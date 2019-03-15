@@ -52,3 +52,5 @@ TEMPLATES = [
         },
     }
 ]
+
+AUTH_USER_MODEL = "khetha.User"
