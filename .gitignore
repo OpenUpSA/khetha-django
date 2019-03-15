@@ -1,0 +1,16 @@
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__
+
+# setuptools-generated
+/.eggs/
+/build/
+/dist/
+/src/khetha_django.egg-info/
+
+# Testing tools
+/.hypothesis/
+/.mypy_cache/
+/.pytest_cache/
+/.tox/
