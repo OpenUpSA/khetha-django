@@ -13,6 +13,7 @@ __pycache__
 /src/khetha_django.egg-info/
 
 # Testing tools
+/.coverage
 /.hypothesis/
 /.mypy_cache/
 /.pytest_cache/
