@@ -10,6 +10,10 @@ Start PostgreSQL:
 docker-compose up
 ```
 
+To attach a `psql` shell:
+
+    docker-compose exec --user postgres db psql
+
 Run the tests:
 
 ```
