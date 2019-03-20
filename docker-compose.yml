@@ -1,4 +1,4 @@
-# docker-compose for D4S development.
+# docker-compose for development.
 #
 # This exposes PostgreSQL and Redis on localhost.
 #
