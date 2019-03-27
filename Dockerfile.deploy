@@ -1,0 +1,93 @@
+# Dockerfile for deployment.
+
+
+# Base Python image
+FROM python:3.7-alpine AS base-python
+ENV COMMAND_APK_ADD='apk add --no-cache'
+# Python: Don't write .pyc files on import
+ENV PYTHONDONTWRITEBYTECODE=1
+
+
+# Base image for building Python wheels
+FROM base-python AS base-python-build-wheel
+ENV COMMAND_PIP_WHEEL='pip --no-cache-dir wheel --wheel-dir=/wheels'
+
+
+# Base image for building Python C extensions
+FROM base-python-build-wheel AS base-python-build-c
+RUN ${COMMAND_APK_ADD:?} build-base
+
+
+# Stage: Build psycopg2 wheel for Alpine
+FROM base-python-build-c AS build-psycopg2
+RUN ${COMMAND_APK_ADD:?} postgresql-dev
+RUN ${COMMAND_PIP_WHEEL:?} psycopg2
+# Output dir: /wheels/
+
+
+# Stage: Build Khetha's requirements-pipenv.txt as wheels
+FROM base-python-build-wheel AS build-khetha-requirements
+COPY --from=build-psycopg2 /wheels/ /wheels/
+COPY requirements-pipenv.txt /
+RUN ${COMMAND_PIP_WHEEL:?} \
+    # Find existing wheels.
+    --find-links /wheels \
+    --no-deps \
+    -r requirements-pipenv.txt
+# Output dir: /wheels/
+
+
+# Stage: Build Khetha wheel
+FROM base-python-build-wheel AS build-khetha-wheel
+# setuptools-scm needs git
+RUN ${COMMAND_APK_ADD:?} git
+# Be explicit about what files we build from:
+COPY .git/ /khetha-django/.git/
+COPY src/ /khetha-django/src/
+COPY README.md setup.cfg setup.py /khetha-django/
+RUN ${COMMAND_PIP_WHEEL:?} --no-deps /khetha-django
+# Output dir: /wheels/
+
+
+# Stage: Build Khetha site and files
+FROM base-python-build-wheel AS build-khetha-site
+COPY --from=build-khetha-requirements /wheels/ /wheels/
+COPY --from=build-khetha-wheel /wheels/ /wheels/
+ENV PATH="/root/.local/bin:${PATH}"
+RUN pip install --no-cache \
+    --no-index \
+    --user \
+    --no-deps \
+    /wheels/*
+ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
+ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
+ENV DJANGO_STATIC_URL='/static/'
+ENV DJANGO_STATIC_ROOT='/static_root/'
+RUN django-admin collectstatic
+# Output dir: /root/.local/
+# Output dir: /static_root/
+
+
+# Stage: Final Django image.
+FROM base-python AS khetha-django
+# psycopg2 runtime dependency:
+RUN ${COMMAND_APK_ADD:?} libpq
+COPY --from=build-khetha-site /root/.local /root/.local
+ENV PATH="/root/.local/bin:$PATH"
+ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
+ENV DJANGO_STATIC_URL='/static/'
+#ENV DJANGO_STATIC_ROOT='/static_root/'
+
+
+# Stage: Final Django + Gunicorn image.
+FROM khetha-django AS khetha-django-gunicorn
+RUN pip install --no-cache --user gunicorn
+# TODO: Better bind host?
+CMD gunicorn --bind 0.0.0.0 'django.core.wsgi:get_wsgi_application()'
+
+
+# Stage: Final nginx image.
+FROM nginx:alpine AS khetha-nginx
+COPY --from=build-khetha-site /static_root/ /static_root/
+# Replace default.conf
+COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
