@@ -1,0 +1,19 @@
+# docker-compose.yml override for local testing.
+#
+# To test:
+#
+# docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+# docker-compose exec django django-admin
+#
+version: '3.4'
+
+services:
+
+  django:
+    environment:
+    - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+    - DJANGO_SECRET_KEY=khetha-docker-test
+
+  nginx:
+    ports:
+    - 127.0.0.1:8000:80

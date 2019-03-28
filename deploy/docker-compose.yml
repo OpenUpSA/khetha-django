@@ -1,4 +1,4 @@
-# docker-compose for (local test) deployment
+# Base docker-compose.yml for deployment.
 #
 version: '3.4'
 
@@ -12,22 +12,20 @@ services:
     - khetha-postgres-data-11:/var/lib/postgresql/data
 
   django:
+    image: pjdelport/khetha-django
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile.deploy
       target: khetha-django-gunicorn
     environment:
-    - DJANGO_ALLOWED_HOSTS=127.0.0.1
-    - DJANGO_DATABASE_URL=postgres://postgres@db/postgres?atomic_requests=True
-    - DJANGO_SECRET_KEY=khetha-docker-FIXME
+    - DJANGO_DATABASE_URL=postgres://postgres@db/postgres
 
   nginx:
+    image: pjdelport/khetha-nginx
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile.deploy
       target: khetha-nginx
-    ports:
-    - 8000:80
 
 
 volumes:

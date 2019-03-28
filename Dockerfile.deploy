@@ -1,4 +1,6 @@
 # Dockerfile for deployment.
+#
+# See also: deploy/docker-compose.yml
 
 
 # Base Python image
