@@ -1,18 +1,46 @@
-language: python
-cache: pip
+language: minimal  # https://docs.travis-ci.com/user/languages/minimal-and-generic/
+dist: xenial  # https://docs.travis-ci.com/user/reference/xenial/
 
-matrix:
+# Default to skipping install and script steps if not overridden in jobs.
+install: skip
+script: skip
+
+jobs:
   include:
-    # Python 3.7 requires "dist: xenial", for now.
-    # See:
-    # https://docs.travis-ci.com/user/languages/python/#specifying-python-versions
-    - { python: '3.7', env: TOXENV=py37-codecov, dist: xenial }
 
-install:
-  - pip install tox
+    - stage: test
+      name: "Tox"
+      language: python
+      python: 3.7
+      env: TOXENV=py37-codecov
+      services:
+        - postgresql
+      install:
+        - pip install tox
+      script:
+        - tox
 
-script:
-  - tox
+    - stage: test
+      name: "docker-compose build"
+      services:
+        - docker
+      script:
+        # TODO: --cache-from
+        - docker-compose -f deploy/docker-compose.yml build
+        - docker images
 
-services:
-  - postgresql
+    # Deploy if successful.
+
+    - stage: deploy
+      name: "docker-compose push"
+      if: branch = deploy-test
+      services:
+        - docker
+      script:
+        # TODO: --cache-from
+        - docker-compose -f deploy/docker-compose.yml build
+        - docker images
+
+        # Credentials at https://travis-ci.com/OpenUpSA/khetha-django/settings
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+        - docker-compose -f deploy/docker-compose.yml push;
