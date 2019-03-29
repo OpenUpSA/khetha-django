@@ -2,6 +2,18 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
+# Expected environment variables:
+#
+# For build-docker:
+#
+#   DOCKER_USERNAME
+#   DOCKER_PASSWORD
+#
+# For deploy-docker-staging
+#
+#   DEPLOY_HOST_STAGING
+#   DEPLOY_CLIENT_SSH_KEY_FINGERPRINT
+#
 version: 2.1
 
 orbs:
@@ -10,7 +22,7 @@ orbs:
 
 jobs:
 
-  build:
+  test-python:
 
     docker:
       # https://circleci.com/docs/2.0/circleci-images/
@@ -60,3 +72,63 @@ jobs:
           key: user-cache-{{ checksum "/home/circleci/.cache.manifest" }}  # ~ not supported here
           paths:
             - "~/.cache"
+
+  # https://circleci.com/docs/2.0/building-docker-images/
+  build-docker:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: "docker-compose build"
+          command: |
+            docker-compose -f deploy/docker-compose.yml build
+      - run:
+          command: |
+            docker images
+      - run:
+          name: "docker-compose push"
+          command: |
+            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+            docker-compose -f deploy/docker-compose.yml push;
+
+  deploy-docker-staging:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - run:
+          name: "Provision SSH host keys"
+          # XXX: Currently hardcoded: 178.128.143.69
+          # XXX: special \<< escape
+          # See https://circleci.com/docs/2.0/build-processing/#limitations
+          command: |
+            mkdir ~/.ssh
+            cat >>~/.ssh/known_hosts \<<-EOF
+              178.128.143.69 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGSX8Xz0eQISjaKuaWcfbK2iCQxDmTrFQoQTwM6EJvuNjA7ZqJaTtgB+Kyvc2tL/YszzxN4kYjg6UAc4VkPqHKs=
+              178.128.143.69 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqCwxzq9C+VeHuoM1qIop5xUYpGoDNzR2V2uqQemUQQU2r0PFXI7iBeY/2lyJGhdbiDBaBVgD+9m4pLM3otYzdBAnWqphPmdQTRTQ8lVRqAImZcGhQxd9SJNNaXF2fF4E+/UeNtACDdSXdlkd0FY7YuRFpmjkucmEOO3KEsKIEsh/vQEjwafi/769KWlPw14FbbjkBPSVT8WQlujk6WnAZSLWMx0zlAFoH/h9h9oUPIgOp9B9tmdm/ZfMIHg8CwwOSVf/OUm/E8u8i6dS4OrTgPF1fqJQJZVE8iZ2Tet89+wp9cK4iGUwcakphQxzhalV5WDkqeyVGQ0Cgx9FLlX/r
+              178.128.143.69 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgOipn4KhFWDSBsCTQ0IrjCWO21JuWGIZ2lF8cke/r7
+            EOF
+      - add_ssh_keys:
+          # Provision SSH client key to access DEPLOY_HOST_STAGING
+          # See: https://circleci.com/gh/OpenUpSA/khetha-django/edit#ssh
+          fingerprints:
+            # XXX: Currently hardcoded
+            - "31:33:cd:eb:82:4e:cb:d3:db:cc:58:d8:cb:a9:33:a8"
+      - checkout
+      - run:
+          name: "docker stack deploy"
+          command: |
+            cd deploy
+            DOCKER_HOST="ssh://root@$DEPLOY_HOST_STAGING" docker stack deploy -c docker-compose.yml -c docker-compose.staging.yml khetha-staging
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test-python
+      - build-docker
+      - deploy-docker-staging:
+          requires:
+            - test-python
+            - build-docker

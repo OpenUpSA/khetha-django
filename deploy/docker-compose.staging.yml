@@ -1,0 +1,14 @@
+# docker-compose.yml override for staging.
+version: '3.4'
+
+services:
+
+  django:
+    environment:
+    - DJANGO_SECRET_KEY=khetha-docker-staging  # FIXME
+    - DJANGO_ALLOWED_HOSTS=staging.khetha.org.za,178.128.143.69
+
+
+  nginx:
+    ports:
+    - 80:80
