@@ -1,0 +1,60 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+
+orbs:
+  # https://circleci.com/orbs/registry/orb/codecov/codecov
+  codecov: codecov/codecov@1.0.4
+
+jobs:
+
+  build:
+
+    docker:
+      # https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/python:3.7
+      # Secondary:
+      - image: circleci/postgres:11-alpine-ram
+
+    environment:
+      # XXX: https://github.com/circleci/circleci-images/issues/375
+      PATH: '/home/circleci/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+    steps:
+      # Prepare:
+      - restore_cache:
+          name: "Cache: Restore ~/.cache"
+          keys:
+            - user-cache-
+      - run:
+          name: "Install Tox"
+          command: |
+            pip install --user tox
+      - checkout
+      - run:
+          name: "Tox: Create environment"
+          command: |
+            tox --notest
+      # Test:
+      - run:
+          name: "Tox: Run tests"
+          command: |
+            tox
+      # Process results:
+      - codecov/upload:
+          file: .coverage
+      - run:
+          name: "Cache: Record manifest"
+          # Experimental: For now, just use the filenames.
+          command: |
+            find ~/.cache/pip/wheels -name 'khetha_django-*.whl' -print -delete  # XXX hack: Don't cache these.
+            find ~/.cache -type f | sort >~/.cache.manifest
+            sha256sum ~/.cache.manifest
+            cat ~/.cache.manifest
+      - save_cache:
+          name: "Cache: Save ~/.cache"
+          key: user-cache-{{ checksum "/home/circleci/.cache.manifest" }}  # ~ not supported here
+          paths:
+            - "~/.cache"
