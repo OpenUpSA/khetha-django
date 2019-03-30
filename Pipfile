@@ -11,6 +11,7 @@ mypy = "*"
 pytest = "*"
 pytest-django = "*"
 setuptools-scm = "*"
+pytest-cov = "*"
 
 [packages]
 khetha-django = {editable = true,path = "."}
