@@ -1,0 +1,303 @@
+[
+{
+  "model": "khetha.task",
+  "pk": 1,
+  "fields": {
+    "slug": "big-debate",
+    "title": "Land redistribution",
+    "description": "A set of questions dealing with the subject of modern-day land redistribution in South Africa, specifically as related to expropriation without compensation.",
+    "points": 2,
+    "is_published": false
+  }
+},
+{
+  "model": "khetha.task",
+  "pk": 2,
+  "fields": {
+    "slug": "views-on-election",
+    "title": "Views on Election",
+    "description": "We are interested in learning more about whether you've voted in the past and whether you plan on voting in the 2019 election.",
+    "points": 2,
+    "is_published": false
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 1,
+  "fields": {
+    "task": 1,
+    "text": "Do you believe in expropriating land without compensation?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 2,
+  "fields": {
+    "task": 2,
+    "text": "How much do you care about the elections?",
+    "description": "Range is from \"I don't care at all\" (0) and \"I am indifferent\" (5) to \"I care alot\" (10)"
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 3,
+  "fields": {
+    "task": 2,
+    "text": "How many elections have you voted in?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 4,
+  "fields": {
+    "task": 2,
+    "text": "Are you currently registered to vote?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 5,
+  "fields": {
+    "task": 2,
+    "text": "Do you plan to vote in 2019?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 6,
+  "fields": {
+    "task": 2,
+    "text": "Do you know which party you are going to vote for?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 7,
+  "fields": {
+    "task": 2,
+    "text": "What are your top 3 reasons for choosing a party to vote for?",
+    "description": ""
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 1,
+  "fields": {
+    "question": 1,
+    "text": "Yes"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 2,
+  "fields": {
+    "question": 1,
+    "text": "No"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 3,
+  "fields": {
+    "question": 1,
+    "text": "It's not that simple"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 4,
+  "fields": {
+    "question": 4,
+    "text": "Yes"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 5,
+  "fields": {
+    "question": 4,
+    "text": "No"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 6,
+  "fields": {
+    "question": 4,
+    "text": "Don't know"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 7,
+  "fields": {
+    "question": 5,
+    "text": "Yes"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 8,
+  "fields": {
+    "question": 5,
+    "text": "No"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 9,
+  "fields": {
+    "question": 5,
+    "text": "Don't know"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 13,
+  "fields": {
+    "question": 6,
+    "text": "Yes"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 14,
+  "fields": {
+    "question": 6,
+    "text": "No"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 15,
+  "fields": {
+    "question": 6,
+    "text": "Don't know"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 16,
+  "fields": {
+    "question": 7,
+    "text": "My family supports the party"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 17,
+  "fields": {
+    "question": 7,
+    "text": "My friends support the party"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 18,
+  "fields": {
+    "question": 7,
+    "text": "I agree with their policies on issues that are important to me"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 19,
+  "fields": {
+    "question": 7,
+    "text": "I trust the national leader"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 20,
+  "fields": {
+    "question": 7,
+    "text": "I trust the local representative"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 21,
+  "fields": {
+    "question": 7,
+    "text": "The party\u2019s activities in my neighbourhood and other areas really benefit people"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 22,
+  "fields": {
+    "question": 7,
+    "text": "The party provides me and my family with services"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 23,
+  "fields": {
+    "question": 7,
+    "text": "The party promised to do things in my community if we vote for them"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 24,
+  "fields": {
+    "question": 7,
+    "text": "The party represents the voices of young people"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 25,
+  "fields": {
+    "question": 7,
+    "text": "I recently got something from the party (i.e. t-shirts, food parcels, etc.)"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 26,
+  "fields": {
+    "question": 7,
+    "text": "The other parties are worse"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 27,
+  "fields": {
+    "question": 7,
+    "text": "I like their ads in the media"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 28,
+  "fields": {
+    "question": 7,
+    "text": "I am part of an organisation or movement that supports this party"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 29,
+  "fields": {
+    "question": 7,
+    "text": "We need a change in leadership"
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 30,
+  "fields": {
+    "question": 7,
+    "text": "None of the above"
+  }
+}
+]
