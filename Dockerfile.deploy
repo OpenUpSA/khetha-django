@@ -84,8 +84,9 @@ ENV DJANGO_STATIC_URL='/static/'
 # Stage: Final Django + Gunicorn image.
 FROM khetha-django AS khetha-django-gunicorn
 RUN pip install --no-cache --user gunicorn
+# XXX: Just run django-admin migrate here, for now.
 # TODO: Better bind host?
-CMD gunicorn --bind 0.0.0.0 'django.core.wsgi:get_wsgi_application()'
+CMD django-admin migrate --noinput && gunicorn --bind 0.0.0.0 'django.core.wsgi:get_wsgi_application()'
 
 
 # Stage: Final nginx image.
