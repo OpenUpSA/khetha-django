@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+
+  django:
+    build:
+      cache_from:
+        - pjdelport/khetha-buildcache:build-psycopg2
+        - pjdelport/khetha-buildcache:build-khetha-requirements
+
+  nginx:
+    build:
+      cache_from:
+        - pjdelport/khetha-buildcache:build-psycopg2
+        - pjdelport/khetha-buildcache:build-khetha-requirements

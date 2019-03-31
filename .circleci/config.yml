@@ -79,19 +79,37 @@ jobs:
       - image: circleci/python:3.7
     steps:
       - setup_remote_docker
+      - run:
+          name: "docker login"
+          command: |
+            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - checkout
+      - run:
+          name: "docker build (intermediate layers)"
+          # Experimental: This intermediate step is optional, but enables build layer caching.
+          command: |
+            # Layer 1
+            cache1='pjdelport/khetha-buildcache:build-psycopg2'
+            docker image pull "$cache1" || true
+            docker build -f Dockerfile.deploy --target build-psycopg2 --cache-from "$cache1" -t "$cache1" .
+            docker image push "$cache1"
+            # Layer 2
+            cache2='pjdelport/khetha-buildcache:build-khetha-requirements'
+            docker image pull "$cache2" || true
+            docker build -f Dockerfile.deploy --target build-khetha-requirements --cache-from "$cache1,$cache2" -t "$cache2" .
+            docker image push "$cache2"
       - run:
           name: "docker-compose build"
           command: |
-            docker-compose -f deploy/docker-compose.yml build
+            # Use cache from previous step.
+            docker-compose -f deploy/docker-compose.yml -f deploy/docker-compose.cache-from.yml build
       - run:
           command: |
             docker images
       - run:
           name: "docker-compose push"
           command: |
-            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-            docker-compose -f deploy/docker-compose.yml push;
+            docker-compose -f deploy/docker-compose.yml push
 
   deploy-docker-staging:
     docker:
