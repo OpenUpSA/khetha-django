@@ -1,4 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 
-urlpatterns: list = [path("admin/", admin.site.urls)]
+from khetha import views
+
+urlpatterns: list = [
+    path("", views.TaskListView.as_view(), name="task-list"),
+    path("admin/", admin.site.urls),
+]
