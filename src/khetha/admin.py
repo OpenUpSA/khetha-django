@@ -38,6 +38,7 @@ class AnswerOptionInline(_TabularInline):
 class TaskAdmin(admin.ModelAdmin):
     list_display = ["slug", "title", "description", "points", "is_published"]
     search_fields = ["slug", "title", "description"]
+    list_editable = ["is_published"]
     list_filter = ["is_published"]
 
     inlines = [QuestionInline]
