@@ -43,6 +43,8 @@ jobs:
           command: |
             tox
       # Process results:
+      - store_test_results:
+          path: build/test-results  # See tox.ini
       - codecov/upload:
           file: .coverage
       - run:
