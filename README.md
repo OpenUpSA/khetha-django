@@ -4,6 +4,13 @@ khetha-django
 Quickstart
 ----------
 
+Collect static assets (``build/assets``):
+
+```shell
+npm install
+./build-assets.sh
+```
+
 Start PostgreSQL:
 
 ```

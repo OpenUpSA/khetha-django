@@ -59,3 +59,8 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = "khetha.User"
+
+
+# Tell collectstatic where to find the static assets collected by build-assets.sh
+# (XXX: This should go in dev/build config.)
+STATICFILES_DIRS = [("assets", "build/assets")]
