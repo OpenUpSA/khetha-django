@@ -3,6 +3,7 @@
 /* MDC customisations */
 
 :root {
+    /* Referenced from prior Layout component style: */
     --mdc-theme-background: #ededed;
 }
 
