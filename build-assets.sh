@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-rm -r build/assets
+test -e build/assets && rm -r build/assets
 mkdir -p build/assets
 
 cp -anv node_modules/normalize.css/normalize.css -t build/assets
