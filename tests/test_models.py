@@ -49,6 +49,8 @@ class TestTask(TestCase):
 
 
 class TestQuestion(TestCase):
+    fixtures = ["sample-task-data"]
+
     @staticmethod
     def _create() -> models.Question:
         task: models.Task = models.Task.objects.create()
@@ -66,6 +68,15 @@ class TestQuestion(TestCase):
 
     def test_str(self) -> None:
         assert "" == str(self._create())
+
+    def test_answer_options(self) -> None:
+        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        question: models.Question = task.questions().first()
+        self.assertQuerysetEqual(
+            question.answeroption_set.order_by("pk"),
+            question.answer_options(),
+            transform=lambda o: o,
+        )
 
 
 class TestAnswerOption(TestCase):
