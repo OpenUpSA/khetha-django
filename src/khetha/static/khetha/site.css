@@ -16,6 +16,12 @@
     font-weight: bold;
 }
 
+/* Not implemented yet: https://github.com/material-components/material-components-web/tree/master/packages/mdc-divider */
+.not-mdc-card__divider {
+    border-top: 1px solid var(--mdc-theme-background);
+    width: 100%;
+}
+
 /* Utility classes */
 
 .d-block {
