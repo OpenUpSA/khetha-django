@@ -18,3 +18,6 @@ __pycache__
 /.mypy_cache/
 /.pytest_cache/
 /.tox/
+
+# NPM
+/node_modules/
