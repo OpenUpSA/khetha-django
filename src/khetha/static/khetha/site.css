@@ -1,0 +1,32 @@
+/* Site-wide styles for Khetha. */
+
+/* MDC customisations */
+
+:root {
+    --mdc-theme-background: #ededed;
+}
+
+/* Khetha-specific classes */
+
+.khetha-outer-grid {
+    max-width: 600px;
+}
+.khetha-task-card__title {
+    font-weight: bold;
+}
+
+/* Utility classes */
+
+.d-block {
+    display: block;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.link-unstyled {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: inherit;
+}

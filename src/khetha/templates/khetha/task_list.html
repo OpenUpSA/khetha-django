@@ -3,13 +3,20 @@
 {% block content %}
     <h1>Tasks</h1>
 
-    <ul>
+    <div class="mdc-layout-grid__inner">
         {% for task in task_list %}
-            <li>
-                <a href="{% url 'task-detail' slug=task.slug %}">
-                    {{ task.title }}
-                </a>
-            </li>
+            <div class="mdc-layout-grid__cell--span-12">
+                <div class="mdc-card">
+                    <div class="mdc-card__primary-action" tabindex="0">
+                        <a class="d-block p-1 link-unstyled"
+                           href="{% url 'task-detail' slug=task.slug %}">
+                            <div class="khetha-task-card__title">
+                                {{ task.title }}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
