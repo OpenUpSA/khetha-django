@@ -9,6 +9,11 @@
 
 /* Khetha-specific classes */
 
+.khetha-theme--gradient-bg {
+    /* Referenced from prior tokens/colors primaryGradient style: */
+    background: linear-gradient(162.21deg, #00F260 0%, #0575E6 83.33%), #0575E6 !important;
+}
+
 .khetha-outer-grid {
     max-width: 600px;
 }
