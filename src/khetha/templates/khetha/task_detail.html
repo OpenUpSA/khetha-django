@@ -1,0 +1,11 @@
+{% extends 'khetha/base.html' %}
+
+{% block content %}
+    <h1>{{ task.title }}</h1>
+
+    <ul>
+        {% for question in task.questions %}
+            <li>{{ question.text }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

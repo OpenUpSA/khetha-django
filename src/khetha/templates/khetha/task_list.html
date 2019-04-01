@@ -5,7 +5,11 @@
 
     <ul>
         {% for task in task_list %}
-            <li>{{ task.title }}</li>
+            <li>
+                <a href="{% url 'task-detail' slug=task.slug %}">
+                    {{ task.title }}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
