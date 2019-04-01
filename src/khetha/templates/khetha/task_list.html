@@ -1,0 +1,15 @@
+{% extends 'khetha/base.html' %}
+
+{% block content %}
+    <h1>Tasks</h1>
+
+    <ul>
+        {% for task in task_list %}
+            <li>
+                <a href="{% url 'task-detail' slug=task.slug %}">
+                    {{ task.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
