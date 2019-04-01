@@ -26,6 +26,12 @@ class Task(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def questions(self) -> models.QuerySet:
+        """
+        The questions to show for this task, in order.
+        """
+        return self.question_set.order_by("pk")  # XXX: Just pk, for now.
+
 
 class Question(models.Model):
     task = _ForeignKey(Task)

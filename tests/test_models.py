@@ -25,6 +25,8 @@ class TestUser(TestCase):
 
 
 class TestTask(TestCase):
+    fixtures = ["sample-task-data"]
+
     def test_create(self) -> None:
         task = models.Task.objects.create()
         assert {
@@ -38,6 +40,12 @@ class TestTask(TestCase):
 
     def test_str(self) -> None:
         assert "" == str(models.Task.objects.create())
+
+    def test_questions(self) -> None:
+        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        self.assertQuerysetEqual(
+            task.question_set.order_by("pk"), task.questions(), transform=lambda o: o
+        )
 
 
 class TestQuestion(TestCase):
