@@ -18,10 +18,6 @@ jobs:
       # Secondary:
       - image: circleci/postgres:11-alpine-ram
 
-    environment:
-      # XXX: https://github.com/circleci/circleci-images/issues/375
-      PATH: '/home/circleci/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-
     steps:
       # Prepare:
       - restore_cache:
