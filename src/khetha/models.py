@@ -42,6 +42,12 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.text
 
+    def answer_options(self) -> models.QuerySet:
+        """
+        The answer options to show for this question, in order.
+        """
+        return self.answeroption_set.order_by("pk")  # XXX: Just pk, for now.
+
 
 class AnswerOption(models.Model):
     question = _ForeignKey(Question)

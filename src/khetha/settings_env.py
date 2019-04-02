@@ -8,9 +8,14 @@ env = environ.Env()
 DEBUG = env("DJANGO_DEBUG", default=False)
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-DATABASES = {"default": env.db("DJANGO_DATABASE_URL")}
-
-STATIC_URL = env("DJANGO_STATIC_URL", default="/static/")
+if "DJANGO_DATABASE_URL" in env:  # pragma: no cover
+    DATABASES = {"default": env.db("DJANGO_DATABASE_URL")}
+if "DJANGO_STATIC_URL" in env:  # pragma: no cover
+    STATIC_URL = env("DJANGO_STATIC_URL")
+if "DJANGO_STATIC_ROOT" in env:  # pragma: no cover
+    STATIC_ROOT = env.path("DJANGO_STATIC_ROOT")()
+if "DJANGO_ALLOWED_HOSTS" in env:  # pragma: no cover
+    ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 
 # Other Django settings:
@@ -54,3 +59,8 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = "khetha.User"
+
+
+# Tell collectstatic where to find the static assets collected by build-assets.sh
+# (XXX: This should go in dev/build config.)
+STATICFILES_DIRS = [("assets", "build/assets")]
