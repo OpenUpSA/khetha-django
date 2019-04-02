@@ -9,7 +9,7 @@
 
 /* Khetha-specific classes */
 
-.khetha-theme--gradient-bg {
+.khetha-theme--gradient-bg--primary {
     /* Referenced from prior tokens/colors primaryGradient style: */
     background: linear-gradient(162.21deg, #00F260 0%, #0575E6 83.33%), #0575E6 !important;
 }
