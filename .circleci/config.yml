@@ -14,7 +14,7 @@ jobs:
 
     docker:
       # https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/python:3.7
+      - image: ccistaging/python:3.7
       # Secondary:
       - image: circleci/postgres:11-alpine-ram
 
