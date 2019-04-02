@@ -72,6 +72,7 @@ class TestQuestion(TestCase):
     def test_answer_options(self) -> None:
         task: models.Task = models.Task.objects.get(slug="views-on-election")
         question: models.Question = task.questions().first()
+        assert 0 < question.answeroption_set.count()  # self-integrity check
         self.assertQuerysetEqual(
             question.answeroption_set.order_by("pk"),
             question.answer_options(),
