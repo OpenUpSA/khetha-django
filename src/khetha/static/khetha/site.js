@@ -1,6 +1,9 @@
 /* Site-wide initialisation for Khetha. */
 
 (function () {
+    // https://material.io/develop/web/components/top-app-bar/#javascript-instantiation
+    const topAppBar = new window.mdc.topAppBar.MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
+
     //https://material.io/develop/web/components/input-controls/text-field/#javascript-instantiation
     const textFields= [].map.call(document.querySelectorAll('.mdc-text-field'), function (el) {
         return new window.mdc.textfield.MDCTextField(el);
