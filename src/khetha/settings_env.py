@@ -8,13 +8,13 @@ env = environ.Env()
 DEBUG = env("DJANGO_DEBUG", default=False)
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-if "DJANGO_DATABASE_URL" in env:
+if "DJANGO_DATABASE_URL" in env:  # pragma: no cover
     DATABASES = {"default": env.db("DJANGO_DATABASE_URL")}
-if "DJANGO_STATIC_URL" in env:
+if "DJANGO_STATIC_URL" in env:  # pragma: no cover
     STATIC_URL = env("DJANGO_STATIC_URL")
-if "DJANGO_STATIC_ROOT" in env:
+if "DJANGO_STATIC_ROOT" in env:  # pragma: no cover
     STATIC_ROOT = env.path("DJANGO_STATIC_ROOT")()
-if "DJANGO_ALLOWED_HOSTS" in env:
+if "DJANGO_ALLOWED_HOSTS" in env:  # pragma: no cover
     ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 
