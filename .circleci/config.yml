@@ -25,16 +25,19 @@ jobs:
           keys:
             - user-cache-
       - run:
+          shell: /bin/bash -l -eo pipefail
           name: "Install Tox"
           command: |
             pip install --user tox
       - checkout
       - run:
+          shell: /bin/bash -l -eo pipefail
           name: "Tox: Create environment"
           command: |
             tox --notest
       # Test:
       - run:
+          shell: /bin/bash -l -eo pipefail
           name: "Tox: Run tests"
           command: |
             tox
