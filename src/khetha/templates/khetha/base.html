@@ -46,7 +46,15 @@ Blocks:
 </head>
 <body class="mdc-typography mdc-theme--background">
 {% block body %}
-    <div class="mdc-layout-grid khetha-outer-grid">
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <span class="mdc-top-app-bar__title">Khetha</span>
+            </section>
+        </div>
+    </header>
+
+    <div class="mdc-layout-grid khetha-outer-grid mdc-top-app-bar--fixed-adjust">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-12">
                 {% block content %}{% endblock %}
