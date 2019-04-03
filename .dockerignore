@@ -1,0 +1,23 @@
+# Project files
+/.env
+
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__
+
+# setuptools-generated
+/.eggs/
+/build/
+/dist/
+/src/khetha_django.egg-info/
+
+# Testing tools
+/.coverage
+/.hypothesis/
+/.mypy_cache/
+/.pytest_cache/
+/.tox/
+
+# NPM
+/node_modules/
