@@ -1,10 +1,3 @@
-# docker-compose for development.
-#
-# This exposes PostgreSQL and Redis on localhost.
-#
-# Check file formatting using:
-#   diff -u docker-compose.yml <(docker run -i --rm funkwerk/compose_format <docker-compose.yml)
-#
 version: '3'
 
 
@@ -12,12 +5,12 @@ services:
 
   db:
     # Constrain PostgreSQL major version, for data compatibility.
-    image: postgres:11-alpine
+    image: 'postgres:11-alpine'
     volumes:
-    - khetha-postgres-data-11:/var/lib/postgresql/data
+    - 'khetha-postgres-data-11:/var/lib/postgresql/data'
     # Expose port, for now.
     ports:
-    - 127.0.0.1:5432:5432
+      - '127.0.0.1:5432:5432'
 
   web:
     depends_on:
