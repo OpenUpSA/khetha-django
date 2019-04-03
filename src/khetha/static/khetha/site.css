@@ -19,6 +19,11 @@
   background: linear-gradient(158.46deg, #00F260 0%, #0575E6 83.33%), #0576E6;
 }
 
+.khetha-app-bar__title {
+    color: var(--mdc-theme-text-primary-on-dark);
+    text-transform: uppercase;
+}
+
 .khetha-outer-grid {
     max-width: 600px;
 }
