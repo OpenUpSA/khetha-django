@@ -19,6 +19,19 @@ services:
     ports:
     - 127.0.0.1:5432:5432
 
+  web:
+    depends_on:
+      - db
+    environment:
+      DJANGO_DATABASE_URL: 'postgres://postgres@db/postgres'
+      DJANGO_DEBUG:
+      DJANGO_SECRET_KEY:
+    build:
+      context: .
+    command: 'django-admin runserver 0.0.0.0:8000'
+    ports:
+      - '127.0.0.1:8000:8000'
+
 
 volumes:
   khetha-postgres-data-11:
