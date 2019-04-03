@@ -9,14 +9,25 @@
 
 /* Khetha-specific classes */
 
-.khetha-theme--gradient-bg {
+.khetha-theme--gradient-bg--primary {
     /* Referenced from prior tokens/colors primaryGradient style: */
     background: linear-gradient(162.21deg, #00F260 0%, #0575E6 83.33%), #0575E6 !important;
+}
+
+.khetha-theme--gradient-bg--bar {
+    /* Referenced from prior FooterBar style: */
+    background: linear-gradient(158.46deg, #00F260 0%, #0575E6 83.33%), #0576E6;
+}
+
+.khetha-app-bar__title {
+    color: var(--mdc-theme-text-primary-on-dark);
+    text-transform: uppercase;
 }
 
 .khetha-outer-grid {
     max-width: 600px;
 }
+
 .khetha-task-card__title {
     font-weight: bold;
 }
