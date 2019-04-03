@@ -6,10 +6,9 @@ from django.urls import reverse
 
 from khetha import models
 
+
 # Test helpers:
 # (Check the counts, for test integrity.)
-
-
 def _publish_tasks() -> None:
     assert 0 < models.Task.objects.update(is_published=True)
 
