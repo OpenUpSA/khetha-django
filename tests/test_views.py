@@ -18,6 +18,12 @@ def _unpublish_tasks() -> None:
     assert 0 < models.Task.objects.update(is_published=False)
 
 
+class TestHome(TestCase):
+    def test_get(self) -> None:
+        response = self.client.get("/")
+        self.assertRedirects(response, reverse("task-list"))
+
+
 class TestTaskListView(TestCase):
     fixtures = ["sample-task-data"]
 
