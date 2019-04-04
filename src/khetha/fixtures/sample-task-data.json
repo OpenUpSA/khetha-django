@@ -1,303 +1,1713 @@
 [
 {
   "model": "khetha.task",
-  "pk": 1,
+  "pk": 3,
   "fields": {
-    "slug": "big-debate",
-    "title": "Land redistribution",
-    "description": "A set of questions dealing with the subject of modern-day land redistribution in South Africa, specifically as related to expropriation without compensation.",
-    "points": 2,
-    "is_published": false
+    "slug": "contact-details",
+    "title": "Contact Details",
+    "description": "Khetha! offers amazing prizes. We will need your phone number to send your airtime, and to notify you when you win any of the other exciting prizes. Please ensure that you have completed this task.",
+    "points": 4,
+    "is_published": true,
+    "order": 1
   }
 },
 {
   "model": "khetha.task",
-  "pk": 2,
+  "pk": 4,
   "fields": {
-    "slug": "views-on-election",
-    "title": "Views on Election",
-    "description": "We are interested in learning more about whether you've voted in the past and whether you plan on voting in the 2019 election.",
+    "slug": "tell-us-about-yourself",
+    "title": "Tell Us About Yourself",
+    "description": "",
+    "points": 6,
+    "is_published": true,
+    "order": 2
+  }
+},
+{
+  "model": "khetha.task",
+  "pk": 5,
+  "fields": {
+    "slug": "parties-competing",
+    "title": "Quiz: How many political parties are competing",
+    "description": "",
     "points": 2,
-    "is_published": false
+    "is_published": true,
+    "order": 3
   }
 },
 {
-  "model": "khetha.question",
-  "pk": 1,
-  "fields": {
-    "task": 1,
-    "text": "Do you believe in expropriating land without compensation?",
-    "description": ""
-  }
-},
-{
-  "model": "khetha.question",
-  "pk": 2,
-  "fields": {
-    "task": 2,
-    "text": "How much do you care about the elections?",
-    "description": "Range is from \"I don't care at all\" (0) and \"I am indifferent\" (5) to \"I care alot\" (10)"
-  }
-},
-{
-  "model": "khetha.question",
-  "pk": 3,
-  "fields": {
-    "task": 2,
-    "text": "How many elections have you voted in?",
-    "description": ""
-  }
-},
-{
-  "model": "khetha.question",
-  "pk": 4,
-  "fields": {
-    "task": 2,
-    "text": "Are you currently registered to vote?",
-    "description": ""
-  }
-},
-{
-  "model": "khetha.question",
-  "pk": 5,
-  "fields": {
-    "task": 2,
-    "text": "Do you plan to vote in 2019?",
-    "description": ""
-  }
-},
-{
-  "model": "khetha.question",
+  "model": "khetha.task",
   "pk": 6,
   "fields": {
-    "task": 2,
-    "text": "Do you know which party you are going to vote for?",
-    "description": ""
+    "slug": "views-on-elections",
+    "title": "Views on Elections",
+    "description": "",
+    "points": 4,
+    "is_published": true,
+    "order": 4
   }
 },
 {
-  "model": "khetha.question",
+  "model": "khetha.task",
   "pk": 7,
   "fields": {
-    "task": 2,
-    "text": "What are your top 3 reasons for choosing a party to vote for?",
-    "description": ""
+    "slug": "election-importance",
+    "title": "How important are elections to you?",
+    "description": "",
+    "points": 10,
+    "is_published": true,
+    "order": 5
   }
 },
 {
-  "model": "khetha.answeroption",
-  "pk": 1,
-  "fields": {
-    "question": 1,
-    "text": "Yes"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 2,
-  "fields": {
-    "question": 1,
-    "text": "No"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 3,
-  "fields": {
-    "question": 1,
-    "text": "It's not that simple"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 4,
-  "fields": {
-    "question": 4,
-    "text": "Yes"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 5,
-  "fields": {
-    "question": 4,
-    "text": "No"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 6,
-  "fields": {
-    "question": 4,
-    "text": "Don't know"
-  }
-},
-{
-  "model": "khetha.answeroption",
-  "pk": 7,
-  "fields": {
-    "question": 5,
-    "text": "Yes"
-  }
-},
-{
-  "model": "khetha.answeroption",
+  "model": "khetha.task",
   "pk": 8,
   "fields": {
-    "question": 5,
-    "text": "No"
+    "slug": "watch-bd-7april",
+    "title": "Watch Some TV!",
+    "description": "1. Complete the challenge, 2. Tell us about your experience,  3. Stand a chance to win!\r\n\r\n        To play this challenge do the following: \r\nWatch the Big Debate on Sunday 7 April 2019 at 7pm on SABC 2 or the SABC Digital News Youtube channel, and lookout for the following:\r\n- What are the stances of the different parties on the issue of gentrification?\r\n- What are your own views on gentrification?\r\n- Which party is most aligned to your views on the issue?",
+    "points": 20,
+    "is_published": true,
+    "order": 6
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 9,
   "fields": {
-    "question": 5,
-    "text": "Don't know"
+    "task": 3,
+    "text": "On which phone number would you like to receive your airtime rewards?",
+    "description": "Please make sure that the phone number is correct (10 digits)",
+    "order": 11
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
+  "pk": 10,
+  "fields": {
+    "task": 3,
+    "text": "Which network provider are you with?",
+    "description": "",
+    "order": 12
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 12,
+  "fields": {
+    "task": 3,
+    "text": "We sometimes run short telephonic surveys (with extra Khetha points and opportunities to win). Can we contact you on this number?",
+    "description": "Please note: We will never share your number with anyone else.",
+    "order": 29
+  }
+},
+{
+  "model": "khetha.question",
   "pk": 13,
   "fields": {
-    "question": 6,
-    "text": "Yes"
+    "task": 4,
+    "text": "What will your gaming name be?",
+    "description": "This can be your nickname or an alias if you want",
+    "order": 13
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 14,
   "fields": {
-    "question": 6,
-    "text": "No"
+    "task": 4,
+    "text": "What is your year of birth?",
+    "description": "YYYY",
+    "order": 14
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 15,
   "fields": {
-    "question": 6,
-    "text": "Don't know"
+    "task": 4,
+    "text": "What is your gender?",
+    "description": "",
+    "order": 30
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 16,
   "fields": {
-    "question": 7,
-    "text": "My family supports the party"
+    "task": 4,
+    "text": "How would you describe yourself?",
+    "description": "",
+    "order": 36
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 17,
   "fields": {
-    "question": 7,
-    "text": "My friends support the party"
+    "task": 4,
+    "text": "What is your highest level of education?",
+    "description": "",
+    "order": 37
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 18,
   "fields": {
-    "question": 7,
-    "text": "I agree with their policies on issues that are important to me"
+    "task": 4,
+    "text": "What do you do at the moment?",
+    "description": "",
+    "order": 15
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 19,
   "fields": {
-    "question": 7,
-    "text": "I trust the national leader"
+    "task": 5,
+    "text": "How many political parties are contesting in the 2019 general elections?",
+    "description": "How many parties will appear on the ballot paper for the national election?",
+    "order": 16
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 20,
   "fields": {
-    "question": 7,
-    "text": "I trust the local representative"
+    "task": 5,
+    "text": "How many political parties are contesting in the 2019 provincial elections?",
+    "description": "How many parties will appear on the ballot paper for the provincial election in each province?",
+    "order": 17
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 21,
   "fields": {
-    "question": 7,
-    "text": "The party\u2019s activities in my neighbourhood and other areas really benefit people"
+    "task": 6,
+    "text": "How much do you care about the elections?",
+    "description": "On a scale from 1 to 5,  what degree are you interested in the elections.\r\n1= I don't care at all, 3= I am indifferent about elections, 5= I care completely",
+    "order": 18
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 22,
   "fields": {
-    "question": 7,
-    "text": "The party provides me and my family with services"
+    "task": 6,
+    "text": "How many elections have you voted in?",
+    "description": "",
+    "order": 19
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 23,
   "fields": {
-    "question": 7,
-    "text": "The party promised to do things in my community if we vote for them"
+    "task": 6,
+    "text": "Are you currently registered to vote?",
+    "description": "If you are not sure, you can find out from IEC by SMSing your ID Number to 32810 (R1.00 per SMS)",
+    "order": 20
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 24,
   "fields": {
-    "question": 7,
-    "text": "The party represents the voices of young people"
+    "task": 6,
+    "text": "Do you plan to vote in the upcoming elections?",
+    "description": "",
+    "order": 21
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 25,
   "fields": {
-    "question": 7,
-    "text": "I recently got something from the party (i.e. t-shirts, food parcels, etc.)"
+    "task": 6,
+    "text": "Do you know which party you are going to vote for?",
+    "description": "If not registered to vote, imagine you were registered. Do you now which party you would vote for?",
+    "order": 22
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 26,
   "fields": {
-    "question": 7,
-    "text": "The other parties are worse"
+    "task": 6,
+    "text": "What are your reasons for choosing a party to vote for?",
+    "description": "Select 3 that apply to you most",
+    "order": 23
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 27,
   "fields": {
-    "question": 7,
-    "text": "I like their ads in the media"
+    "task": 7,
+    "text": "Are you planning to vote in the 2019 National and Provincial elections?",
+    "description": "",
+    "order": 24
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 28,
   "fields": {
-    "question": 7,
-    "text": "I am part of an organisation or movement that supports this party"
+    "task": 7,
+    "text": "You ARE planning vote? What is your main reason? Choose the one that MOST explains your decision.",
+    "description": "",
+    "order": 25
   }
 },
 {
-  "model": "khetha.answeroption",
+  "model": "khetha.question",
   "pk": 29,
   "fields": {
-    "question": 7,
-    "text": "We need a change in leadership"
+    "task": 7,
+    "text": "You are NOT planning to vote? What is your main reason? Choose the one that MOST explains your decision.",
+    "description": "",
+    "order": 31
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 30,
+  "fields": {
+    "task": 7,
+    "text": "You are NOT SURE yet if you are going to vote? What is your main reason? Choose the one that MOST explains your decision.",
+    "description": "",
+    "order": 32
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 31,
+  "fields": {
+    "task": 7,
+    "text": "What do you think? How important are elections in doing the following?",
+    "description": "",
+    "order": 33
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 32,
+  "fields": {
+    "task": 7,
+    "text": "Changing your life",
+    "description": "Have no impact at all (1) - Have a big impact (5)",
+    "order": 34
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 33,
+  "fields": {
+    "task": 7,
+    "text": "Changing living conditions in my community?",
+    "description": "Have no impact at all (1) - Have a big impact (5)",
+    "order": 35
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 34,
+  "fields": {
+    "task": 7,
+    "text": "Changing living conditions for other people in the country?",
+    "description": "Have no impact at all (1) - Have a big impact (5)",
+    "order": 1
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 35,
+  "fields": {
+    "task": 7,
+    "text": "What influenced your decision to register to vote? Select the one that MOST explains your reason",
+    "description": "",
+    "order": 2
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 36,
+  "fields": {
+    "task": 7,
+    "text": "What influenced your decision to not register to vote? Select the one that MOST explains your reason",
+    "description": "",
+    "order": 3
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 37,
+  "fields": {
+    "task": 7,
+    "text": "In the past 12 months, how many parties have you engaged with directly by:",
+    "description": "",
+    "order": 4
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 38,
+  "fields": {
+    "task": 7,
+    "text": "Attending a political rally or manifesto launch",
+    "description": "",
+    "order": 5
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 39,
+  "fields": {
+    "task": 7,
+    "text": "Listening to a political rally, manifesto launch or speeches and interviews (on radio and other forms of media)",
+    "description": "",
+    "order": 6
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 40,
+  "fields": {
+    "task": 7,
+    "text": "Reading a party manifesto",
+    "description": "",
+    "order": 7
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 41,
+  "fields": {
+    "task": 8,
+    "text": "Now tell us about what your experience watching the Big Debate.",
+    "description": "",
+    "order": 8
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 42,
+  "fields": {
+    "task": 8,
+    "text": "Did you learn anything you did not know? What did you learn?",
+    "description": "",
+    "order": 9
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 43,
+  "fields": {
+    "task": 8,
+    "text": "What were your thoughts while watching?",
+    "description": "",
+    "order": 10
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 44,
+  "fields": {
+    "task": 8,
+    "text": "Has watching the show shaped your views about a party in any way? In what ways have our views changed?",
+    "description": "",
+    "order": 26
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 45,
+  "fields": {
+    "task": 8,
+    "text": "Thank you for completing this task. Feel free to share a video on one of our social media platforms telling us about your experience watching the big debate. Facebook: @khetha.thegame  Twitter: @khetha_thegame",
+    "description": "",
+    "order": 27
+  }
+},
+{
+  "model": "khetha.question",
+  "pk": 46,
+  "fields": {
+    "task": 7,
+    "text": "How do you get updates on political matters?",
+    "description": "",
+    "order": 28
   }
 },
 {
   "model": "khetha.answeroption",
-  "pk": 30,
+  "pk": 44,
   "fields": {
-    "question": 7,
-    "text": "None of the above"
+    "question": 10,
+    "text": "Cell C",
+    "order": 107
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 45,
+  "fields": {
+    "question": 10,
+    "text": "MTN",
+    "order": 2
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 46,
+  "fields": {
+    "question": 10,
+    "text": "rain",
+    "order": 3
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 47,
+  "fields": {
+    "question": 10,
+    "text": "Telkom (8ta)",
+    "order": 4
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 48,
+  "fields": {
+    "question": 10,
+    "text": "Virgin Mobile",
+    "order": 5
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 49,
+  "fields": {
+    "question": 10,
+    "text": "Vodacom",
+    "order": 6
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 52,
+  "fields": {
+    "question": 12,
+    "text": "Yes",
+    "order": 141
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 53,
+  "fields": {
+    "question": 12,
+    "text": "No, I would prefer you don't call me at all",
+    "order": 140
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 54,
+  "fields": {
+    "question": 15,
+    "text": "Female",
+    "order": 7
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 55,
+  "fields": {
+    "question": 15,
+    "text": "Male",
+    "order": 8
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 56,
+  "fields": {
+    "question": 15,
+    "text": "Other",
+    "order": 9
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 57,
+  "fields": {
+    "question": 15,
+    "text": "I would rather not say",
+    "order": 10
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 58,
+  "fields": {
+    "question": 16,
+    "text": "Black South African",
+    "order": 11
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 59,
+  "fields": {
+    "question": 16,
+    "text": "Coloured South African",
+    "order": 12
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 60,
+  "fields": {
+    "question": 16,
+    "text": "Indian South African",
+    "order": 13
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 61,
+  "fields": {
+    "question": 16,
+    "text": "White South African",
+    "order": 14
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 62,
+  "fields": {
+    "question": 16,
+    "text": "I am South African, but don't identify with either one of these",
+    "order": 15
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 63,
+  "fields": {
+    "question": 16,
+    "text": "I am not South African",
+    "order": 16
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 64,
+  "fields": {
+    "question": 17,
+    "text": "Some primary schooling (grade 0-7)",
+    "order": 17
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 65,
+  "fields": {
+    "question": 17,
+    "text": "High school (grade 9-11)",
+    "order": 18
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 66,
+  "fields": {
+    "question": 17,
+    "text": "Matric (grade 12)",
+    "order": 19
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 67,
+  "fields": {
+    "question": 17,
+    "text": "TVET college (incomplete or complete)",
+    "order": 20
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 68,
+  "fields": {
+    "question": 17,
+    "text": "University/ college undergraduate (incomplete or complete)",
+    "order": 21
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 69,
+  "fields": {
+    "question": 17,
+    "text": "University/ college post-graduate (incomplete or complete)",
+    "order": 22
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 70,
+  "fields": {
+    "question": 18,
+    "text": "In high school",
+    "order": 23
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 71,
+  "fields": {
+    "question": 18,
+    "text": "In college/ university",
+    "order": 24
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 72,
+  "fields": {
+    "question": 18,
+    "text": "Employed",
+    "order": 25
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 73,
+  "fields": {
+    "question": 18,
+    "text": "Self-employed",
+    "order": 26
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 74,
+  "fields": {
+    "question": 18,
+    "text": "Unemployed and not looking",
+    "order": 27
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 75,
+  "fields": {
+    "question": 18,
+    "text": "Unemployed and seeking employment",
+    "order": 28
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 76,
+  "fields": {
+    "question": 19,
+    "text": "10",
+    "order": 29
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 77,
+  "fields": {
+    "question": 19,
+    "text": "25",
+    "order": 30
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 78,
+  "fields": {
+    "question": 19,
+    "text": "48",
+    "order": 31
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 79,
+  "fields": {
+    "question": 19,
+    "text": "176",
+    "order": 32
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 80,
+  "fields": {
+    "question": 20,
+    "text": "4-9",
+    "order": 33
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 81,
+  "fields": {
+    "question": 20,
+    "text": "10-15",
+    "order": 34
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 82,
+  "fields": {
+    "question": 20,
+    "text": "16-25",
+    "order": 35
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 83,
+  "fields": {
+    "question": 20,
+    "text": "26-36",
+    "order": 36
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 84,
+  "fields": {
+    "question": 20,
+    "text": "37-100",
+    "order": 37
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 85,
+  "fields": {
+    "question": 21,
+    "text": "1",
+    "order": 38
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 86,
+  "fields": {
+    "question": 21,
+    "text": "2",
+    "order": 39
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 87,
+  "fields": {
+    "question": 21,
+    "text": "3",
+    "order": 40
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 88,
+  "fields": {
+    "question": 21,
+    "text": "4",
+    "order": 41
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 89,
+  "fields": {
+    "question": 21,
+    "text": "5",
+    "order": 42
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 90,
+  "fields": {
+    "question": 22,
+    "text": "0",
+    "order": 43
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 91,
+  "fields": {
+    "question": 22,
+    "text": "1-3",
+    "order": 44
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 92,
+  "fields": {
+    "question": 22,
+    "text": "4-5",
+    "order": 45
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 93,
+  "fields": {
+    "question": 22,
+    "text": "6-10",
+    "order": 46
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 94,
+  "fields": {
+    "question": 22,
+    "text": "11+",
+    "order": 47
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 95,
+  "fields": {
+    "question": 23,
+    "text": "Yes",
+    "order": 48
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 96,
+  "fields": {
+    "question": 23,
+    "text": "No",
+    "order": 49
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 97,
+  "fields": {
+    "question": 24,
+    "text": "Yes",
+    "order": 50
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 98,
+  "fields": {
+    "question": 24,
+    "text": "No",
+    "order": 51
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 99,
+  "fields": {
+    "question": 24,
+    "text": "Not sure yet",
+    "order": 52
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 100,
+  "fields": {
+    "question": 24,
+    "text": "Not applicable (I am not registered, so I can't vote)",
+    "order": 53
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 101,
+  "fields": {
+    "question": 25,
+    "text": "Yes",
+    "order": 54
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 102,
+  "fields": {
+    "question": 25,
+    "text": "No",
+    "order": 55
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 103,
+  "fields": {
+    "question": 26,
+    "text": "My family and/or friends support the party",
+    "order": 56
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 104,
+  "fields": {
+    "question": 26,
+    "text": "I agree with their proposed policies on issues that are important to me",
+    "order": 57
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 105,
+  "fields": {
+    "question": 26,
+    "text": "I trust the party representatives",
+    "order": 58
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 106,
+  "fields": {
+    "question": 26,
+    "text": "The party does things that are beneficial for people in my neighbourhood and other areas",
+    "order": 59
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 107,
+  "fields": {
+    "question": 26,
+    "text": "The party promised to do things in my community if we vote for them",
+    "order": 60
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 108,
+  "fields": {
+    "question": 26,
+    "text": "The party represents the views of young people",
+    "order": 61
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 109,
+  "fields": {
+    "question": 26,
+    "text": "The other parties are worse",
+    "order": 62
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 110,
+  "fields": {
+    "question": 26,
+    "text": "We need a change in leadership",
+    "order": 63
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 111,
+  "fields": {
+    "question": 26,
+    "text": "I like their media adverts",
+    "order": 64
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 112,
+  "fields": {
+    "question": 26,
+    "text": "I am part of an organisation that supports this party",
+    "order": 65
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 113,
+  "fields": {
+    "question": 26,
+    "text": "None of the above",
+    "order": 66
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 114,
+  "fields": {
+    "question": 27,
+    "text": "Yes",
+    "order": 67
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 115,
+  "fields": {
+    "question": 27,
+    "text": "No",
+    "order": 68
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 116,
+  "fields": {
+    "question": 27,
+    "text": "Not sure yet",
+    "order": 69
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 117,
+  "fields": {
+    "question": 28,
+    "text": "I DON'T plan to vote, or NOT SURE yet",
+    "order": 70
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 118,
+  "fields": {
+    "question": 28,
+    "text": "I want to support the party that has helped me and  my family",
+    "order": 71
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 119,
+  "fields": {
+    "question": 28,
+    "text": "I want to support the party I feel has done the most for the country",
+    "order": 72
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 120,
+  "fields": {
+    "question": 28,
+    "text": "I want the policies I care about to be actioned",
+    "order": 73
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 121,
+  "fields": {
+    "question": 28,
+    "text": "We need a change in leadership",
+    "order": 74
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 122,
+  "fields": {
+    "question": 28,
+    "text": "I HAVE to vote (no particular reason)",
+    "order": 75
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 123,
+  "fields": {
+    "question": 28,
+    "text": "My family and friends expect me to vote",
+    "order": 76
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 124,
+  "fields": {
+    "question": 29,
+    "text": "I DO plan to vote, or NOT SURE yet",
+    "order": 77
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 125,
+  "fields": {
+    "question": 29,
+    "text": "Not interested in politics",
+    "order": 78
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 126,
+  "fields": {
+    "question": 29,
+    "text": "Voting doesn't make a difference",
+    "order": 79
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 127,
+  "fields": {
+    "question": 29,
+    "text": "Voting won't change my life in any way",
+    "order": 80
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 128,
+  "fields": {
+    "question": 29,
+    "text": "No party addresses the issues I am most interested in",
+    "order": 81
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 129,
+  "fields": {
+    "question": 29,
+    "text": "Not registered/ missed registration deadline",
+    "order": 82
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 130,
+  "fields": {
+    "question": 29,
+    "text": "I don't believe anything the politicians say",
+    "order": 83
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 131,
+  "fields": {
+    "question": 29,
+    "text": "I don't trust that the voting process will keep my vote secret",
+    "order": 84
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 132,
+  "fields": {
+    "question": 29,
+    "text": "I am worried that there will be violence on voting day",
+    "order": 85
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 133,
+  "fields": {
+    "question": 29,
+    "text": "All politicians are corrupt or only interested in benefiting themselves",
+    "order": 86
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 134,
+  "fields": {
+    "question": 30,
+    "text": "I DO plan to vote, or I DON'T plan to vote",
+    "order": 87
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 135,
+  "fields": {
+    "question": 30,
+    "text": "I don't know yet which party to vote for",
+    "order": 88
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 136,
+  "fields": {
+    "question": 30,
+    "text": "I'm not sure if it\u2019s going to be safe to vote in my area",
+    "order": 89
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 137,
+  "fields": {
+    "question": 30,
+    "text": "I'm not sure if I will be able to make it to the voting station",
+    "order": 90
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 138,
+  "fields": {
+    "question": 30,
+    "text": "I'm not sure if I will be able to make it to the voting station Not applicable",
+    "order": 91
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 139,
+  "fields": {
+    "question": 32,
+    "text": "1",
+    "order": 92
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 140,
+  "fields": {
+    "question": 32,
+    "text": "2",
+    "order": 93
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 141,
+  "fields": {
+    "question": 32,
+    "text": "3",
+    "order": 94
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 142,
+  "fields": {
+    "question": 32,
+    "text": "4",
+    "order": 95
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 143,
+  "fields": {
+    "question": 32,
+    "text": "5",
+    "order": 96
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 144,
+  "fields": {
+    "question": 33,
+    "text": "1",
+    "order": 97
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 145,
+  "fields": {
+    "question": 33,
+    "text": "2",
+    "order": 98
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 146,
+  "fields": {
+    "question": 33,
+    "text": "3",
+    "order": 99
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 147,
+  "fields": {
+    "question": 33,
+    "text": "4",
+    "order": 100
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 148,
+  "fields": {
+    "question": 33,
+    "text": "5",
+    "order": 101
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 149,
+  "fields": {
+    "question": 34,
+    "text": "1",
+    "order": 102
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 150,
+  "fields": {
+    "question": 34,
+    "text": "2",
+    "order": 103
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 151,
+  "fields": {
+    "question": 34,
+    "text": "3",
+    "order": 104
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 152,
+  "fields": {
+    "question": 34,
+    "text": "4",
+    "order": 105
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 153,
+  "fields": {
+    "question": 34,
+    "text": "5",
+    "order": 106
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 154,
+  "fields": {
+    "question": 35,
+    "text": "Not applicable, I am not registered to vote",
+    "order": 1
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 155,
+  "fields": {
+    "question": 35,
+    "text": "IEC advertisements and registration drives",
+    "order": 108
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 156,
+  "fields": {
+    "question": 35,
+    "text": "Political party registration drives",
+    "order": 109
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 157,
+  "fields": {
+    "question": 35,
+    "text": "Family and friends",
+    "order": 110
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 158,
+  "fields": {
+    "question": 35,
+    "text": "People at school/ college/ university",
+    "order": 111
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 159,
+  "fields": {
+    "question": 35,
+    "text": "People I work with",
+    "order": 112
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 160,
+  "fields": {
+    "question": 35,
+    "text": "My employment depends on whether I vote",
+    "order": 113
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 161,
+  "fields": {
+    "question": 36,
+    "text": "Not applicable, I am registered to vote",
+    "order": 114
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 162,
+  "fields": {
+    "question": 36,
+    "text": "I moved to a different place from where I initially registered",
+    "order": 115
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 163,
+  "fields": {
+    "question": 36,
+    "text": "I couldn't make time to go register",
+    "order": 116
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 164,
+  "fields": {
+    "question": 36,
+    "text": "I didn't know my local voting station",
+    "order": 117
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 165,
+  "fields": {
+    "question": 36,
+    "text": "I couldn't get to my local voting station",
+    "order": 118
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 166,
+  "fields": {
+    "question": 36,
+    "text": "I don't care about voting",
+    "order": 119
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 167,
+  "fields": {
+    "question": 38,
+    "text": "None",
+    "order": 120
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 168,
+  "fields": {
+    "question": 38,
+    "text": "One",
+    "order": 121
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 169,
+  "fields": {
+    "question": 38,
+    "text": "More than one",
+    "order": 122
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 170,
+  "fields": {
+    "question": 39,
+    "text": "None",
+    "order": 123
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 171,
+  "fields": {
+    "question": 39,
+    "text": "One",
+    "order": 124
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 172,
+  "fields": {
+    "question": 39,
+    "text": "More than one",
+    "order": 125
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 173,
+  "fields": {
+    "question": 40,
+    "text": "None",
+    "order": 126
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 174,
+  "fields": {
+    "question": 40,
+    "text": "One",
+    "order": 127
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 175,
+  "fields": {
+    "question": 40,
+    "text": "More than one",
+    "order": 130
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 176,
+  "fields": {
+    "question": 46,
+    "text": "Radio news",
+    "order": 131
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 177,
+  "fields": {
+    "question": 46,
+    "text": "Talk radio",
+    "order": 132
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 178,
+  "fields": {
+    "question": 46,
+    "text": "Television",
+    "order": 133
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 179,
+  "fields": {
+    "question": 46,
+    "text": "Local newspapers",
+    "order": 134
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 180,
+  "fields": {
+    "question": 46,
+    "text": "Elected local leaders (councillors)",
+    "order": 135
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 181,
+  "fields": {
+    "question": 46,
+    "text": "Local traditional leaders",
+    "order": 136
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 182,
+  "fields": {
+    "question": 46,
+    "text": "Provincial/ national newspapers",
+    "order": 137
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 183,
+  "fields": {
+    "question": 46,
+    "text": "Political party representatives",
+    "order": 138
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 184,
+  "fields": {
+    "question": 46,
+    "text": "Family and friends",
+    "order": 139
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 185,
+  "fields": {
+    "question": 46,
+    "text": "Social media",
+    "order": 128
+  }
+},
+{
+  "model": "khetha.answeroption",
+  "pk": 186,
+  "fields": {
+    "question": 46,
+    "text": "None of the above, I am not interested in political matters",
+    "order": 129
   }
 }
 ]

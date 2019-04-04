@@ -43,7 +43,7 @@ class TestTask(TestCase):
         assert "" == str(models.Task.objects.create())
 
     def test_questions(self) -> None:
-        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        task: models.Task = models.Task.objects.get(slug="views-on-elections")
         self.assertQuerysetEqual(
             task.question_set.order_by("order"), task.questions(), transform=lambda o: o
         )
@@ -72,7 +72,7 @@ class TestQuestion(TestCase):
         assert "" == str(self._create())
 
     def test_answer_options(self) -> None:
-        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        task: models.Task = models.Task.objects.get(slug="views-on-elections")
         # First question with some answers:
         question: models.Question = task.questions().filter(
             answeroption__isnull=False
