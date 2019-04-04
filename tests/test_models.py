@@ -33,6 +33,7 @@ class TestTask(TestCase):
             "description": "",
             "id": task.pk,
             "is_published": False,
+            "order": 0,
             "points": 0,
             "slug": "",
             "title": "",
@@ -42,9 +43,9 @@ class TestTask(TestCase):
         assert "" == str(models.Task.objects.create())
 
     def test_questions(self) -> None:
-        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        task: models.Task = models.Task.objects.get(slug="views-on-elections")
         self.assertQuerysetEqual(
-            task.question_set.order_by("pk"), task.questions(), transform=lambda o: o
+            task.question_set.order_by("order"), task.questions(), transform=lambda o: o
         )
 
 
@@ -62,6 +63,7 @@ class TestQuestion(TestCase):
         assert {
             "description": "",
             "id": question.pk,
+            "order": 0,
             "task_id": question.task.pk,
             "text": "",
         } == models.Question.objects.values().get(pk=question.pk)
@@ -70,14 +72,14 @@ class TestQuestion(TestCase):
         assert "" == str(self._create())
 
     def test_answer_options(self) -> None:
-        task: models.Task = models.Task.objects.get(slug="views-on-election")
+        task: models.Task = models.Task.objects.get(slug="views-on-elections")
         # First question with some answers:
         question: models.Question = task.questions().filter(
             answeroption__isnull=False
         ).first()
         assert 0 < question.answeroption_set.count()  # self-integrity check
         self.assertQuerysetEqual(
-            question.answeroption_set.order_by("pk"),
+            question.answeroption_set.order_by("order"),
             question.answer_options(),
             transform=lambda o: o,
         )
@@ -94,6 +96,7 @@ class TestAnswerOption(TestCase):
         answer_option = self._create()
         assert {
             "id": answer_option.pk,
+            "order": 0,
             "question_id": answer_option.question.pk,
             "text": "",
         } == models.AnswerOption.objects.values().get(pk=answer_option.pk)

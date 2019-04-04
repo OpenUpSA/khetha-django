@@ -25,6 +25,8 @@ ROOT_URLCONF = "khetha.urls"
 INSTALLED_APPS = [
     # Khetha
     "khetha",
+    # Third-party libraries
+    "adminsortable2",
     # Django defaults
     "django.contrib.admin",
     "django.contrib.auth",

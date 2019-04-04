@@ -1,3 +1,4 @@
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin
 from django.contrib.auth.admin import UserAdmin as django_UserAdmin
@@ -23,19 +24,19 @@ class UserAdmin(django_UserAdmin):
     """
 
 
-class QuestionInline(_TabularInline):
+class QuestionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.Question
     exclude = ["description"]
     raw_id_fields = ["task"]
 
 
-class AnswerOptionInline(_TabularInline):
+class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.AnswerOption
     raw_id_fields = ["question"]
 
 
 @admin.register(models.Task)
-class TaskAdmin(admin.ModelAdmin):
+class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ["slug", "title", "description", "points", "is_published"]
     search_fields = ["slug", "title", "description"]
     list_editable = ["is_published"]
