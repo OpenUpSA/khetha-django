@@ -23,6 +23,11 @@ class Task(models.Model):
 
     is_published = models.BooleanField(default=False)
 
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        ordering = ["order"]
+
     def __str__(self) -> str:
         return self.title
 
@@ -30,7 +35,7 @@ class Task(models.Model):
         """
         The questions to show for this task, in order.
         """
-        return self.question_set.order_by("pk")  # XXX: Just pk, for now.
+        return self.question_set.all()
 
 
 class Question(models.Model):
@@ -39,6 +44,11 @@ class Question(models.Model):
     text: str = _CharField()
     description = _BlankTextField()
 
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        ordering = ["order"]
+
     def __str__(self) -> str:
         return self.text
 
@@ -46,13 +56,18 @@ class Question(models.Model):
         """
         The answer options to show for this question, in order.
         """
-        return self.answeroption_set.order_by("pk")  # XXX: Just pk, for now.
+        return self.answeroption_set.all()
 
 
 class AnswerOption(models.Model):
     question = _ForeignKey(Question)
 
     text: str = _CharField()
+
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta(object):
+        ordering = ["order"]
 
     def __str__(self) -> str:
         return self.text
