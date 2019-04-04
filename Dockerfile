@@ -38,7 +38,6 @@ COPY --from=khetha-wheels-builder /wheels/ /wheels/
 ENV PATH="/root/.local/bin:${PATH}"
 RUN pip install --no-cache-dir --no-deps --no-index --user /wheels/*.whl
 # Build the static files.
-# NOTE: This won't get used unless you extract it from this stage as part of your deployment.
 ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
 ENV DJANGO_STATIC_URL='/static/'
@@ -52,6 +51,10 @@ FROM base-python AS khetha-django
 # psycopg2 runtime dependency:
 RUN apk add --no-cache libpq
 COPY --from=khetha-site-builder /root/.local /root/.local
+# XXX: Include the static files in this image, for now.
+# (This should be better done as a separate build output stage,
+# but support for this is still immature in the Docker ecosystem.)
+COPY --from=khetha-site-builder /static_root /static_root
 ENV PATH="/root/.local/bin:$PATH"
 ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_STATIC_URL='/static/'
