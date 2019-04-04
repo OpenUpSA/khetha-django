@@ -13,9 +13,9 @@
                             <div class="khetha-task-card__title">
                                 {{ task.title }}
                             </div>
-                            <p class="mdc-typography--caption">
-                                {{ task.description }}
-                            </p>
+                            <div class="mdc-typography--caption">
+                                {{ task.description|linebreaks }}
+                            </div>
                         </a>
                     </div>
                 </div>

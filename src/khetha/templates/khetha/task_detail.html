@@ -3,6 +3,10 @@
 {% block content %}
     <h1>{{ task.title }}</h1>
 
+    <div class="mdc-typography--body2">
+        {{ task.description|linebreaks }}
+    </div>
+
     <div class="mdc-layout-grid__inner">
         {% for question in task.questions %}
             <div class="mdc-layout-grid__cell--span-12">
