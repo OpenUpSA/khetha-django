@@ -36,6 +36,14 @@
     font-weight: bold;
 }
 
+.khetha-question-card__content {
+    padding: 0.5em;
+}
+
+.khetha-question-card__content__item {
+    margin: 0.5em;
+}
+
 /* Not implemented yet: https://github.com/material-components/material-components-web/tree/master/packages/mdc-divider */
 .not-mdc-card__divider {
     border-top: 1px solid var(--mdc-theme-background);
