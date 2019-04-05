@@ -77,3 +77,19 @@ class AnswerOption(models.Model):
 
     def __str__(self) -> str:
         return self.text
+
+
+class TaskSubmission(TimestampedModel):
+    # Key the submissions by task and an arbitrary user key, for now.
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    user_key = models.CharField(max_length=1024, db_index=True)
+
+
+class Answer(TimestampedModel):
+    tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    value = models.TextField(blank=True)
+
+    def __str__(self) -> str:
+        return self.value
