@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -24,6 +25,9 @@ class Task(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self) -> str:
+        return reverse("task-detail", kwargs={"slug": self.slug})
 
     def questions(self) -> models.QuerySet[Question]:
         """

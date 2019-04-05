@@ -42,6 +42,10 @@ class TestTask(TestCase):
     def test_str(self) -> None:
         assert "" == str(models.Task.objects.create())
 
+    def test_get_absolute_url(self) -> None:
+        task = models.Task.objects.create(slug="spam")
+        assert "/tasks/spam/" == task.get_absolute_url()
+
     def test_questions(self) -> None:
         task: models.Task = models.Task.objects.get(slug="views-on-elections")
         self.assertQuerysetEqual(
