@@ -44,6 +44,10 @@
     margin: 0.5em;
 }
 
+.khetha-text-field--full-width {
+    width: 100%;
+}
+
 /* Not implemented yet: https://github.com/material-components/material-components-web/tree/master/packages/mdc-divider */
 .not-mdc-card__divider {
     border-top: 1px solid var(--mdc-theme-background);
