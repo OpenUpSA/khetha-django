@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List, Tuple
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -83,6 +85,16 @@ class TaskSubmission(TimestampedModel):
     # Key the submissions by task and an arbitrary user key, for now.
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     user_key = models.CharField(max_length=1024, db_index=True)
+
+    def answers(self) -> List[Answer]:
+        """
+        Get or create the set of answers for this task submission.
+        """
+        answers_creations: List[Tuple[Answer, bool]] = [
+            self.answer_set.get_or_create(question=question)
+            for question in self.task.questions()
+        ]
+        return [answer for (answer, created) in answers_creations]
 
 
 class Answer(TimestampedModel):

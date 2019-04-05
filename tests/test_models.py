@@ -104,3 +104,20 @@ class TestAnswerOption(TestCase):
 
     def test_str(self) -> None:
         assert "" == str(self._create())
+
+
+class TestTaskSubmission(TestCase):
+
+    fixtures = ["sample-task-data"]
+
+    def test_answers(self) -> None:
+        self.assertQuerysetEqual([], models.Answer.objects.all())
+        for task in models.Task.objects.all():
+            with self.subTest(task=task):
+                tasksubmission = models.TaskSubmission.objects.create(
+                    task=task, user_key="user-1"
+                )
+                assert list(task.questions()) == [
+                    answer.question for answer in tasksubmission.answers()
+                ]
+        assert models.Question.objects.count() == models.Answer.objects.count()
