@@ -5,6 +5,14 @@ from django.db import models
 from django.urls import reverse
 
 
+class TimestampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    modified_at = models.DateTimeField(auto_now=True, db_index=True)
+
+    class Meta:
+        abstract = True
+
+
 class User(AbstractUser):
     pass
 
