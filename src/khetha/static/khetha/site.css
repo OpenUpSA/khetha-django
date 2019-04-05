@@ -9,9 +9,13 @@
 
 /* Khetha-specific classes */
 
-.khetha-theme--gradient-bg--primary {
+.khetha-theme--gradient-bg--primary, .khetha-button--answer {
     /* Referenced from prior tokens/colors primaryGradient style: */
     background: linear-gradient(162.21deg, #00F260 0%, #0575E6 83.33%), #0575E6 !important;
+}
+
+.khetha-button--answer {
+    font-weight: bold;
 }
 
 .khetha-theme--gradient-bg--bar {
