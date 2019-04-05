@@ -11,6 +11,7 @@ for package in \
     floating-label \
     layout-grid \
     ripple \
+    snackbar \
     textfield \
     theme \
     top-app-bar \
