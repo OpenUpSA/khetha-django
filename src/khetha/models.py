@@ -45,6 +45,15 @@ class Task(models.Model):
         """
         return self.question_set.all()
 
+    def get_submission(self, user_key: str) -> TaskSubmission:
+        """
+        Get (or create) the active task submission this task and user_key.
+        """
+        (tasksubmission, created) = self.tasksubmission_set.get_or_create(
+            user_key=user_key
+        )
+        return tasksubmission
+
 
 class Question(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
