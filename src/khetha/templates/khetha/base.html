@@ -66,6 +66,21 @@ Blocks:
             </div>
         </div>
     </div>
+
+    {# Django messages as a snackbar: #}
+    {% for message in messages %}
+        <div class="mdc-snackbar">
+            <div class="mdc-snackbar__surface">
+                <div class="mdc-snackbar__label" role="status" aria-live="polite">
+                    {{ message }}
+                </div>
+                <div class="mdc-snackbar__actions">
+                    <button class="mdc-button mdc-theme--text-secondary-on-dark mdc-snackbar__dismiss" title="Dismiss">×</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}
 <script src="{% static 'khetha/site.js' %}"></script>
 </body>
