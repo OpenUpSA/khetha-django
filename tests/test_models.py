@@ -73,16 +73,13 @@ class TestQuestion(TestCase):
 
     def test_answer_options(self) -> None:
         task: models.Task = models.Task.objects.get(slug="views-on-elections")
-        # First question with some answers:
-        question: models.Question = task.questions().filter(
-            answeroption__isnull=False
-        ).first()
-        assert 0 < question.answeroption_set.count()  # self-integrity check
-        self.assertQuerysetEqual(
-            question.answeroption_set.order_by("order"),
-            question.answer_options(),
-            transform=lambda o: o,
-        )
+        for question in task.questions().filter(answeroption__isnull=False):
+            assert 0 < question.answeroption_set.count()  # self-integrity check
+            self.assertQuerysetEqual(
+                question.answeroption_set.order_by("order"),
+                question.answer_options(),
+                transform=lambda o: o,
+            )
 
 
 class TestAnswerOption(TestCase):
