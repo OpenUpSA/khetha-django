@@ -10,5 +10,10 @@ urlpatterns: list = [
     path("tasks/", views.TaskListView.as_view(), name="task-list"),
     path("tasks/<slug:slug>/", views.TaskDetailView.as_view(), name="task-detail"),
     # Django admin:
+    path(
+        "answers/<int:pk>/update/",
+        views.AnswerUpdateView.as_view(),
+        name="answer-update",
+    ),
     path("admin/", admin.site.urls),
 ]
