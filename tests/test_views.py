@@ -1,9 +1,9 @@
 from http import HTTPStatus
 
-from django.http import HttpResponse
 from django.test import TestCase
 from django.urls import reverse
 
+from helpers import TestResponse
 from khetha import models
 
 
@@ -26,8 +26,8 @@ class TestHome(TestCase):
 class TestTaskListView(TestCase):
     fixtures = ["sample-task-data"]
 
-    def _get(self) -> HttpResponse:
-        response: HttpResponse = self.client.get(reverse("task-list"))
+    def _get(self) -> TestResponse:
+        response = TestResponse.check(self.client.get(reverse("task-list")))
         self.assertTemplateUsed("khetha/task_list.html")
         assert HTTPStatus.OK == response.status_code
         return response
@@ -55,18 +55,21 @@ class TestTaskListView(TestCase):
 class TestTaskDetailView(TestCase):
     fixtures = ["sample-task-data"]
 
-    def _get(self, *, slug: str) -> HttpResponse:
-        return self.client.get(reverse("task-detail", kwargs={"slug": slug}))
+    def _get(self, *, slug: str) -> TestResponse:
+        return TestResponse.check(
+            self.client.get(reverse("task-detail", kwargs={"slug": slug}))
+        )
 
     def test_not_found(self) -> None:
         _unpublish_tasks()
-        task: models.Task = models.Task.objects.first()
-        response = self._get(slug=task.slug)
-        assert HTTPStatus.NOT_FOUND == response.status_code
-        self.assertTemplateNotUsed("khetha/task_detail.html")
-        assert "task" not in response.context
+        task: models.Task
+        for task in models.Task.objects.all():
+            response = self._get(slug=task.slug)
+            assert HTTPStatus.NOT_FOUND == response.status_code
+            self.assertTemplateNotUsed("khetha/task_detail.html")
+            assert "task" not in response.context
 
-    def _get_ok(self, task: models.Task) -> HttpResponse:
+    def _get_ok(self, task: models.Task) -> TestResponse:
         response = self._get(slug=task.slug)
         assert HTTPStatus.OK == response.status_code
         self.assertTemplateUsed("khetha/task_detail.html")
