@@ -1,13 +1,7 @@
-from functools import partial
+from __future__ import annotations
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-# Field shortcuts:
-_CharField = partial(models.CharField, max_length=1024)
-_ForeignKey = partial(models.ForeignKey, on_delete=models.CASCADE)
-# Blank fields:
-_BlankTextField = partial(models.TextField, blank=True)
 
 
 class User(AbstractUser):
@@ -15,10 +9,10 @@ class User(AbstractUser):
 
 
 class Task(models.Model):
-    slug: str = models.SlugField()
+    slug = models.SlugField()
 
-    title: str = _CharField()
-    description = _BlankTextField()
+    title = models.CharField(max_length=1024)
+    description = models.TextField(blank=True)
     points = models.PositiveSmallIntegerField(default=0)
 
     is_published = models.BooleanField(default=False)
@@ -31,7 +25,7 @@ class Task(models.Model):
     def __str__(self) -> str:
         return self.title
 
-    def questions(self) -> models.QuerySet:
+    def questions(self) -> models.QuerySet[Question]:
         """
         The questions to show for this task, in order.
         """
@@ -39,10 +33,10 @@ class Task(models.Model):
 
 
 class Question(models.Model):
-    task = _ForeignKey(Task)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
-    text: str = _CharField()
-    description = _BlankTextField()
+    text = models.CharField(max_length=1024)
+    description = models.TextField(blank=True)
 
     order = models.PositiveIntegerField(default=0)
 
@@ -52,7 +46,7 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.text
 
-    def answer_options(self) -> models.QuerySet:
+    def answer_options(self) -> models.QuerySet[AnswerOption]:
         """
         The answer options to show for this question, in order.
         """
@@ -60,9 +54,9 @@ class Question(models.Model):
 
 
 class AnswerOption(models.Model):
-    question = _ForeignKey(Question)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
-    text: str = _CharField()
+    text = models.CharField(max_length=1024)
 
     order = models.PositiveIntegerField(default=0)
 

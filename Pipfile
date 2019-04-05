@@ -12,6 +12,7 @@ pytest = "*"
 pytest-django = "*"
 setuptools-scm = "*"
 pytest-cov = "*"
+django-stubs = "*"
 
 [packages]
 khetha-django = {editable = true,path = "."}
