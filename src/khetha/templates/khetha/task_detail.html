@@ -1,7 +1,15 @@
 {% extends 'khetha/base.html' %}
 
 {% block content %}
-    <h1>{{ task.title }}</h1>
+    <h1>
+        {{ task.title }}
+        {% if user.is_authenticated and user.is_staff %}
+            <a class="mdc-button mdc-button--dense" style="float: right; margin: 0.25em"
+               href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
+                edit
+            </a>
+        {% endif %}
+    </h1>
 
     <div class="mdc-typography--body2">
         {{ task.description|linebreaks }}
