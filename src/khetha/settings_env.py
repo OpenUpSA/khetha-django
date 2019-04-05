@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 import environ
 
 env = environ.Env()
@@ -66,3 +68,8 @@ AUTH_USER_MODEL = "khetha.User"
 # Tell collectstatic where to find the static assets collected by build-assets.sh
 # (XXX: This should go in dev/build config.)
 STATICFILES_DIRS = [("assets", "build/assets")]
+
+
+# Khetha relies on session persistence to identify people:
+# increase the default 2 week lifetime to something long.
+SESSION_COOKIE_AGE = timedelta(days=1000).total_seconds()
