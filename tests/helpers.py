@@ -4,7 +4,6 @@ from typing import cast
 
 from django.http.response import HttpResponse
 from django.template.context import Context
-from django.test.utils import ContextList
 
 
 class TestResponse(HttpResponse):
@@ -14,5 +13,7 @@ class TestResponse(HttpResponse):
 
     @staticmethod
     def check(response: HttpResponse) -> TestResponse:
-        assert isinstance(response.context, (Context, ContextList))
-        return cast(TestResponse, response)
+        response = cast(TestResponse, response)
+        if response.context is None:
+            response.context = {}
+        return response

@@ -14,4 +14,15 @@
     const ripples = [].map.call(document.querySelectorAll(selector), function (el) {
         return new window.mdc.ripple.MDCRipple(el);
     });
+
+    // https://material.io/develop/web/components/snackbars/#javascript-instantiation
+    const snackbars = [].map.call(document.querySelectorAll('.mdc-snackbar'), function (el) {
+        console.log(el);
+        let snackbar = new window.mdc.snackbar.MDCSnackbar(el);
+        // The Django messages snackbars should open on page load.
+        snackbar.open();
+        return snackbar;
+    });
+
+
 })();

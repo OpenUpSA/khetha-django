@@ -1,44 +1,89 @@
 {% extends 'khetha/base.html' %}
 
 {% block content %}
-    <h1>{{ task.title }}</h1>
+    <h1>
+        {{ task.title }}
+        {% if user.is_authenticated and user.is_staff %}
+            <a class="mdc-button mdc-button--dense" style="float: right; margin: 0.25em"
+               href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
+                edit
+            </a>
+        {% endif %}
+    </h1>
 
     <div class="mdc-typography--body2">
         {{ task.description|linebreaks }}
     </div>
 
     <div class="mdc-layout-grid__inner">
-        {% for question in task.questions %}
-            <div class="mdc-layout-grid__cell--span-12">
-                <div class="mdc-card">
-                    <div class="p-1">
-                        <p>{{ question.text }}</p>
-                    </div>
+        {% for answer in tasksubmission.answers %}
+            {% with question=answer.question %}
 
-                    <div class="not-mdc-card__divider"></div>
+                {# Begin question card #}
+                <div id="question-{{ question.pk }}" class="mdc-layout-grid__cell--span-12">
+                    <div class="mdc-card">
+                        <div class="p-1">
+                            <p>{{ question.text }}</p>
+                        </div>
 
-                    <div class="p-1">
-                        {% for answer_option in question.answer_options %}
-                            <button class="mdc-button mdc-button--raised khetha-theme--gradient-bg--primary">
-                                <span class="mdc-button__label">
-                                    {{ answer_option.text }}
-                                </span>
-                            </button>
-                        {% empty %}
-                            <div class="mdc-text-field mdc-text-field--outlined">
-                                <input type="text" class="mdc-text-field__input">
-                                <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__notch">
-                                        <label class="mdc-floating-label">Answer</label>
+                        <div class="not-mdc-card__divider"></div>
+
+                        <div class="khetha-question-card__content">
+
+                            {# Anchor by question rather than answer, #}
+                            {# since those should be more public. #}
+                            <form id="question-{{ question.pk }}-form" method="post"
+                                  action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
+                                {% csrf_token %}
+                                {% for answer_option in question.answer_options %}
+
+                                    <div class="khetha-question-card__content__item" style="display: inline-block">
+                                        <button class="mdc-button
+                                                        {# XXX: Over-sensitive selection #}
+                                                        {% if answer.value == answer_option.text %}
+                                                        mdc-button--raised khetha-button--answer
+                                                        {% else %}
+                                                        mdc-button--outlined
+                                                        {% endif %}"
+                                                name="value" value="{{ answer_option.text }}">
+                                            <span class="mdc-button__label">
+                                                {{ answer_option.text }}
+                                            </span>
+                                        </button>
                                     </div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                </div>
-                            </div>
-                        {% endfor %}
+
+                                {% empty %}
+
+                                    <div class="khetha-question-card__content__item">
+                                        <div class="mdc-text-field mdc-text-field--outlined khetha-text-field--full-width">
+                                            <input class="mdc-text-field__input"
+                                                   name="value" value="{{ answer.value }}" type="text">
+                                            <div class="mdc-notched-outline">
+                                                <div class="mdc-notched-outline__leading"></div>
+                                                <div class="mdc-notched-outline__notch">
+                                                    <label class="mdc-floating-label">Answer</label>
+                                                </div>
+                                                <div class="mdc-notched-outline__trailing"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="khetha-question-card__content__item">
+                                        <button class="mdc-button mdc-button--raised khetha-button--answer"
+                                                type="submit">
+                                            <span class="mdc-button__label">Save</span>
+                                        </button>
+                                    </div>
+
+                                {% endfor %}
+                            </form>
+
+                        </div>
+
                     </div>
                 </div>
-            </div>
+                {# End question card #}
+
+            {% endwith %}
         {% endfor %}
     </div>
 {% endblock %}

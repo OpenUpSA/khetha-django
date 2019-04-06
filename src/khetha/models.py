@@ -1,7 +1,18 @@
 from __future__ import annotations
 
+from typing import List, Tuple
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
+
+
+class TimestampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    modified_at = models.DateTimeField(auto_now=True, db_index=True)
+
+    class Meta:
+        abstract = True
 
 
 class User(AbstractUser):
@@ -25,11 +36,23 @@ class Task(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def get_absolute_url(self) -> str:
+        return reverse("task-detail", kwargs={"slug": self.slug})
+
     def questions(self) -> models.QuerySet[Question]:
         """
         The questions to show for this task, in order.
         """
         return self.question_set.all()
+
+    def get_submission(self, user_key: str) -> TaskSubmission:
+        """
+        Get (or create) the active task submission this task and user_key.
+        """
+        (tasksubmission, created) = self.tasksubmission_set.get_or_create(
+            user_key=user_key
+        )
+        return tasksubmission
 
 
 class Question(models.Model):
@@ -65,3 +88,29 @@ class AnswerOption(models.Model):
 
     def __str__(self) -> str:
         return self.text
+
+
+class TaskSubmission(TimestampedModel):
+    # Key the submissions by task and an arbitrary user key, for now.
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    user_key = models.CharField(max_length=1024, db_index=True)
+
+    def answers(self) -> List[Answer]:
+        """
+        Get or create the set of answers for this task submission.
+        """
+        answers_creations: List[Tuple[Answer, bool]] = [
+            self.answer_set.get_or_create(question=question)
+            for question in self.task.questions()
+        ]
+        return [answer for (answer, created) in answers_creations]
+
+
+class Answer(TimestampedModel):
+    tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    value = models.TextField(blank=True)
+
+    def __str__(self) -> str:
+        return self.value

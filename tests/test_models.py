@@ -42,6 +42,10 @@ class TestTask(TestCase):
     def test_str(self) -> None:
         assert "" == str(models.Task.objects.create())
 
+    def test_get_absolute_url(self) -> None:
+        task = models.Task.objects.create(slug="spam")
+        assert "/tasks/spam/" == task.get_absolute_url()
+
     def test_questions(self) -> None:
         task: models.Task = models.Task.objects.get(slug="views-on-elections")
         self.assertQuerysetEqual(
@@ -100,3 +104,20 @@ class TestAnswerOption(TestCase):
 
     def test_str(self) -> None:
         assert "" == str(self._create())
+
+
+class TestTaskSubmission(TestCase):
+
+    fixtures = ["sample-task-data"]
+
+    def test_answers(self) -> None:
+        self.assertQuerysetEqual([], models.Answer.objects.all())
+        for task in models.Task.objects.all():
+            with self.subTest(task=task):
+                tasksubmission = models.TaskSubmission.objects.create(
+                    task=task, user_key="user-1"
+                )
+                assert list(task.questions()) == [
+                    answer.question for answer in tasksubmission.answers()
+                ]
+        assert models.Question.objects.count() == models.Answer.objects.count()
