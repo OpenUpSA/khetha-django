@@ -20,7 +20,7 @@
             {% with question=answer.question %}
 
                 {# Begin question card #}
-                <div class="mdc-layout-grid__cell--span-12">
+                <div id="question-{{ question.pk }}" class="mdc-layout-grid__cell--span-12">
                     <div class="mdc-card">
                         <div class="p-1">
                             <p>{{ question.text }}</p>
@@ -30,7 +30,10 @@
 
                         <div class="khetha-question-card__content">
 
-                            <form method="post" action="{% url 'answer-update' pk=answer.pk %}">
+                            {# Anchor by question rather than answer, #}
+                            {# since those should be more public. #}
+                            <form id="question-{{ question.pk }}-form" method="post"
+                                  action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
                                 {% csrf_token %}
                                 {% for answer_option in question.answer_options %}
 
