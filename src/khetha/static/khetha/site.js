@@ -1,6 +1,6 @@
 /* Site-wide initialisation for Khetha. */
 
-(function () {
+function initMDC() {
     // https://material.io/develop/web/components/top-app-bar/#javascript-instantiation
     const topAppBar = new window.mdc.topAppBar.MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
@@ -23,6 +23,6 @@
         snackbar.open();
         return snackbar;
     });
+}
 
-
-})();
+initMDC();

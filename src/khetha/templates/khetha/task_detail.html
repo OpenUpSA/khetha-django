@@ -32,13 +32,13 @@
 
                             {# Anchor by question rather than answer, #}
                             {# since those should be more public. #}
-                            <form id="question-{{ question.pk }}-form" method="post"
+                            <form id="question-{{ question.pk }}-form" class="khetha-question-answer-form" method="post"
                                   action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
                                 {% csrf_token %}
                                 {% for answer_option in question.answer_options %}
 
                                     <div class="khetha-question-card__content__item" style="display: inline-block">
-                                        <button class="mdc-button
+                                        <button class="mdc-button trigger-submit-button-hidden-input-hack
                                                         {# XXX: Over-sensitive selection #}
                                                         {% if answer.value == answer_option.text %}
                                                         mdc-button--raised khetha-button--answer

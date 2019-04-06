@@ -19,3 +19,5 @@ for package in \
 ; do
     cp -av "node_modules/@material/$package/dist/"*.min.* build/assets
 done
+
+cp -av node_modules/zepto/dist/zepto.min.js build/assets
