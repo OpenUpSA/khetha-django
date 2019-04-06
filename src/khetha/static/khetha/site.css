@@ -5,6 +5,10 @@
 :root {
     /* Referenced from prior Layout component style: */
     --mdc-theme-background: #ededed;
+
+    /* Referenced from prior tokens/colors constants: */
+    --mdc-theme-primary: #0575E6;
+    --mdc-theme-secondary: #01C98B;
 }
 
 /* Khetha-specific classes */
