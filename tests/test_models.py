@@ -94,6 +94,7 @@ class TestQuestion(TestCase):
             (1, "Short text"),
             (2, "Long text"),
             (3, "Buttons"),
+            (4, "Select"),
         ] == field.flatchoices  # type: ignore
 
     def test_display_type_enum(self) -> None:
