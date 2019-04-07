@@ -87,6 +87,17 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.text
 
+    @property
+    def display_type_enum(self) -> QuestionDisplayType:
+        """
+        Access `display_type` as an `Enum`.
+        """
+        return QuestionDisplayType(self.display_type)
+
+    @display_type_enum.setter
+    def display_type_enum(self, member: QuestionDisplayType) -> None:
+        self.display_type = member.value
+
     def answer_options(self) -> models.QuerySet[AnswerOption]:
         """
         The answer options to show for this question, in order.
