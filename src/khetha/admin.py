@@ -67,8 +67,11 @@ class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
     search_fields = ["text", "description"]
-    list_display = ["text", "description", "task"]
+    list_display = ["text", "description", "task", "display_type"]
+    list_filter = ["display_type"]
+
     raw_id_fields = ["task"]
+    radio_fields = {"display_type": admin.HORIZONTAL}
 
     inlines = [AnswerOptionInline]
 
