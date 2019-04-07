@@ -1,0 +1,46 @@
+# The following re-enables Auto-DevOps, but let's skip it for now and just do a customised deployment.
+#
+# See: https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/gitlab/ci/templates/Auto-DevOps.gitlab-ci.yml
+#
+#include:
+#  - template: Auto-DevOps.gitlab-ci.yml
+
+
+deploy_staging:
+  stage: deploy
+
+  # Build with a Docker-capable base image, with SSH and Git.
+  # See: https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+  image: pidelport/docker-compose  # Derived from docker:git, but adding docker-compose.
+  services:
+    - docker:dind
+
+  variables:
+    # For deploy-target.sh
+    BASE_DOCKER_IMAGE: "$CI_REGISTRY_IMAGE/deploy/$CI_COMMIT_REF_SLUG"  # https://gitlab.com/PiDelport/khetha-django/container_registry
+    TARGET_NAME: staging
+
+  before_script:
+    # Check for necessary environment variables before proceeding.
+    # See: https://gitlab.com/PiDelport/khetha-django/settings/ci_cd
+    - true "${TARGET_DOCKER_HOST:?"Missing environment variable TARGET_DOCKER_HOST"}"
+    - true "${TARGET_SSH_HOST_KEY:?"Missing environment variable TARGET_SSH_HOST_KEY"}"
+    - true "${TARGET_SSH_PRIVATE_KEY:?"Missing environment variable TARGET_SSH_PRIVATE_KEY"}"
+    - docker info
+    # Authenticate with the repo's registry.
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#using-the-gitlab-container-registry
+    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+    # Configure SSH access to TARGET_DOCKER_HOST
+    - eval "$(ssh-agent)"
+    - echo "${TARGET_SSH_PRIVATE_KEY}" | ssh-add -
+    - mkdir -p ~/.ssh
+    - echo "${TARGET_SSH_HOST_KEY}" >>~/.ssh/known_hosts
+  script:
+    - git clone https://gitlab.com/PiDelport/khetha-deploy.git
+    - cd khetha-deploy
+    - BASE_TAG="${BASE_DOCKER_IMAGE}:${TARGET_NAME}" ./deploy-target.sh "${TARGET_NAME}" "${TARGET_DOCKER_HOST}" ..
+  environment:
+    name: staging
+    url: http://staging.khetha.org.za/
+  # Manual approval for all staging deployments, for now.
+  when: manual
