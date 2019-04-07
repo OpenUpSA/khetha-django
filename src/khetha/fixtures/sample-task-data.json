@@ -76,6 +76,7 @@
   "pk": 9,
   "fields": {
     "task": 3,
+    "display_type": 1,
     "text": "On which phone number would you like to receive your airtime rewards?",
     "description": "Please make sure that the phone number is correct (10 digits)",
     "order": 9
@@ -86,6 +87,7 @@
   "pk": 10,
   "fields": {
     "task": 3,
+    "display_type": 3,
     "text": "Which network provider are you with?",
     "description": "",
     "order": 10
@@ -96,6 +98,7 @@
   "pk": 12,
   "fields": {
     "task": 3,
+    "display_type": 3,
     "text": "We sometimes run short telephonic surveys (with extra Khetha points and opportunities to win). Can we contact you on this number?",
     "description": "Please note: We will never share your number with anyone else.",
     "order": 12
@@ -106,6 +109,7 @@
   "pk": 13,
   "fields": {
     "task": 4,
+    "display_type": 1,
     "text": "What will your gaming name be?",
     "description": "This can be your nickname or an alias if you want",
     "order": 13
@@ -116,6 +120,7 @@
   "pk": 14,
   "fields": {
     "task": 4,
+    "display_type": 1,
     "text": "What is your year of birth?",
     "description": "YYYY",
     "order": 14
@@ -126,6 +131,7 @@
   "pk": 15,
   "fields": {
     "task": 4,
+    "display_type": 3,
     "text": "What is your gender?",
     "description": "",
     "order": 15
@@ -136,6 +142,7 @@
   "pk": 16,
   "fields": {
     "task": 4,
+    "display_type": 3,
     "text": "How would you describe yourself?",
     "description": "",
     "order": 16
@@ -146,6 +153,7 @@
   "pk": 17,
   "fields": {
     "task": 4,
+    "display_type": 3,
     "text": "What is your highest level of education?",
     "description": "",
     "order": 17
@@ -156,6 +164,7 @@
   "pk": 18,
   "fields": {
     "task": 4,
+    "display_type": 3,
     "text": "What do you do at the moment?",
     "description": "",
     "order": 18
@@ -166,6 +175,7 @@
   "pk": 19,
   "fields": {
     "task": 5,
+    "display_type": 3,
     "text": "How many political parties are contesting in the 2019 general elections?",
     "description": "How many parties will appear on the ballot paper for the national election?",
     "order": 19
@@ -176,6 +186,7 @@
   "pk": 20,
   "fields": {
     "task": 5,
+    "display_type": 3,
     "text": "How many political parties are contesting in the 2019 provincial elections?",
     "description": "How many parties will appear on the ballot paper for the provincial election in each province?",
     "order": 20
@@ -186,6 +197,7 @@
   "pk": 21,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "How much do you care about the elections?",
     "description": "On a scale from 1 to 5,  what degree are you interested in the elections.\r\n1= I don't care at all, 3= I am indifferent about elections, 5= I care completely",
     "order": 21
@@ -196,6 +208,7 @@
   "pk": 22,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "How many elections have you voted in?",
     "description": "",
     "order": 22
@@ -206,6 +219,7 @@
   "pk": 23,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "Are you currently registered to vote?",
     "description": "If you are not sure, you can find out from IEC by SMSing your ID Number to 32810 (R1.00 per SMS)",
     "order": 23
@@ -216,6 +230,7 @@
   "pk": 24,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "Do you plan to vote in the upcoming elections?",
     "description": "",
     "order": 24
@@ -226,6 +241,7 @@
   "pk": 25,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "Do you know which party you are going to vote for?",
     "description": "If not registered to vote, imagine you were registered. Do you now which party you would vote for?",
     "order": 25
@@ -236,6 +252,7 @@
   "pk": 26,
   "fields": {
     "task": 6,
+    "display_type": 3,
     "text": "What are your reasons for choosing a party to vote for?",
     "description": "Select 3 that apply to you most",
     "order": 26
@@ -246,6 +263,7 @@
   "pk": 27,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Are you planning to vote in the 2019 National and Provincial elections?",
     "description": "",
     "order": 27
@@ -256,6 +274,7 @@
   "pk": 28,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "You ARE planning vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 28
@@ -266,6 +285,7 @@
   "pk": 29,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "You are NOT planning to vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 29
@@ -276,6 +296,7 @@
   "pk": 30,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "You are NOT SURE yet if you are going to vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 30
@@ -286,6 +307,7 @@
   "pk": 31,
   "fields": {
     "task": 7,
+    "display_type": 1,
     "text": "What do you think? How important are elections in doing the following?",
     "description": "",
     "order": 31
@@ -296,6 +318,7 @@
   "pk": 32,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Changing your life",
     "description": "Have no impact at all (1) - Have a big impact (5)",
     "order": 32
@@ -306,6 +329,7 @@
   "pk": 33,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Changing living conditions in my community?",
     "description": "Have no impact at all (1) - Have a big impact (5)",
     "order": 33
@@ -316,6 +340,7 @@
   "pk": 34,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Changing living conditions for other people in the country?",
     "description": "Have no impact at all (1) - Have a big impact (5)",
     "order": 34
@@ -326,6 +351,7 @@
   "pk": 35,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "What influenced your decision to register to vote? Select the one that MOST explains your reason",
     "description": "",
     "order": 35
@@ -336,6 +362,7 @@
   "pk": 36,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "What influenced your decision to not register to vote? Select the one that MOST explains your reason",
     "description": "",
     "order": 36
@@ -346,6 +373,7 @@
   "pk": 37,
   "fields": {
     "task": 7,
+    "display_type": 1,
     "text": "In the past 12 months, how many parties have you engaged with directly by:",
     "description": "",
     "order": 37
@@ -356,6 +384,7 @@
   "pk": 38,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Attending a political rally or manifesto launch",
     "description": "",
     "order": 38
@@ -366,6 +395,7 @@
   "pk": 39,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Listening to a political rally, manifesto launch or speeches and interviews (on radio and other forms of media)",
     "description": "",
     "order": 39
@@ -376,6 +406,7 @@
   "pk": 40,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "Reading a party manifesto",
     "description": "",
     "order": 40
@@ -386,6 +417,7 @@
   "pk": 41,
   "fields": {
     "task": 8,
+    "display_type": 1,
     "text": "Now tell us about what your experience watching the Big Debate.",
     "description": "",
     "order": 41
@@ -396,6 +428,7 @@
   "pk": 42,
   "fields": {
     "task": 8,
+    "display_type": 1,
     "text": "Did you learn anything you did not know? What did you learn?",
     "description": "",
     "order": 42
@@ -406,6 +439,7 @@
   "pk": 43,
   "fields": {
     "task": 8,
+    "display_type": 1,
     "text": "What were your thoughts while watching?",
     "description": "",
     "order": 43
@@ -416,6 +450,7 @@
   "pk": 44,
   "fields": {
     "task": 8,
+    "display_type": 1,
     "text": "Has watching the show shaped your views about a party in any way? In what ways have our views changed?",
     "description": "",
     "order": 44
@@ -426,6 +461,7 @@
   "pk": 45,
   "fields": {
     "task": 8,
+    "display_type": 1,
     "text": "Thank you for completing this task. Feel free to share a video on one of our social media platforms telling us about your experience watching the big debate. Facebook: @khetha.thegame  Twitter: @khetha_thegame",
     "description": "",
     "order": 45
@@ -436,6 +472,7 @@
   "pk": 46,
   "fields": {
     "task": 7,
+    "display_type": 3,
     "text": "How do you get updates on political matters?",
     "description": "",
     "order": 46
