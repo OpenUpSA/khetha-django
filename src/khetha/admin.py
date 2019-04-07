@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin
 from django.contrib.auth.admin import UserAdmin as django_UserAdmin
 from django.db.models import CharField
-from django.db.models.fields import TextField
 
 from khetha import models
 
@@ -17,6 +16,10 @@ class _InlineModelAdmin(InlineModelAdmin):
 
 
 class _TabularInline(admin.TabularInline, _InlineModelAdmin):
+    pass
+
+
+class _StackedInline(admin.StackedInline, _InlineModelAdmin):
     pass
 
 
@@ -50,11 +53,11 @@ class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
     formfield_overrides = {**_formfield_override_wider_char_fields}
 
 
-class AnswerInline(_TabularInline):
+class AnswerInline(_StackedInline):
     model = models.Answer
     ordering = ["question__order"]
     raw_id_fields = ["tasksubmission", "question"]
-    formfield_overrides = {TextField: {"widget": forms.TextInput}}
+    readonly_fields = ["value"]
 
 
 @admin.register(models.Task)
