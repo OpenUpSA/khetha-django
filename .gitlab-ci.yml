@@ -1,0 +1,5 @@
+# See:
+# https://gitlab.com/gitlab-org/gitlab-ce/blob/master/lib/gitlab/ci/templates/Auto-DevOps.gitlab-ci.yml
+
+include:
+  - template: Auto-DevOps.gitlab-ci.yml
