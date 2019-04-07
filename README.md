@@ -46,3 +46,5 @@ Updating dependencies
 ---------------------
 
 Use Pipenv, and run [requirements-update.sh] after any Pipfile.lock update.
+
+[requirements-update.sh]: requirements-update.sh
