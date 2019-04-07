@@ -1,0 +1,23 @@
+{% comment %}
+Render a question as a button per answer option.
+
+Expected context: question, answer
+{% endcomment %}
+
+{% for answer_option in question.answer_options %}
+    <div class="khetha-question-card__content__item" style="display: inline-block">
+        <button class="mdc-button trigger-submit-button-hidden-input-hack
+                    {# XXX: Over-sensitive selection #}
+                    {% if answer.value == answer_option.text %}
+                    mdc-button--raised khetha-button--answer
+                    {% else %}
+                    mdc-button--outlined
+                    {% endif %}"
+                data-mdc-auto-init="MDCRipple"
+                name="value" value="{{ answer_option.text }}">
+        <span class="mdc-button__label">
+            {{ answer_option.text }}
+        </span>
+        </button>
+    </div>
+{% endfor %}
