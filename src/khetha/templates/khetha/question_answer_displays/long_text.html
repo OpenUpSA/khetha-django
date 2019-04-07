@@ -1,16 +1,15 @@
 {% comment %}
-Render a question as a simple one-line text-field
+Render a question as a simple multi-line text area.
 
 Expected context: question, answer
 
-XXX: Almost identical with long_text.html
+XXX: Almost identical with short_text.html
 {% endcomment %}
 
 <div class="khetha-question-card__content__item">
-    <div class="mdc-text-field mdc-text-field--outlined khetha-text-field--full-width"
-         data-mdc-auto-init="MDCTextField">
-        <input class="mdc-text-field__input"
-               name="value" value="{{ answer.value }}" type="text">
+    <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
+        <textarea class="mdc-text-field__input textarea--autosize"
+                  name="value">{{ answer.value }}</textarea>
         <div class="mdc-notched-outline">
             <div class="mdc-notched-outline__leading"></div>
             <div class="mdc-notched-outline__notch">
@@ -23,7 +22,6 @@ XXX: Almost identical with long_text.html
 
 <div class="khetha-question-card__content__item">
     <button class="mdc-button mdc-button--raised khetha-button--answer"
-            data-mdc-auto-init="MDCRipple"
             type="submit">
         <span class="mdc-button__label">Save</span>
     </button>
