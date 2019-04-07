@@ -22,6 +22,8 @@ function initMDC() {
 function initWidgets() {
     initMDC();
 
+    // http://www.jacklmoore.com/autosize/
+    autosize(document.querySelectorAll('.textarea--autosize'));
 }
 
 initWidgets();
