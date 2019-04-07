@@ -37,8 +37,11 @@ _formfield_override_wider_char_fields = {
 class QuestionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.Question
     raw_id_fields = ["task"]
-    readonly_fields = ["description"]
+    readonly_fields = ["description", "answer_options"]
     formfield_overrides = {**_formfield_override_wider_char_fields}
+
+    def answer_options(self, question: models.Question) -> str:
+        return ", ".join(question.answer_options().values_list("text", flat=True))
 
 
 class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
