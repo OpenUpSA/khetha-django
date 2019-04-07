@@ -70,6 +70,7 @@ class TestQuestion(TestCase):
             "order": 0,
             "task_id": question.task.pk,
             "text": "",
+            "display_type": models.QuestionDisplayType.short_text.value,
         } == models.Question.objects.values().get(pk=question.pk)
 
     def test_str(self) -> None:

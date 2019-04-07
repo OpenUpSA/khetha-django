@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import enum
 from typing import List, Tuple
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+
+from django_missing_bits import missing_utils
 
 
 class TimestampedModel(models.Model):
@@ -55,10 +58,25 @@ class Task(models.Model):
         return tasksubmission
 
 
+@enum.unique
+class QuestionDisplayType(enum.Enum):
+    short_text = 1
+    long_text = 2
+    buttons = 3
+
+
 class Question(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
+    # https://code.djangoproject.com/ticket/24342
+    display_type = models.PositiveSmallIntegerField(
+        db_index=True,
+        default=QuestionDisplayType.short_text.value,
+        choices=missing_utils.enum_choices(QuestionDisplayType),
+    )
+
     text = models.CharField(max_length=1024)
+
     description = models.TextField(blank=True)
 
     order = models.PositiveIntegerField(default=0)
