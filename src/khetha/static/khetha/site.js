@@ -19,4 +19,9 @@ function initMDC() {
   });
 }
 
-initMDC();
+function initWidgets() {
+    initMDC();
+
+}
+
+initWidgets();
