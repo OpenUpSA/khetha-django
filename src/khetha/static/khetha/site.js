@@ -20,10 +20,10 @@ function initMDC() {
 }
 
 function initWidgets() {
-    initMDC();
+  initMDC();
 
-    // http://www.jacklmoore.com/autosize/
-    autosize(document.querySelectorAll('.textarea--autosize'));
+  // http://www.jacklmoore.com/autosize/
+  autosize(document.querySelectorAll(".textarea--autosize"));
 }
 
 initWidgets();
