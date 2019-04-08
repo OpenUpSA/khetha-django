@@ -142,7 +142,7 @@
   "pk": 16,
   "fields": {
     "task": 4,
-    "display_type": 3,
+    "display_type": 4,
     "text": "How would you describe yourself?",
     "description": "",
     "order": 16
@@ -153,7 +153,7 @@
   "pk": 17,
   "fields": {
     "task": 4,
-    "display_type": 3,
+    "display_type": 4,
     "text": "What is your highest level of education?",
     "description": "",
     "order": 17
@@ -164,7 +164,7 @@
   "pk": 18,
   "fields": {
     "task": 4,
-    "display_type": 3,
+    "display_type": 4,
     "text": "What do you do at the moment?",
     "description": "",
     "order": 18
@@ -252,7 +252,7 @@
   "pk": 26,
   "fields": {
     "task": 6,
-    "display_type": 3,
+    "display_type": 4,
     "text": "What are your reasons for choosing a party to vote for?",
     "description": "Select 3 that apply to you most",
     "order": 26
@@ -274,7 +274,7 @@
   "pk": 28,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "You ARE planning vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 28
@@ -285,7 +285,7 @@
   "pk": 29,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "You are NOT planning to vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 29
@@ -296,7 +296,7 @@
   "pk": 30,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "You are NOT SURE yet if you are going to vote? What is your main reason? Choose the one that MOST explains your decision.",
     "description": "",
     "order": 30
@@ -307,7 +307,7 @@
   "pk": 31,
   "fields": {
     "task": 7,
-    "display_type": 1,
+    "display_type": 2,
     "text": "What do you think? How important are elections in doing the following?",
     "description": "",
     "order": 31
@@ -351,7 +351,7 @@
   "pk": 35,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "What influenced your decision to register to vote? Select the one that MOST explains your reason",
     "description": "",
     "order": 35
@@ -362,7 +362,7 @@
   "pk": 36,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "What influenced your decision to not register to vote? Select the one that MOST explains your reason",
     "description": "",
     "order": 36
@@ -417,7 +417,7 @@
   "pk": 41,
   "fields": {
     "task": 8,
-    "display_type": 1,
+    "display_type": 2,
     "text": "Now tell us about what your experience watching the Big Debate.",
     "description": "",
     "order": 41
@@ -428,7 +428,7 @@
   "pk": 42,
   "fields": {
     "task": 8,
-    "display_type": 1,
+    "display_type": 2,
     "text": "Did you learn anything you did not know? What did you learn?",
     "description": "",
     "order": 42
@@ -439,7 +439,7 @@
   "pk": 43,
   "fields": {
     "task": 8,
-    "display_type": 1,
+    "display_type": 2,
     "text": "What were your thoughts while watching?",
     "description": "",
     "order": 43
@@ -450,7 +450,7 @@
   "pk": 44,
   "fields": {
     "task": 8,
-    "display_type": 1,
+    "display_type": 2,
     "text": "Has watching the show shaped your views about a party in any way? In what ways have our views changed?",
     "description": "",
     "order": 44
@@ -461,7 +461,7 @@
   "pk": 45,
   "fields": {
     "task": 8,
-    "display_type": 1,
+    "display_type": 2,
     "text": "Thank you for completing this task. Feel free to share a video on one of our social media platforms telling us about your experience watching the big debate. Facebook: @khetha.thegame  Twitter: @khetha_thegame",
     "description": "",
     "order": 45
@@ -472,7 +472,7 @@
   "pk": 46,
   "fields": {
     "task": 7,
-    "display_type": 3,
+    "display_type": 4,
     "text": "How do you get updates on political matters?",
     "description": "",
     "order": 46
