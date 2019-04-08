@@ -3,6 +3,7 @@ from django import forms
 from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin
 from django.contrib.auth.admin import UserAdmin as django_UserAdmin
+from django.db.models import CharField
 from django.db.models.fields import TextField
 
 from khetha import models
@@ -26,15 +27,24 @@ class UserAdmin(django_UserAdmin):
     """
 
 
+# XXX: The default `django.contrib.admin.widgets.AdminTextInputWidget`
+# is a bit narrow with class vTextField; this widens it.
+_formfield_override_wider_char_fields = {
+    CharField: {"widget": forms.TextInput(attrs={"class": "vLargeTextField"})}
+}
+
+
 class QuestionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.Question
-    exclude = ["description"]
     raw_id_fields = ["task"]
+    readonly_fields = ["description"]
+    formfield_overrides = {**_formfield_override_wider_char_fields}
 
 
 class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.AnswerOption
     raw_id_fields = ["question"]
+    formfield_overrides = {**_formfield_override_wider_char_fields}
 
 
 class AnswerInline(_TabularInline):
@@ -56,7 +66,8 @@ class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ["text", "task"]
+    search_fields = ["text", "description"]
+    list_display = ["text", "description", "task"]
     raw_id_fields = ["task"]
 
     inlines = [AnswerOptionInline]

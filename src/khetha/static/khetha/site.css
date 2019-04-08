@@ -40,6 +40,16 @@
     font-weight: bold;
 }
 
+.khetha-question-card__heading {
+    font-weight: bold;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.khetha-question-card__heading__description {
+    opacity: 0.5;
+}
+
 .khetha-question-card__content {
     padding: 0.5em;
 }
