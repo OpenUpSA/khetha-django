@@ -10,7 +10,7 @@ Expected context: question, answer
     <select class="mdc-select__native-control"
             name="value"
             onchange="$(this.form).submit()">
-        <option disabled style="color: lightgray">Select an option</option>
+        <option disabled selected style="color: lightgray">Select an option</option>
 
         {% for answer_option in question.answer_options %}
             <option style="padding: 0.5em; font-size: larger"
