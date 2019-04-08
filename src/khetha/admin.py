@@ -36,8 +36,8 @@ _formfield_override_wider_char_fields = {
 
 class QuestionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.Question
-    exclude = ["description"]
     raw_id_fields = ["task"]
+    readonly_fields = ["description"]
     formfield_overrides = {**_formfield_override_wider_char_fields}
 
 
@@ -66,7 +66,7 @@ class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ["text", "task"]
+    list_display = ["text", "description", "task"]
     raw_id_fields = ["task"]
 
     inlines = [AnswerOptionInline]
