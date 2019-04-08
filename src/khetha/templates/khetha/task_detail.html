@@ -41,6 +41,10 @@
                                   action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
                                 {% csrf_token %}
 
+                                {% comment %}
+                                Styling note: The main items defined in these templates should have
+                                class "khetha-question-card__content__item" (for padding).
+                                {% endcomment %}
                                 {% with template_name="khetha/question_answer_displays/"|add:question.display_type_enum.name|add:".html" %}
                                     {% include template_name with question=question answer=answer only %}
                                 {% endwith %}
