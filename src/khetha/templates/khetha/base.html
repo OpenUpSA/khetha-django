@@ -36,7 +36,8 @@ Blocks:
 </head>
 <body class="mdc-typography mdc-theme--background">
 {% block body %}
-    <header class="mdc-top-app-bar khetha-theme--gradient-bg--bar">
+    <header class="mdc-top-app-bar khetha-theme--gradient-bg--bar"
+            data-mdc-auto-init="MDCTopAppBar">
         <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                 <a class="mdc-top-app-bar__title khetha-app-bar__title"
@@ -57,13 +58,16 @@ Blocks:
 
     {# Django messages as a snackbar: #}
     {% for message in messages %}
-        <div class="mdc-snackbar">
+        <div class="mdc-snackbar"
+             data-mdc-auto-init="MDCSnackbar">
             <div class="mdc-snackbar__surface">
                 <div class="mdc-snackbar__label" role="status" aria-live="polite">
                     {{ message }}
                 </div>
                 <div class="mdc-snackbar__actions">
-                    <button class="mdc-button mdc-theme--text-secondary-on-dark mdc-snackbar__dismiss" title="Dismiss">×</button>
+                    <button class="mdc-button mdc-theme--text-secondary-on-dark mdc-snackbar__dismiss"
+                            data-mdc-auto-init="MDCRipple"
+                            title="Dismiss">×</button>
                 </div>
             </div>
         </div>
