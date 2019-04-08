@@ -24,8 +24,11 @@
                 {# Begin question card #}
                 <div id="question-{{ question.pk }}" class="mdc-layout-grid__cell--span-12">
                     <div class="mdc-card">
-                        <div class="p-1">
+                        <div class="khetha-question-card__heading">
                             <p>{{ question.text }}</p>
+                            <div class="mdc-typography--caption khetha-question-card__heading__description">
+                                {{ question.description|linebreaks }}
+                            </div>
                         </div>
 
                         <div class="not-mdc-card__divider"></div>
