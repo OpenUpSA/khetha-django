@@ -63,7 +63,7 @@ class QuestionDisplayType(enum.Enum):
     short_text = 1
     long_text = 2
     buttons = 3
-    select = 4
+    select_list = 4
 
 
 class Question(models.Model):
