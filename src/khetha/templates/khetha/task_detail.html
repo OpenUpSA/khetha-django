@@ -4,7 +4,9 @@
     <h1>
         {{ task.title }}
         {% if user.is_authenticated and user.is_staff %}
-            <a class="mdc-button mdc-button--dense" style="float: right; margin: 0.25em"
+            <a class="mdc-button mdc-button--dense"
+               data-mdc-auto-init="MDCRipple"
+               style="float: right; margin: 0.25em"
                href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
                 Edit in admin ›
             </a>
@@ -45,6 +47,7 @@
                                                         {% else %}
                                                         mdc-button--outlined
                                                         {% endif %}"
+                                                data-mdc-auto-init="MDCRipple"
                                                 name="value" value="{{ answer_option.text }}">
                                             <span class="mdc-button__label">
                                                 {{ answer_option.text }}
@@ -55,7 +58,8 @@
                                 {% empty %}
 
                                     <div class="khetha-question-card__content__item">
-                                        <div class="mdc-text-field mdc-text-field--outlined khetha-text-field--full-width">
+                                        <div class="mdc-text-field mdc-text-field--outlined khetha-text-field--full-width"
+                                             data-mdc-auto-init="MDCTextField">
                                             <input class="mdc-text-field__input"
                                                    name="value" value="{{ answer.value }}" type="text">
                                             <div class="mdc-notched-outline">
@@ -69,6 +73,7 @@
                                     </div>
                                     <div class="khetha-question-card__content__item">
                                         <button class="mdc-button mdc-button--raised khetha-button--answer"
+                                                data-mdc-auto-init="MDCRipple"
                                                 type="submit">
                                             <span class="mdc-button__label">Save</span>
                                         </button>
