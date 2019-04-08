@@ -66,6 +66,7 @@ class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
+    search_fields = ["text", "description"]
     list_display = ["text", "description", "task"]
     raw_id_fields = ["task"]
 
