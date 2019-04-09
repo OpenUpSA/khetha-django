@@ -91,11 +91,11 @@ class TestQuestion(TestCase):
         assert isinstance(models.Question._meta, Options)
         field = models.Question._meta.get_field("display_type")
         assert [
-            (1, "Short text"),
-            (2, "Long text"),
-            (3, "Buttons"),
-            (4, "Select list"),
-            (5, "Radio buttons"),
+            (10, "Short text"),
+            (11, "Long text"),
+            (20, "Buttons"),
+            (30, "Select list"),
+            (40, "Radio buttons"),
         ] == field.flatchoices  # type: ignore
 
     def test_display_type_enum(self) -> None:

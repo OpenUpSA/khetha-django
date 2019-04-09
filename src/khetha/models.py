@@ -60,11 +60,22 @@ class Task(models.Model):
 
 @enum.unique
 class QuestionDisplayType(enum.Enum):
-    short_text = 1
-    long_text = 2
-    buttons = 3
-    select_list = 4
-    radio_buttons = 5
+    """
+    Ways to display different types of `Question` answers.
+
+    See: `Question.display_type`
+
+    Value convention: These use a decimal scheme for now, to have space to add
+    related types without changing the value ordering.
+
+    (Value 0 is not used, to avoid conflating with the default database value.)
+    """
+
+    short_text = 10
+    long_text = 11
+    buttons = 20
+    select_list = 30
+    radio_buttons = 40
 
 
 class Question(models.Model):
