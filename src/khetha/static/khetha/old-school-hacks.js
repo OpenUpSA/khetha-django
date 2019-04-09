@@ -23,12 +23,10 @@ function submitButtonHiddenInputHack() {
 }
 
 $(document).ready(function() {
-  $(".khetha-question-answer-form").live("submit", inplaceSubmit);
-
+  var $form = $(".inplace-submit-form");
+  $form.live("submit", inplaceSubmit);
   // Enable the submit button / hidden input hack.
-  $(".khetha-question-answer-form").append(
-    '<div class="submit-button-hidden-input-hack">'
-  );
+  $form.append('<div class="submit-button-hidden-input-hack">');
   $(".trigger-submit-button-hidden-input-hack").live(
     "click",
     submitButtonHiddenInputHack

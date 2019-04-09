@@ -21,7 +21,7 @@
         {% for answer in tasksubmission.answers %}
             {% with question=answer.question %}
                 <div id="question-{{ question.pk }}" class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question=question answer=answer only %}
+                    {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
                 </div>
             {% endwith %}
         {% endfor %}
