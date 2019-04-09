@@ -17,6 +17,23 @@ function initMDC() {
       console.log("Warning, MDCSnackbar not initialised:", el);
     }
   });
+
+  // https://material.io/develop/web/components/input-controls/radio-buttons/#javascript-instantiation
+  [].map.call(document.querySelectorAll(".mdc-radio"), function(radioButtonEl) {
+    if (radioButtonEl.MDCRadio) {
+      const formFieldQuery = $(radioButtonEl).closest(".mdc-form-field");
+      formFieldQuery.each(function(index, formFieldEl) {
+        if (formFieldEl.MDCFormField) {
+          // Associate the radio component with its form-field component
+          formFieldEl.MDCFormField.input = radioButtonEl.MDCRadio;
+        } else {
+          console.log("Warning, MDCFormField not initialised on:", formFieldEl);
+        }
+      });
+    } else {
+      console.log("Warning, MDCRadio not initialised on:", radioButtonEl);
+    }
+  });
 }
 
 function initWidgets() {

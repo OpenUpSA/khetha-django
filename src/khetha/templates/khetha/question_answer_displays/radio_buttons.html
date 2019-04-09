@@ -1,0 +1,32 @@
+{% comment %}
+Render a question as a radio button per answer option.
+
+Expected context: question, answer
+{% endcomment %}
+
+{% for answer_option in question.answer_options %}
+    <div class="mdc-form-field khetha-question-card__content__item"
+         data-mdc-auto-init="MDCFormField"
+         style="width: 100%">
+        <div class="mdc-radio"
+             data-mdc-auto-init="MDCRadio">
+            <input class="mdc-radio__native-control" type="radio"
+                   id="answer-option-{{ answer_option.pk }}"
+                   name="value" value="{{ answer_option.text }}"
+                    {% if answer.value == answer_option.text %} checked {% endif %}>
+            <div class="mdc-radio__background">
+                <div class="mdc-radio__outer-circle"></div>
+                <div class="mdc-radio__inner-circle"></div>
+            </div>
+        </div>
+        <label for="answer-option-{{ answer_option.pk }}">{{ answer_option.text }}</label>
+    </div>
+{% endfor %}
+
+<div class="khetha-question-card__content__item">
+    <button class="mdc-button mdc-button--raised khetha-button--answer"
+            data-mdc-auto-init="MDCRipple"
+            type="submit">
+        <span class="mdc-button__label">Save</span>
+    </button>
+</div>
