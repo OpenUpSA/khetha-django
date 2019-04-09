@@ -1,0 +1,33 @@
+{% comment %}
+Render a card for one question / answer.
+
+Expected context: csrf_token, question, answer
+{% endcomment %}
+<div class="mdc-card">
+
+    <div class="khetha-question-card__heading">
+        <p>{{ question.text }}</p>
+        <div class="mdc-typography--caption khetha-question-card__heading__description">
+            {{ question.description|linebreaks }}
+        </div>
+    </div>
+
+    <div class="not-mdc-card__divider"></div>
+
+    <div class="khetha-question-card__content">
+        {# Anchor by question rather than answer, since those should be more public. #}
+        <form id="question-{{ question.pk }}-form" class="khetha-question-answer-form" method="post"
+              action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
+            {% csrf_token %}
+
+            {% comment %}
+            Styling note: The main items defined in these templates should have
+            class "khetha-question-card__content__item" (for padding).
+            {% endcomment %}
+            {% with template_name="khetha/question_answer_displays/"|add:question.display_type_enum.name|add:".html" %}
+                {% include template_name with question=question answer=answer only %}
+            {% endwith %}
+        </form>
+    </div>
+
+</div>
