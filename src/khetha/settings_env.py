@@ -65,6 +65,11 @@ TEMPLATES = [
 AUTH_USER_MODEL = "khetha.User"
 
 
+# Time zone (hard-coded, for now)
+USE_TZ = True
+TIME_ZONE = "Africa/Johannesburg"
+
+
 # Tell collectstatic where to find the static assets collected by build-assets.sh
 # (XXX: This should go in dev/build config.)
 STATICFILES_DIRS = [("assets", "build/assets")]
