@@ -27,6 +27,12 @@
     background: linear-gradient(158.46deg, #00F260 0%, #0575E6 83.33%), #0576E6;
 }
 
+/* MDC only has align-start and align-end for top app bar sections. */
+/* This is a centering variation. */
+.mdc-top-app-bar__section--align-center-khetha {
+    justify-content: center;
+}
+
 .khetha-app-bar__title {
     color: var(--mdc-theme-text-primary-on-dark);
     text-transform: uppercase;
