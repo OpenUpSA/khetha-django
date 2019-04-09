@@ -4,7 +4,6 @@ from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin
 from django.contrib.auth.admin import UserAdmin as django_UserAdmin
 from django.db.models import CharField
-from django.db.models.fields import TextField
 
 from khetha import models
 
@@ -17,6 +16,10 @@ class _InlineModelAdmin(InlineModelAdmin):
 
 
 class _TabularInline(admin.TabularInline, _InlineModelAdmin):
+    pass
+
+
+class _StackedInline(admin.StackedInline, _InlineModelAdmin):
     pass
 
 
@@ -37,8 +40,11 @@ _formfield_override_wider_char_fields = {
 class QuestionInline(SortableInlineAdminMixin, _TabularInline):
     model = models.Question
     raw_id_fields = ["task"]
-    readonly_fields = ["description"]
+    readonly_fields = ["description", "answer_options"]
     formfield_overrides = {**_formfield_override_wider_char_fields}
+
+    def answer_options(self, question: models.Question) -> str:
+        return ", ".join(question.answer_options().values_list("text", flat=True))
 
 
 class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
@@ -47,11 +53,11 @@ class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
     formfield_overrides = {**_formfield_override_wider_char_fields}
 
 
-class AnswerInline(_TabularInline):
+class AnswerInline(_StackedInline):
     model = models.Answer
     ordering = ["question__order"]
     raw_id_fields = ["tasksubmission", "question"]
-    formfield_overrides = {TextField: {"widget": forms.TextInput}}
+    readonly_fields = ["value"]
 
 
 @admin.register(models.Task)
@@ -67,8 +73,11 @@ class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
 @admin.register(models.Question)
 class QuestionAdmin(admin.ModelAdmin):
     search_fields = ["text", "description"]
-    list_display = ["text", "description", "task"]
+    list_display = ["text", "description", "task", "display_type"]
+    list_filter = ["display_type"]
+
     raw_id_fields = ["task"]
+    radio_fields = {"display_type": admin.HORIZONTAL}
 
     inlines = [AnswerOptionInline]
 

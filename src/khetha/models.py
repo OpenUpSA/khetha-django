@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import enum
 from typing import List, Tuple
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+
+from django_missing_bits import missing_utils
 
 
 class TimestampedModel(models.Model):
@@ -55,10 +58,38 @@ class Task(models.Model):
         return tasksubmission
 
 
+@enum.unique
+class QuestionDisplayType(enum.Enum):
+    """
+    Ways to display different types of `Question` answers.
+
+    See: `Question.display_type`
+
+    Value convention: These use a decimal scheme for now, to have space to add
+    related types without changing the value ordering.
+
+    (Value 0 is not used, to avoid conflating with the default database value.)
+    """
+
+    short_text = 10
+    long_text = 11
+    buttons = 20
+    select_list = 30
+    radio_buttons = 40
+
+
 class Question(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
+    # https://code.djangoproject.com/ticket/24342
+    display_type = models.PositiveSmallIntegerField(
+        db_index=True,
+        default=QuestionDisplayType.short_text.value,
+        choices=missing_utils.enum_choices(QuestionDisplayType),
+    )
+
     text = models.CharField(max_length=1024)
+
     description = models.TextField(blank=True)
 
     order = models.PositiveIntegerField(default=0)
@@ -68,6 +99,17 @@ class Question(models.Model):
 
     def __str__(self) -> str:
         return self.text
+
+    @property
+    def display_type_enum(self) -> QuestionDisplayType:
+        """
+        Access `display_type` as an `Enum`.
+        """
+        return QuestionDisplayType(self.display_type)
+
+    @display_type_enum.setter
+    def display_type_enum(self, member: QuestionDisplayType) -> None:
+        self.display_type = member.value
 
     def answer_options(self) -> models.QuerySet[AnswerOption]:
         """

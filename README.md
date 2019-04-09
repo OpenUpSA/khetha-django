@@ -46,3 +46,19 @@ Updating dependencies
 ---------------------
 
 Use Pipenv, and run [requirements-update.sh] after any Pipfile.lock update.
+
+[requirements-update.sh]: requirements-update.sh
+
+
+Working with data
+-----------------
+
+To dump the task data, or update [src/khetha/fixtures/sample-task-data.json]:
+
+```shell
+django-admin dumpdata --indent 2 khetha.task khetha.question khetha.answeroption
+
+meld <(django-admin dumpdata --indent 2 khetha.task khetha.question khetha.answeroption) src/khetha/fixtures/sample-task-data.json
+```
+
+[src/khetha/fixtures/sample-task-data.json]: src/khetha/fixtures/sample-task-data.json

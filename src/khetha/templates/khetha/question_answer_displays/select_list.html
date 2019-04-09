@@ -1,0 +1,30 @@
+{% comment %}
+Render a question as a select dropdown.
+
+Expected context: question, answer
+{% endcomment %}
+
+<div class="mdc-select mdc-select--outlined khetha-question-card__content__item"
+     data-mdc-auto-init="MDCSelect">
+    <i class="mdc-select__dropdown-icon"></i>
+    <select class="mdc-select__native-control"
+            name="value"
+            onchange="$(this.form).submit()">
+        <option disabled selected style="color: lightgray">Select an option</option>
+
+        {% for answer_option in question.answer_options %}
+            <option style="padding: 0.5em; font-size: larger"
+                    value="{{ answer_option.text }}"
+                    {% if answer.value == answer_option.text %}selected{% endif %}>
+                {{ answer_option.text }}
+            </option>
+        {% endfor %}
+
+    </select>
+
+    <div class="mdc-notched-outline">
+        <div class="mdc-notched-outline__leading"></div>
+        <div class="mdc-notched-outline__notch"></div>
+        <div class="mdc-notched-outline__trailing"></div>
+    </div>
+</div>

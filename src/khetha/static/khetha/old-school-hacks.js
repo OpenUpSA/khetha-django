@@ -6,9 +6,11 @@ function inplaceSubmit(e) {
     var fresh = $(formAnchor, response);
     $(formAnchor).replaceWith(fresh);
 
-    // Reinitialise any MDC components.
+    // Restore the submit button / hidden input hack after replacement.
     $(formAnchor).append('<div class="submit-button-hidden-input-hack">');
-    initMDC();
+
+    // Reinitialise any new widgets that need JavaScript.
+    initWidgets();
   });
 }
 

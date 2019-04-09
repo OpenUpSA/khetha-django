@@ -1,3 +1,4 @@
+from django.db.models.options import Options
 from django.test import TestCase
 
 from khetha import models
@@ -70,6 +71,7 @@ class TestQuestion(TestCase):
             "order": 0,
             "task_id": question.task.pk,
             "text": "",
+            "display_type": models.QuestionDisplayType.short_text.value,
         } == models.Question.objects.values().get(pk=question.pk)
 
     def test_str(self) -> None:
@@ -84,6 +86,23 @@ class TestQuestion(TestCase):
                 question.answer_options(),
                 transform=lambda o: o,
             )
+
+    def test_display_type(self) -> None:
+        assert isinstance(models.Question._meta, Options)
+        field = models.Question._meta.get_field("display_type")
+        assert [
+            (10, "Short text"),
+            (11, "Long text"),
+            (20, "Buttons"),
+            (30, "Select list"),
+            (40, "Radio buttons"),
+        ] == field.flatchoices  # type: ignore
+
+    def test_display_type_enum(self) -> None:
+        question = self._create()
+        assert models.QuestionDisplayType.short_text is question.display_type_enum
+        question.display_type_enum = models.QuestionDisplayType.long_text
+        assert models.QuestionDisplayType.long_text.value == question.display_type
 
 
 class TestAnswerOption(TestCase):
