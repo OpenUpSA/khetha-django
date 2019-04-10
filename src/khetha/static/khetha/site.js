@@ -46,11 +46,11 @@ function initWidgets() {
 initWidgets();
 
 // Enable the question cards' khetha-collapsible toggles.
-$(".khetha-card--question .mdc-card__primary-action").live(
+$(".khetha-card--question-complete .mdc-card__primary-action").live(
   "click keypress",
   function(event) {
     var $collapsible = $(event.target)
-      .closest(".khetha-card--question")
+      .closest(".khetha-card--question-complete")
       .find(".khetha-collapsible");
     $collapsible.toggleClass("khetha-collapsible--collapsed");
   }
