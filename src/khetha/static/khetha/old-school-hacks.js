@@ -28,7 +28,12 @@ function inplaceSubmit(e) {
    * @param {XMLHttpRequest} xhr
    * */
   function handleResponse(data, status, xhr) {
-    replaceForm(form, data);
+    if (document.URL === xhr.responseURL) {
+      replaceForm(form, data);
+    } else {
+      // If the response URL differs, treat it as a redirect.
+      document.location = xhr.responseURL;
+    }
   }
 
   e.preventDefault();
