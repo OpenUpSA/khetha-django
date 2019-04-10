@@ -31,6 +31,17 @@ def _unpublish_tasks() -> None:
     assert 0 < models.Task.objects.update(is_published=False)
 
 
+def _set_user_key(session: SessionBase, user_key: str) -> None:
+    """
+    Set the given user_key in the session.
+
+    Note about test client session object lifetime:
+    https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.Client.session
+    """
+    session[views.SESSION_USER_KEY_NAME] = user_key
+    session.save()
+
+
 class TestHome(TestCase):
     def test_get(self) -> None:
         response = self.client.get("/")
@@ -123,13 +134,7 @@ class TestAnswerUpdateView(TestCase):
         self.answer = models.Answer.objects.filter(
             tasksubmission__user_key="test-user-1"
         ).earliest("created_at")
-        self._set_user_key("test-user-1")
-
-    def _set_user_key(self, user_key: str) -> None:
-        # https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.Client.session
-        session: SessionBase = self.client.session
-        session[views.SESSION_USER_KEY_NAME] = user_key
-        session.save()
+        _set_user_key(self.client.session, "test-user-1")
 
     def _get(self, *, pk: int) -> HttpResponse:
         path = reverse("answer-update", kwargs={"pk": pk})
@@ -143,7 +148,7 @@ class TestAnswerUpdateView(TestCase):
         assert HTTPStatus.NOT_FOUND == self._get(pk=404).status_code
 
     def test_get_post__no_access(self) -> None:
-        self._set_user_key("test-user-2")
+        _set_user_key(self.client.session, "test-user-2")
         assert HTTPStatus.NOT_FOUND == self._get(pk=self.answer.pk).status_code
         assert HTTPStatus.NOT_FOUND == self._post(pk=self.answer.pk).status_code
 
