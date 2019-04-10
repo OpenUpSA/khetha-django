@@ -79,6 +79,11 @@ Icon variants:
 
     khetha-card__icon-row__icon--question-complete
 
+Khetha content bits:
+
+    khetha-card__icon-row__content__question
+    khetha-card__icon-row__content__answer
+
 */
 
 .khetha-card__icon-row {
@@ -104,16 +109,20 @@ Icon variants:
     justify-content: center;
 }
 
-.khetha-card__icon-row__content {
-    font-weight: bold;
-}
-
 .khetha-card__icon-row__icon--question-incomplete {
     opacity: 0.25;
 }
 
 .khetha-card__icon-row__icon--question-complete {
     border-color: var(--mdc-theme-primary);
+}
+
+.khetha-card__icon-row__content__question {
+    font-weight: bold;
+}
+
+.khetha-card__icon-row__content__answer {
+    color: var(--mdc-theme-primary)
 }
 
 .khetha-text-field--full-width {
