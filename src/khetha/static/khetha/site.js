@@ -34,6 +34,19 @@ function initMDC() {
       console.log("Warning, MDCRadio not initialised on:", radioButtonEl);
     }
   });
+
+  // Initialise and open any progress bars marked with data-khetha-initial-progress.
+  // https://material.io/develop/web/components/linear-progress/
+  [].map.call(document.querySelectorAll(".mdc-linear-progress"), function(el) {
+    if (el.dataset.khethaInitialProgress) {
+      if (el.MDCLinearProgress) {
+        el.MDCLinearProgress.progress = el.dataset.khethaInitialProgress;
+        el.MDCLinearProgress.open();
+      } else {
+        console.log("Warning, MDCLinearProgress not initialised:", el);
+      }
+    }
+  });
 }
 
 function initWidgets() {
