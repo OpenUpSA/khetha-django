@@ -152,6 +152,9 @@ class TaskSubmission(TimestampedModel):
         question_count: int = self.task.questions().count()
         return answered_count / question_count
 
+    def is_completed(self) -> bool:
+        return self.progress_factor() == 1
+
 
 class Answer(TimestampedModel):
     tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)

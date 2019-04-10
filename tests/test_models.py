@@ -141,23 +141,30 @@ class TestTaskSubmission(TestCase):
                 ]
         assert models.Question.objects.count() == models.Answer.objects.count()
 
-    def test_progress_factor(self) -> None:
+    def test_progress_factor_is_completed(self) -> None:
+        """
+        `progress_factor` and `is_completed`
+        """
         for task in models.Task.objects.all():
             with self.subTest(task=task):
                 tasksubmission = models.TaskSubmission.objects.create(
                     task=task, user_key="user-1"
                 )
                 assert 0 == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
 
                 # Create answers
                 answers = tasksubmission.answers()
                 assert 0 == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
 
                 # Answer one
                 answers[0].value = "dummy"
                 answers[0].save()
                 assert (1 / len(answers)) == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
 
                 # Answer all
                 tasksubmission.answer_set.all().update(value="dummy")
                 assert 1 == tasksubmission.progress_factor()
+                assert tasksubmission.is_completed()
