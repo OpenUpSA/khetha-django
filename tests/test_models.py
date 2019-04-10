@@ -168,3 +168,11 @@ class TestTaskSubmission(TestCase):
                 tasksubmission.answer_set.all().update(value="dummy")
                 assert 1 == tasksubmission.progress_factor()
                 assert tasksubmission.is_completed()
+
+    def test_get_task_url(self) -> None:
+        task = models.Task.objects.get(slug="contact-details")
+        tasksubmission = task.get_submission("user-key-1")
+        assert task.get_absolute_url() == tasksubmission.get_task_url()
+        tasksubmission.answers()
+        tasksubmission.answer_set.update(value="dummy")
+        assert f"{task.get_absolute_url()}?completed" == tasksubmission.get_task_url()

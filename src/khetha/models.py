@@ -155,6 +155,16 @@ class TaskSubmission(TimestampedModel):
     def is_completed(self) -> bool:
         return self.progress_factor() == 1
 
+    def get_task_url(self) -> str:
+        """
+        Get the URL for this submission's task.
+
+        XXX: This adds a no-effect "completed" query parameter
+        if this user's submission is completed.
+        """
+        task_url = self.task.get_absolute_url()
+        return f"{task_url}?completed" if self.is_completed() else task_url
+
 
 class Answer(TimestampedModel):
     tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)
