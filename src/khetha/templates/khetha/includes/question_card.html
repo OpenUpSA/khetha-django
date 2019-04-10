@@ -15,7 +15,7 @@ Expected context:
       class="inplace-submit-form"
       method="post" action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
     {% csrf_token %}
-    <div class="mdc-card khetha-card--question">
+    <div class="mdc-card khetha-card--question-{% if answer.value %}complete{% else %}incomplete{% endif %}">
 
         <div class="mdc-card__primary-action"
              data-mdc-auto-init="MDCRipple"
