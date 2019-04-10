@@ -20,20 +20,7 @@ Expected context:
         <div class="mdc-card__primary-action"
              data-mdc-auto-init="MDCRipple"
              tabindex="0">
-            <div class="khetha-card__icon-row">
-                <div class="khetha-card__icon-row__icon
-                            khetha-card__icon-row__icon--question-{% if answer.value %}complete{% else %}incomplete{% endif %}">
-                    {% if answer.value %}
-                        <span style="font-size: 1.5em">✓</span>  {# Compensate for small Unicode check mark size. #}
-                    {% else %}
-                        <span>{{ question_number }}</span>
-                    {% endif %}
-                </div>
-                <div class="khetha-card__icon-row__content">
-                    <div class="khetha-card__icon-row__content__question">{{ question.text }}</div>
-                    <div class="khetha-card__icon-row__content__answer">{{ answer.value|linebreaks }}</div>
-                </div>
-            </div>
+            {% include 'khetha/includes/card_icon_row.html' with question_number=question_number question=question answer=answer only %}
         </div>
 
         <div class="khetha-collapsible {% if answer.value %}khetha-collapsible--collapsed{% endif %}">
