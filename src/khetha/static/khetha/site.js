@@ -47,6 +47,34 @@ function initMDC() {
       }
     }
   });
+
+  // Dialog handling.
+  // https://material.io/develop/web/components/dialogs/
+  [].map.call(document.querySelectorAll(".mdc-dialog"), function(el) {
+    /** @type {MDCDialog} */
+    var dialog = el.MDCDialog;
+    if (dialog) {
+      // Handle data-khetha-dialog-auto-open
+      if (el.dataset.khethaDialogAutoOpen === "once") {
+        dialog.open();
+        el.dataset.khethaDialogAutoOpen = "opened";
+      }
+
+      // Handle data-khetha-dialog-behaviour
+      if (el.dataset.khethaDialogBehaviour === "task-complete") {
+        dialog.listen("MDCDialog:closed", function(event) {
+          /** @type {string} */
+          var action = event.detail.action;
+          if (action === "continue") {
+            document.location = "/";
+          }
+          // Otherwise, assume "close"
+        });
+      }
+    } else {
+      console.warn("MDCDialog not initialised on", el);
+    }
+  });
 }
 
 function initWidgets() {
