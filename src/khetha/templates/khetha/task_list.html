@@ -21,22 +21,22 @@
                     <div class="mdc-card__primary-action"
                          data-mdc-auto-init="MDCRipple"
                          tabindex="0">
-                        <a class="d-block p-1 link-unstyled"
-                           href="{% url 'task-detail' slug=task.slug %}">
+                        {% with tasksubmission=task|get_submission:user_key %}
+                            <a class="d-block p-1 link-unstyled"
+                               href="{% url 'task-detail' slug=task.slug %}">
 
-                            <div class="khetha-task-card__title">
-                                {{ task.title }}
-                            </div>
+                                <div class="khetha-task-card__title">
+                                    {{ task.title }}
+                                </div>
 
-                            <div class="mdc-typography--caption">
-                                {{ task.description|linebreaks }}
-                            </div>
+                                <div class="mdc-typography--caption">
+                                    {{ task.description|linebreaks }}
+                                </div>
 
-                            {% with submission=task|get_submission:user_key %}
                                 <div role="progressbar"
                                      class="mdc-linear-progress mdc-linear-progress--closed"
                                      data-mdc-auto-init="MDCLinearProgress"
-                                     data-khetha-initial-progress="{{ submission.progress_factor }}">
+                                     data-khetha-initial-progress="{{ tasksubmission.progress_factor }}">
                                     <div class="mdc-linear-progress__buffering-dots"></div>
                                     <div class="mdc-linear-progress__buffer"></div>
                                     <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
@@ -46,9 +46,9 @@
                                         <span class="mdc-linear-progress__bar-inner"></span>
                                     </div>
                                 </div>
-                            {% endwith %}
 
-                        </a>
+                            </a>
+                        {% endwith %}
                     </div>
                 </div>
             </div>
