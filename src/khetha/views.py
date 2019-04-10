@@ -94,8 +94,8 @@ class AnswerUpdateView(DjangoMessageErrorsFormMixin, BaseUpdateView):
     # Redirect back to the task on success and otherwise:
 
     def get_success_url(self) -> str:
-        task: models.Task = self.object.tasksubmission.task
-        return task.get_absolute_url()
+        tasksubmission = self.object.tasksubmission
+        return tasksubmission.get_task_url()
 
     def render_to_response(
         self, context: Dict[str, Any], **response_kwargs: Any

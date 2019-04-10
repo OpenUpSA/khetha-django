@@ -153,22 +153,30 @@ class TestAnswerUpdateView(TestCase):
         assert HTTPStatus.NOT_FOUND == self._post(pk=self.answer.pk).status_code
 
     def test_get(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         response = self._get(pk=self.answer.pk)
-        self.assertRedirects(response, task.get_absolute_url())
+        self.assertRedirects(response, tasksubmission.get_task_url())
 
     def test_post__empty(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         response = self._post(pk=self.answer.pk, data={})
-        self.assertRedirects(response, task.get_absolute_url())
+        self.assertRedirects(response, tasksubmission.get_task_url())
         self.answer.refresh_from_db()
         assert "" == self.answer.value
 
     def test_post__values(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         for value in ["one", "two", "three"]:
             with self.subTest(value=value):
                 response = self._post(pk=self.answer.pk, data={"value": value})
-                self.assertRedirects(response, task.get_absolute_url())
+                self.assertRedirects(response, tasksubmission.get_task_url())
                 self.answer.refresh_from_db()
                 assert value == self.answer.value
+
+    def test_post__completed(self) -> None:
+        tasksubmission = self.answer.tasksubmission
+        tasksubmission.answer_set.update(value="dummy")
+        response = self._post(pk=self.answer.pk, data={"value": "new"})
+        self.assertRedirects(response, tasksubmission.get_task_url())
+        self.answer.refresh_from_db()
+        assert "new" == self.answer.value
