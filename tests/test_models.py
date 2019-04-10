@@ -140,3 +140,24 @@ class TestTaskSubmission(TestCase):
                     answer.question for answer in tasksubmission.answers()
                 ]
         assert models.Question.objects.count() == models.Answer.objects.count()
+
+    def test_progress_factor(self) -> None:
+        for task in models.Task.objects.all():
+            with self.subTest(task=task):
+                tasksubmission = models.TaskSubmission.objects.create(
+                    task=task, user_key="user-1"
+                )
+                assert 0 == tasksubmission.progress_factor()
+
+                # Create answers
+                answers = tasksubmission.answers()
+                assert 0 == tasksubmission.progress_factor()
+
+                # Answer one
+                answers[0].value = "dummy"
+                answers[0].save()
+                assert (1 / len(answers)) == tasksubmission.progress_factor()
+
+                # Answer all
+                tasksubmission.answer_set.all().update(value="dummy")
+                assert 1 == tasksubmission.progress_factor()

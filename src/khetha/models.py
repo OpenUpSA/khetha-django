@@ -147,6 +147,11 @@ class TaskSubmission(TimestampedModel):
         ]
         return [answer for (answer, created) in answers_creations]
 
+    def progress_factor(self) -> float:
+        answered_count: int = self.answer_set.exclude(value="").count()
+        question_count: int = self.task.questions().count()
+        return answered_count / question_count
+
 
 class Answer(TimestampedModel):
     tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)
