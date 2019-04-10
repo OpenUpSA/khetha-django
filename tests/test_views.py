@@ -44,6 +44,8 @@ class TestTaskListView(TestCase):
         response = TestResponse.check(self.client.get(reverse("task-list")))
         self.assertTemplateUsed("khetha/task_list.html")
         assert HTTPStatus.OK == response.status_code
+        expected_user_key = views.get_user_key(response.wsgi_request)
+        assert expected_user_key == response.context["user_key"]
         return response
 
     def test_get__not_published(self) -> None:

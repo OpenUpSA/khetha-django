@@ -33,6 +33,13 @@ def get_user_key(request: HttpRequest) -> str:
 class TaskListView(generic.ListView):
     queryset = models.Task.objects.filter(is_published=True)
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        """
+        Include the user's `user_key`.
+        """
+        user_key = get_user_key(self.request)
+        return super().get_context_data(user_key=user_key, **kwargs)
+
 
 class TaskDetailView(generic.DetailView):
 
