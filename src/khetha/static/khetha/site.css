@@ -125,6 +125,15 @@ Khetha content bits:
     color: var(--mdc-theme-primary)
 }
 
+/*
+Only use top margins for the answer paragraphs,
+to avoid pushing against the bottom __content padding.
+*/
+.khetha-card__icon-row__content__answer p {
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
 .khetha-text-field--full-width {
     width: 100%;
 }
