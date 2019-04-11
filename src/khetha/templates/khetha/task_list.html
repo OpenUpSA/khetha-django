@@ -1,4 +1,12 @@
 {% extends 'khetha/base.html' %}
+{% comment %}
+Expected context:
+
+    new_tasks: Sequence[Task]
+    active_submissions: Sequence[TaskSubmission]
+    completed_submissions: Sequence[TaskSubmission]
+
+{% endcomment %}
 {% load khetha_tags %}
 
 {% block content %}
@@ -12,46 +20,40 @@
         </a>
     {% endif %}
 
-    <h1>Tasks</h1>
+    {% if active_submissions %}
+        <h1>📝️ Active tasks</h1>
 
-    <div class="mdc-layout-grid__inner">
-        {% for task in task_list %}
-            <div class="mdc-layout-grid__cell--span-12">
-                <div class="mdc-card">
-                    <div class="mdc-card__primary-action"
-                         data-mdc-auto-init="MDCRipple"
-                         tabindex="0">
-                        {% with tasksubmission=task|get_submission:user_key %}
-                            <a class="d-block p-1 link-unstyled"
-                               href="{{ tasksubmission.get_task_url }}">
-
-                                <div class="khetha-task-card__title">
-                                    {{ task.title }}
-                                </div>
-
-                                <div class="mdc-typography--caption">
-                                    {{ task.description|linebreaks }}
-                                </div>
-
-                                <div role="progressbar"
-                                     class="mdc-linear-progress mdc-linear-progress--closed"
-                                     data-mdc-auto-init="MDCLinearProgress"
-                                     data-khetha-initial-progress="{{ tasksubmission.progress_factor }}">
-                                    <div class="mdc-linear-progress__buffering-dots"></div>
-                                    <div class="mdc-linear-progress__buffer"></div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-                                        <span class="mdc-linear-progress__bar-inner"></span>
-                                    </div>
-                                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                                        <span class="mdc-linear-progress__bar-inner"></span>
-                                    </div>
-                                </div>
-
-                            </a>
-                        {% endwith %}
-                    </div>
+        <div class="mdc-layout-grid__inner">
+            {% for tasksubmission in active_submissions %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if new_tasks %}
+        <h1>🆕 New tasks</h1>
+
+        <div class="mdc-layout-grid__inner">
+            {% for task in new_tasks %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/task_card.html' with task=task only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if completed_submissions %}
+        <h1>👌️ Completed tasks</h1>
+
+        <div class="mdc-layout-grid__inner">
+            {% for tasksubmission in completed_submissions %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 {% endblock %}
