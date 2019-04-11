@@ -44,7 +44,8 @@ ENV DJANGO_STATIC_URL='/static/'
 ENV DJANGO_STATIC_ROOT='/static_root/'
 # Tell collectstatic where to find the static assets collected by build-assets.sh
 ENV DJANGO_STATICFILES_DIRS='assets:/khetha-django/build/assets'
-RUN django-admin collectstatic
+# --verbosity 2 lists the collected files, for build logs.
+RUN django-admin collectstatic --verbosity 2
 # Output: /root/.local/
 # Output: /static_root/
 
