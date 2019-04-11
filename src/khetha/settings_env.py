@@ -37,6 +37,10 @@ if "DJANGO_STATICFILES_DIRS" in env:  # pragma: no cover
         "DJANGO_STATICFILES_DIRS",
         cast=lambda s: (tuple(s.split(":")) if ":" in s else s),
     )
+# XXX: Skip this if empty, to avoid inadvertently changing
+# the default StaticFilesStorage to DEFAULT_FILE_STORAGE.
+if env("DJANGO_STATICFILES_STORAGE", default=""):  # pragma: no cover
+    STATICFILES_STORAGE = env("DJANGO_STATICFILES_STORAGE")
 
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
