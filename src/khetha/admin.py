@@ -92,8 +92,8 @@ class AnswerOptionAdmin(admin.ModelAdmin):
 class TaskSubmissionAdmin(admin.ModelAdmin):
     date_hierarchy = "modified_at"
     ordering = ["-modified_at"]
-    list_display_links = ["task", "user_key"]
-    list_display = ["task", "user_key", "modified_at"]
+    list_display_links = ["id", "task", "user_key"]
+    list_display = ["id", "task", "user_key", "modified_at"]
     search_fields = ["task__title", "user_key"]
     list_filter = [("task", admin.RelatedOnlyFieldListFilter)]
 
