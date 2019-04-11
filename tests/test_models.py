@@ -176,3 +176,35 @@ class TestTaskSubmission(TestCase):
         tasksubmission.answers()
         tasksubmission.answer_set.update(value="dummy")
         assert f"{task.get_absolute_url()}?completed" == tasksubmission.get_task_url()
+
+
+class TestUserTasks(TestCase):
+    fixtures = ["sample-task-data"]
+
+    def test_basic(self) -> None:
+        expected = models.UserTasks(new_tasks=list(models.Task.objects.all()))
+        assert expected == models.UserTasks.for_user(
+            "user-key-1", models.Task.objects.all()
+        )
+
+    def test_mixed(self) -> None:
+        tasks = list(models.Task.objects.all())
+
+        active_task = tasks.pop()
+        active_submission = active_task.get_submission("user-key-1")
+        assert not active_submission.is_completed()
+
+        completed_task = tasks.pop()
+        completed_submission = completed_task.get_submission("user-key-1")
+        completed_submission.answers()
+        completed_submission.answer_set.update(value="dummy")
+        assert completed_submission.is_completed()
+
+        expected = models.UserTasks(
+            new_tasks=tasks,
+            active_submissions=[active_submission],
+            completed_submissions=[completed_submission],
+        )
+        assert expected == models.UserTasks.for_user(
+            "user-key-1", models.Task.objects.all()
+        )
