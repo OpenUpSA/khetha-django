@@ -93,6 +93,7 @@ class TestQuestion(TestCase):
         assert [
             (10, "Short text"),
             (11, "Long text"),
+            (12, "Place field"),
             (20, "Buttons"),
             (30, "Select list"),
             (40, "Radio buttons"),

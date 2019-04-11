@@ -19,6 +19,9 @@ if "DJANGO_STATIC_ROOT" in env:  # pragma: no cover
 if "DJANGO_ALLOWED_HOSTS" in env:  # pragma: no cover
     ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
+if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
+    GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
+
 
 # Other Django settings:
 
