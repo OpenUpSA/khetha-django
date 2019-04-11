@@ -23,7 +23,11 @@ services:
       GOOGLE_MAPS_API_KEY:
     build:
       context: .
-    command: 'django-admin runserver 0.0.0.0:8000'
+      args:
+        DJANGO_STATICFILES_STORAGE: 'whitenoise.storage.CompressedStaticFilesStorage'
+
+    # WhiteNoise needs --nostatic for development
+    command: 'django-admin runserver --nostatic 0.0.0.0:8000'
     ports:
       - '127.0.0.1:8000:8000'
 
