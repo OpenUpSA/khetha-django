@@ -77,8 +77,26 @@ function initMDC() {
   });
 }
 
+// Guard variable: Google Maps API loaded yet?
+var isGoogleMapsLoaded = false;
+
+function initGoogleMapsAutocomplete() {
+  if (isGoogleMapsLoaded) {
+    var elements = document.querySelectorAll(".google-maps-autocomplete");
+    [].map.call(elements, function(el) {
+      new google.maps.places.Autocomplete(el);
+    });
+  }
+  // Just skip if not ready yet: a later call should get it.
+}
+function setGoogleMapsLoaded() {
+  isGoogleMapsLoaded = true;
+  initGoogleMapsAutocomplete();
+}
+
 function initWidgets() {
   initMDC();
+  initGoogleMapsAutocomplete();
 
   // http://www.jacklmoore.com/autosize/
   autosize(document.querySelectorAll(".textarea--autosize"));

@@ -1,0 +1,32 @@
+{% comment %}
+Expected context: question, answer
+
+XXX: Almost identical with short_text.html
+{% endcomment %}
+{% load khetha_tags %}
+
+<div class="khetha-question-card__content__item">
+    <div class="mdc-text-field mdc-text-field--outlined khetha-text-field--full-width"
+         data-mdc-auto-init="MDCTextField">
+        <input class="mdc-text-field__input google-maps-autocomplete"
+               name="value" value="{{ answer.value }}" type="text">
+        <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch">
+                <label class="mdc-floating-label">Answer</label>
+            </div>
+            <div class="mdc-notched-outline__trailing"></div>
+        </div>
+    </div>
+</div>
+
+<div class="khetha-question-card__content__item">
+    <button class="mdc-button mdc-button--raised khetha-button--answer"
+            data-mdc-auto-init="MDCRipple"
+            type="submit">
+        <span class="mdc-button__label">Save</span>
+    </button>
+</div>
+
+{# XXX: Should not really be loaded from here. #}
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={% google_maps_api_key %}&libraries=places&callback=setGoogleMapsLoaded"></script>
