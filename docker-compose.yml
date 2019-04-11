@@ -19,6 +19,7 @@ services:
       DJANGO_DATABASE_URL: 'postgres://postgres@db/postgres'
       DJANGO_DEBUG:
       DJANGO_SECRET_KEY:
+      GOOGLE_MAPS_API_KEY:
     build:
       context: .
     command: 'django-admin runserver 0.0.0.0:8000'
