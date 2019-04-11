@@ -31,6 +31,17 @@ def _unpublish_tasks() -> None:
     assert 0 < models.Task.objects.update(is_published=False)
 
 
+def _set_user_key(session: SessionBase, user_key: str) -> None:
+    """
+    Set the given user_key in the session.
+
+    Note about test client session object lifetime:
+    https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.Client.session
+    """
+    session[views.SESSION_USER_KEY_NAME] = user_key
+    session.save()
+
+
 class TestHome(TestCase):
     def test_get(self) -> None:
         response = self.client.get("/")
@@ -44,6 +55,16 @@ class TestTaskListView(TestCase):
         response = TestResponse.check(self.client.get(reverse("task-list")))
         self.assertTemplateUsed("khetha/task_list.html")
         assert HTTPStatus.OK == response.status_code
+        expected_user_key = views.get_user_key(response.wsgi_request)
+        user_tasks = models.UserTasks.for_user(
+            expected_user_key, list(views.TaskListView.queryset.all())
+        )
+        assert user_tasks.new_tasks == response.context["new_tasks"]
+        assert user_tasks.active_submissions == response.context["active_submissions"]
+        assert (
+            user_tasks.completed_submissions
+            == response.context["completed_submissions"]
+        )
         return response
 
     def test_get__not_published(self) -> None:
@@ -121,13 +142,7 @@ class TestAnswerUpdateView(TestCase):
         self.answer = models.Answer.objects.filter(
             tasksubmission__user_key="test-user-1"
         ).earliest("created_at")
-        self._set_user_key("test-user-1")
-
-    def _set_user_key(self, user_key: str) -> None:
-        # https://docs.djangoproject.com/en/stable/topics/testing/tools/#django.test.Client.session
-        session: SessionBase = self.client.session
-        session[views.SESSION_USER_KEY_NAME] = user_key
-        session.save()
+        _set_user_key(self.client.session, "test-user-1")
 
     def _get(self, *, pk: int) -> HttpResponse:
         path = reverse("answer-update", kwargs={"pk": pk})
@@ -141,27 +156,35 @@ class TestAnswerUpdateView(TestCase):
         assert HTTPStatus.NOT_FOUND == self._get(pk=404).status_code
 
     def test_get_post__no_access(self) -> None:
-        self._set_user_key("test-user-2")
+        _set_user_key(self.client.session, "test-user-2")
         assert HTTPStatus.NOT_FOUND == self._get(pk=self.answer.pk).status_code
         assert HTTPStatus.NOT_FOUND == self._post(pk=self.answer.pk).status_code
 
     def test_get(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         response = self._get(pk=self.answer.pk)
-        self.assertRedirects(response, task.get_absolute_url())
+        self.assertRedirects(response, tasksubmission.get_task_url())
 
     def test_post__empty(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         response = self._post(pk=self.answer.pk, data={})
-        self.assertRedirects(response, task.get_absolute_url())
+        self.assertRedirects(response, tasksubmission.get_task_url())
         self.answer.refresh_from_db()
         assert "" == self.answer.value
 
     def test_post__values(self) -> None:
-        task: models.Task = self.answer.tasksubmission.task
+        tasksubmission = self.answer.tasksubmission
         for value in ["one", "two", "three"]:
             with self.subTest(value=value):
                 response = self._post(pk=self.answer.pk, data={"value": value})
-                self.assertRedirects(response, task.get_absolute_url())
+                self.assertRedirects(response, tasksubmission.get_task_url())
                 self.answer.refresh_from_db()
                 assert value == self.answer.value
+
+    def test_post__completed(self) -> None:
+        tasksubmission = self.answer.tasksubmission
+        tasksubmission.answer_set.update(value="dummy")
+        response = self._post(pk=self.answer.pk, data={"value": "new"})
+        self.assertRedirects(response, tasksubmission.get_task_url())
+        self.answer.refresh_from_db()
+        assert "new" == self.answer.value

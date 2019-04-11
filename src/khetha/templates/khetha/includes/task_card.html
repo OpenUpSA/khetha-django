@@ -1,0 +1,24 @@
+{% comment %}
+Expected context:
+
+    task: models.Task
+
+{% endcomment %}
+<div class="mdc-card">
+    <div class="mdc-card__primary-action"
+         data-mdc-auto-init="MDCRipple"
+         tabindex="0">
+        <a class="d-block p-1 link-unstyled"
+           href="{{ task.get_absolute_url }}">
+
+            <div class="khetha-task-card__title">
+                {{ task.title }}
+            </div>
+
+            <div class="mdc-typography--caption">
+                {{ task.description|linebreaks }}
+            </div>
+
+        </a>
+    </div>
+</div>

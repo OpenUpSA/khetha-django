@@ -1,0 +1,40 @@
+{% comment %}
+Expected context:
+
+    tasksubmission: models.TaskSubmission
+
+{% endcomment %}
+<div class="mdc-card">
+    <div class="mdc-card__primary-action"
+         data-mdc-auto-init="MDCRipple"
+         tabindex="0">
+        <a class="d-block p-1 link-unstyled"
+           href="{{ tasksubmission.get_task_url }}">
+
+            {% with task=tasksubmission.task %}
+                <div class="khetha-task-card__title">
+                    {{ task.title }}
+                </div>
+
+                <div class="mdc-typography--caption">
+                    {{ task.description|linebreaks }}
+                </div>
+            {% endwith %}
+
+            <div role="progressbar"
+                 class="mdc-linear-progress mdc-linear-progress--closed"
+                 data-mdc-auto-init="MDCLinearProgress"
+                 data-khetha-initial-progress="{{ tasksubmission.progress_factor }}">
+                {#                                    <div class="mdc-linear-progress__buffering-dots"></div>#}
+                <div class="mdc-linear-progress__buffer"></div>
+                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+                    <span class="mdc-linear-progress__bar-inner khetha-theme--gradient-bg--primary"></span>
+                </div>
+                <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                    <span class="mdc-linear-progress__bar-inner"></span>
+                </div>
+            </div>
+
+        </a>
+    </div>
+</div>

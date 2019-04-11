@@ -33,6 +33,19 @@ def get_user_key(request: HttpRequest) -> str:
 class TaskListView(generic.ListView):
     queryset = models.Task.objects.filter(is_published=True)
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        """
+        Include the user's `user_key`.
+        """
+        user_key = get_user_key(self.request)
+        user_tasks = models.UserTasks.for_user(user_key, self.object_list)
+        return super().get_context_data(
+            new_tasks=user_tasks.new_tasks,
+            active_submissions=user_tasks.active_submissions,
+            completed_submissions=user_tasks.completed_submissions,
+            **kwargs
+        )
+
 
 class TaskDetailView(generic.DetailView):
 
@@ -87,8 +100,8 @@ class AnswerUpdateView(DjangoMessageErrorsFormMixin, BaseUpdateView):
     # Redirect back to the task on success and otherwise:
 
     def get_success_url(self) -> str:
-        task: models.Task = self.object.tasksubmission.task
-        return task.get_absolute_url()
+        tasksubmission = self.object.tasksubmission
+        return tasksubmission.get_task_url()
 
     def render_to_response(
         self, context: Dict[str, Any], **response_kwargs: Any

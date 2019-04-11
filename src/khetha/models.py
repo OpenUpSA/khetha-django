@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import enum
-from typing import List, Tuple
+from dataclasses import dataclass, field
+from typing import Iterable, List, Tuple
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -147,6 +148,24 @@ class TaskSubmission(TimestampedModel):
         ]
         return [answer for (answer, created) in answers_creations]
 
+    def progress_factor(self) -> float:
+        answered_count: int = self.answer_set.exclude(value="").count()
+        question_count: int = self.task.questions().count()
+        return answered_count / question_count
+
+    def is_completed(self) -> bool:
+        return self.progress_factor() == 1
+
+    def get_task_url(self) -> str:
+        """
+        Get the URL for this submission's task.
+
+        XXX: This adds a no-effect "completed" query parameter
+        if this user's submission is completed.
+        """
+        task_url = self.task.get_absolute_url()
+        return f"{task_url}?completed" if self.is_completed() else task_url
+
 
 class Answer(TimestampedModel):
     tasksubmission = models.ForeignKey(TaskSubmission, on_delete=models.CASCADE)
@@ -156,3 +175,30 @@ class Answer(TimestampedModel):
 
     def __str__(self) -> str:
         return self.value
+
+
+@dataclass
+class UserTasks:
+    """
+    This groups tasks according to their submission state,
+    for a particular user.
+    """
+
+    new_tasks: List[Task] = field(default_factory=list)
+    active_submissions: List[TaskSubmission] = field(default_factory=list)
+    completed_submissions: List[TaskSubmission] = field(default_factory=list)
+
+    @classmethod
+    def for_user(cls, user_key: str, tasks: Iterable[Task]) -> UserTasks:
+        user_tasks = UserTasks()
+        for task in tasks:
+            try:
+                tasksubmission = task.tasksubmission_set.get(user_key=user_key)
+            except TaskSubmission.DoesNotExist:
+                user_tasks.new_tasks.append(task)
+            else:
+                if tasksubmission.is_completed():
+                    user_tasks.completed_submissions.append(tasksubmission)
+                else:
+                    user_tasks.active_submissions.append(tasksubmission)
+        return user_tasks

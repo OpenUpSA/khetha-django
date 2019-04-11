@@ -140,3 +140,71 @@ class TestTaskSubmission(TestCase):
                     answer.question for answer in tasksubmission.answers()
                 ]
         assert models.Question.objects.count() == models.Answer.objects.count()
+
+    def test_progress_factor_is_completed(self) -> None:
+        """
+        `progress_factor` and `is_completed`
+        """
+        for task in models.Task.objects.all():
+            with self.subTest(task=task):
+                tasksubmission = models.TaskSubmission.objects.create(
+                    task=task, user_key="user-1"
+                )
+                assert 0 == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
+
+                # Create answers
+                answers = tasksubmission.answers()
+                assert 0 == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
+
+                # Answer one
+                answers[0].value = "dummy"
+                answers[0].save()
+                assert (1 / len(answers)) == tasksubmission.progress_factor()
+                assert not tasksubmission.is_completed()
+
+                # Answer all
+                tasksubmission.answer_set.all().update(value="dummy")
+                assert 1 == tasksubmission.progress_factor()
+                assert tasksubmission.is_completed()
+
+    def test_get_task_url(self) -> None:
+        task = models.Task.objects.get(slug="contact-details")
+        tasksubmission = task.get_submission("user-key-1")
+        assert task.get_absolute_url() == tasksubmission.get_task_url()
+        tasksubmission.answers()
+        tasksubmission.answer_set.update(value="dummy")
+        assert f"{task.get_absolute_url()}?completed" == tasksubmission.get_task_url()
+
+
+class TestUserTasks(TestCase):
+    fixtures = ["sample-task-data"]
+
+    def test_basic(self) -> None:
+        expected = models.UserTasks(new_tasks=list(models.Task.objects.all()))
+        assert expected == models.UserTasks.for_user(
+            "user-key-1", models.Task.objects.all()
+        )
+
+    def test_mixed(self) -> None:
+        tasks = list(models.Task.objects.all())
+
+        active_task = tasks.pop()
+        active_submission = active_task.get_submission("user-key-1")
+        assert not active_submission.is_completed()
+
+        completed_task = tasks.pop()
+        completed_submission = completed_task.get_submission("user-key-1")
+        completed_submission.answers()
+        completed_submission.answer_set.update(value="dummy")
+        assert completed_submission.is_completed()
+
+        expected = models.UserTasks(
+            new_tasks=tasks,
+            active_submissions=[active_submission],
+            completed_submissions=[completed_submission],
+        )
+        assert expected == models.UserTasks.for_user(
+            "user-key-1", models.Task.objects.all()
+        )

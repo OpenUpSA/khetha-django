@@ -1,62 +1,69 @@
 {% extends 'khetha/base.html' %}
+{% comment %}
+Expected context:
+
+    task
+    tasksubmission
+
+{% endcomment %}
 
 {% block content %}
-    <h1>
-        {{ task.title }}
-        {% if user.is_authenticated and user.is_staff %}
-            <a class="mdc-button mdc-button--dense"
-               data-mdc-auto-init="MDCRipple"
-               style="float: right; margin: 0.25em"
-               href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
-                Edit in admin ›
-            </a>
-        {% endif %}
-    </h1>
 
-    <div class="mdc-typography--body2"{% if user.is_authenticated and user.is_staff %} style="clear: both"{% endif %}>
+    {% if user.is_authenticated and user.is_staff %}
+        <a class="mdc-button mdc-button--dense"
+           data-mdc-auto-init="MDCRipple"
+           style="float: right; margin: 1em"
+           href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
+            Edit in admin ›
+        </a>
+    {% endif %}
+
+    <h1>{{ task.title }}</h1>
+
+    <div class="mdc-typography--body2">
         {{ task.description|linebreaks }}
     </div>
 
     <div class="mdc-layout-grid__inner">
         {% for answer in tasksubmission.answers %}
             {% with question=answer.question %}
-
-                {# Begin question card #}
-                <div id="question-{{ question.pk }}" class="mdc-layout-grid__cell--span-12">
-                    <div class="mdc-card">
-                        <div class="khetha-question-card__heading">
-                            <p>{{ question.text }}</p>
-                            <div class="mdc-typography--caption khetha-question-card__heading__description">
-                                {{ question.description|linebreaks }}
-                            </div>
-                        </div>
-
-                        <div class="not-mdc-card__divider"></div>
-
-                        <div class="khetha-question-card__content">
-
-                            {# Anchor by question rather than answer, #}
-                            {# since those should be more public. #}
-                            <form id="question-{{ question.pk }}-form" class="khetha-question-answer-form" method="post"
-                                  action="{% url 'answer-update' pk=answer.pk %}#question-{{ question.pk }}">
-                                {% csrf_token %}
-
-                                {% comment %}
-                                Styling note: The main items defined in these templates should have
-                                class "khetha-question-card__content__item" (for padding).
-                                {% endcomment %}
-                                {% with template_name="khetha/question_answer_displays/"|add:question.display_type_enum.name|add:".html" %}
-                                    {% include template_name with question=question answer=answer only %}
-                                {% endwith %}
-                            </form>
-
-                        </div>
-
-                    </div>
+                <div id="question-{{ question.pk }}"
+                     {# Make each question card full-width (span 12). #}
+                     class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
                 </div>
-                {# End question card #}
-
             {% endwith %}
         {% endfor %}
     </div>
+
+    {% if tasksubmission.is_completed %}
+        <div class="mdc-dialog" role="alertdialog"
+             data-mdc-auto-init="MDCDialog"
+             data-khetha-dialog-auto-open="once"
+             data-khetha-dialog-behaviour="task-complete"
+             aria-modal="true">
+            <div class="mdc-dialog__container">
+                <div class="mdc-dialog__surface">
+                    <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+                    <h2 class="mdc-dialog__title">🎉️ Task complete!</h2>
+                    <div class="mdc-dialog__content">
+                        You've completed this task.
+                    </div>
+                    <footer class="mdc-dialog__actions">
+                        <button type="button" class="mdc-button mdc-dialog__button"
+                                data-mdc-dialog-action="close">
+                            <span class="mdc-button__label">Close</span>
+                        </button>
+                        <button type="button" class="mdc-button mdc-dialog__button mdc-dialog__button--default"
+                                data-mdc-dialog-action="continue"
+                                autofocus>
+                            <span class="mdc-button__label">Keep going</span>
+                        </button>
+                    </footer>
+                </div>
+            </div>
+            <div class="mdc-dialog__scrim"></div>
+        </div>
+    {% endif %}
+
 {% endblock %}

@@ -1,37 +1,59 @@
 {% extends 'khetha/base.html' %}
+{% comment %}
+Expected context:
+
+    new_tasks: Sequence[Task]
+    active_submissions: Sequence[TaskSubmission]
+    completed_submissions: Sequence[TaskSubmission]
+
+{% endcomment %}
+{% load khetha_tags %}
 
 {% block content %}
-    <h1>
-        Tasks
-        {% if user.is_authenticated and user.is_staff %}
-            <a class="mdc-button mdc-button--dense"
-               data-mdc-auto-init="MDCRipple"
-               style="float: right; margin: 0.25em"
-               href="{% url 'admin:khetha_task_changelist' %}">
-                Edit in admin ›
-            </a>
-        {% endif %}
-    </h1>
 
-    <div class="mdc-layout-grid__inner">
-        {% for task in task_list %}
-            <div class="mdc-layout-grid__cell--span-12">
-                <div class="mdc-card">
-                    <div class="mdc-card__primary-action"
-                         data-mdc-auto-init="MDCRipple"
-                         tabindex="0">
-                        <a class="d-block p-1 link-unstyled"
-                           href="{% url 'task-detail' slug=task.slug %}">
-                            <div class="khetha-task-card__title">
-                                {{ task.title }}
-                            </div>
-                            <div class="mdc-typography--caption">
-                                {{ task.description|linebreaks }}
-                            </div>
-                        </a>
-                    </div>
+    {% if user.is_authenticated and user.is_staff %}
+        <a class="mdc-button mdc-button--dense"
+           data-mdc-auto-init="MDCRipple"
+           style="float: right; margin: 1em"
+           href="{% url 'admin:khetha_task_changelist' %}">
+            Edit in admin ›
+        </a>
+    {% endif %}
+
+    {% if active_submissions %}
+        <h1>📝️ Active tasks</h1>
+
+        <div class="mdc-layout-grid__inner">
+            {% for tasksubmission in active_submissions %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if new_tasks %}
+        <h1>🆕 New tasks</h1>
+
+        <div class="mdc-layout-grid__inner">
+            {% for task in new_tasks %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/task_card.html' with task=task only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if completed_submissions %}
+        <h1>👌️ Completed tasks</h1>
+
+        <div class="mdc-layout-grid__inner">
+            {% for tasksubmission in completed_submissions %}
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 {% endblock %}

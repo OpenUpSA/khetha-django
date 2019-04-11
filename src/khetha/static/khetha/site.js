@@ -21,7 +21,7 @@ function initMDC() {
   // https://material.io/develop/web/components/input-controls/radio-buttons/#javascript-instantiation
   [].map.call(document.querySelectorAll(".mdc-radio"), function(radioButtonEl) {
     if (radioButtonEl.MDCRadio) {
-      const formFieldQuery = $(radioButtonEl).closest(".mdc-form-field");
+      var formFieldQuery = $(radioButtonEl).closest(".mdc-form-field");
       formFieldQuery.each(function(index, formFieldEl) {
         if (formFieldEl.MDCFormField) {
           // Associate the radio component with its form-field component
@@ -34,6 +34,47 @@ function initMDC() {
       console.log("Warning, MDCRadio not initialised on:", radioButtonEl);
     }
   });
+
+  // Initialise and open any progress bars marked with data-khetha-initial-progress.
+  // https://material.io/develop/web/components/linear-progress/
+  [].map.call(document.querySelectorAll(".mdc-linear-progress"), function(el) {
+    if (el.dataset.khethaInitialProgress) {
+      if (el.MDCLinearProgress) {
+        el.MDCLinearProgress.progress = el.dataset.khethaInitialProgress;
+        el.MDCLinearProgress.open();
+      } else {
+        console.log("Warning, MDCLinearProgress not initialised:", el);
+      }
+    }
+  });
+
+  // Dialog handling.
+  // https://material.io/develop/web/components/dialogs/
+  [].map.call(document.querySelectorAll(".mdc-dialog"), function(el) {
+    /** @type {MDCDialog} */
+    var dialog = el.MDCDialog;
+    if (dialog) {
+      // Handle data-khetha-dialog-auto-open
+      if (el.dataset.khethaDialogAutoOpen === "once") {
+        dialog.open();
+        el.dataset.khethaDialogAutoOpen = "opened";
+      }
+
+      // Handle data-khetha-dialog-behaviour
+      if (el.dataset.khethaDialogBehaviour === "task-complete") {
+        dialog.listen("MDCDialog:closed", function(event) {
+          /** @type {string} */
+          var action = event.detail.action;
+          if (action === "continue") {
+            document.location = "/";
+          }
+          // Otherwise, assume "close"
+        });
+      }
+    } else {
+      console.warn("MDCDialog not initialised on", el);
+    }
+  });
 }
 
 function initWidgets() {
@@ -44,3 +85,14 @@ function initWidgets() {
 }
 
 initWidgets();
+
+// Enable the question cards' khetha-collapsible toggles.
+$(".khetha-card--question-complete .mdc-card__primary-action").live(
+  "click keypress",
+  function(event) {
+    var $collapsible = $(event.target)
+      .closest(".khetha-card--question-complete")
+      .find(".khetha-collapsible");
+    $collapsible.toggleClass("khetha-collapsible--collapsed");
+  }
+);
