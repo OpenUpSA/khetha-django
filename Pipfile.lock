@@ -36,6 +36,13 @@
             ],
             "version": "==0.4.5"
         },
+        "django-pipeline": {
+            "hashes": [
+                "sha256:b56f2cfdb113dc1cb05257d8eb8d145fc0ade6f0d1236fb425df15bd059dce15",
+                "sha256:ef67aaf58959a2959e13fc114001cee5beec05ac18a81cc700ea9f1c8e3f40a8"
+            ],
+            "version": "==1.6.14"
+        },
         "khetha-django": {
             "editable": true,
             "path": "."

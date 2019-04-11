@@ -1,6 +1,7 @@
 -i https://pypi.org/simple
 django-admin-sortable2==0.7
 django-environ==0.4.5
+django-pipeline==1.6.14
 django==2.1.8
 psycopg2==2.8.1
 pytz==2019.1
