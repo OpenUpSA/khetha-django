@@ -2,6 +2,7 @@
 
 # Base Python image
 FROM python:3.7-alpine AS base-python
+ENV PATH="/root/.local/bin:${PATH}"
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # Collect NPM assets.
@@ -32,18 +33,19 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir=/wheels .
 
 # Build the installed Khetha site and static files
 FROM base-python AS khetha-site-builder
-WORKDIR /khetha-django
 COPY --from=npm-assets-builder /khetha-django/build/assets/ /khetha-django/build/assets/
 COPY --from=khetha-wheels-builder /wheels/ /wheels/
-ENV PATH="/root/.local/bin:${PATH}"
 RUN pip install --no-cache-dir --no-deps --no-index --user /wheels/*.whl
-# Build the static files.
-ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
-ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
-ENV DJANGO_STATIC_URL='/static/'
-ENV DJANGO_STATIC_ROOT='/static_root/'
+
 # Tell collectstatic where to find the static assets collected by build-assets.sh
 ENV DJANGO_STATICFILES_DIRS='assets:/khetha-django/build/assets'
+
+# Shared block: Base Django settings
+ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
+ENV DJANGO_STATIC_URL='/static/'
+ENV DJANGO_STATIC_ROOT='/static_root/'
+
+ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
 # --verbosity 2 lists the collected files, for build logs.
 RUN django-admin collectstatic --verbosity 2
 # Output: /root/.local/
@@ -58,6 +60,8 @@ COPY --from=khetha-site-builder /root/.local /root/.local
 # (This should be better done as a separate build output stage,
 # but support for this is still immature in the Docker ecosystem.)
 COPY --from=khetha-site-builder /static_root /static_root
-ENV PATH="/root/.local/bin:$PATH"
+
+# Shared block: Base Django settings
 ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_STATIC_URL='/static/'
+ENV DJANGO_STATIC_ROOT='/static_root/'
