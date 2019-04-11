@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "autosize": "^4.0.2",
-    "material-components-web": "^1.1.0",
+    "material-components-web": "^1.1.1",
     "normalize.css": "^8.0.1",
     "zepto": "^1.2.0"
   }
