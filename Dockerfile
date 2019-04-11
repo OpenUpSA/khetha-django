@@ -42,6 +42,8 @@ ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
 ENV DJANGO_STATIC_URL='/static/'
 ENV DJANGO_STATIC_ROOT='/static_root/'
+# Tell collectstatic where to find the static assets collected by build-assets.sh
+ENV DJANGO_STATICFILES_DIRS='assets:/khetha-django/build/assets'
 RUN django-admin collectstatic
 # Output: /root/.local/
 # Output: /static_root/
