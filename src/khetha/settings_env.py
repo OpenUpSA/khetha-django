@@ -42,8 +42,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # Django defaults
+    # Django default:
     "django.middleware.security.SecurityMiddleware",
+    # WhiteNoise: After SecurityMiddleware, before everything else.
+    # http://whitenoise.evans.io/en/stable/django.html#enable-whitenoise
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Django defaults:
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
