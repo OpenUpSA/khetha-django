@@ -74,6 +74,7 @@ class QuestionDisplayType(enum.Enum):
 
     short_text = 10
     long_text = 11
+    place_field = 12
     buttons = 20
     select_list = 30
     radio_buttons = 40
