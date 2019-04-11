@@ -84,11 +84,21 @@ function initGoogleMapsAutocomplete() {
   if (isGoogleMapsLoaded) {
     var elements = document.querySelectorAll(".google-maps-autocomplete");
     [].map.call(elements, function(el) {
-      new google.maps.places.Autocomplete(el);
+      /** @type {google.maps.places.AutocompleteOptions} */
+      var options = {
+        // Search within South Africa.
+        // https://developers.google.com/maps/documentation/javascript/places-autocomplete#set_search_area
+        componentRestrictions: { country: "za" },
+        // Don't return data we won't use.
+        // https://developers.google.com/maps/documentation/javascript/places-autocomplete#get_place_information
+        fields: ["address_components"]
+      };
+      new google.maps.places.Autocomplete(el, options);
     });
   }
   // Just skip if not ready yet: a later call should get it.
 }
+
 function setGoogleMapsLoaded() {
   isGoogleMapsLoaded = true;
   initGoogleMapsAutocomplete();
