@@ -38,7 +38,13 @@ class TaskListView(generic.ListView):
         Include the user's `user_key`.
         """
         user_key = get_user_key(self.request)
-        return super().get_context_data(user_key=user_key, **kwargs)
+        user_tasks = models.UserTasks.for_user(user_key, self.object_list)
+        return super().get_context_data(
+            new_tasks=user_tasks.new_tasks,
+            active_submissions=user_tasks.active_submissions,
+            completed_submissions=user_tasks.completed_submissions,
+            **kwargs
+        )
 
 
 class TaskDetailView(generic.DetailView):

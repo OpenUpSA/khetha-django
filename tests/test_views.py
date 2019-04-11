@@ -56,7 +56,15 @@ class TestTaskListView(TestCase):
         self.assertTemplateUsed("khetha/task_list.html")
         assert HTTPStatus.OK == response.status_code
         expected_user_key = views.get_user_key(response.wsgi_request)
-        assert expected_user_key == response.context["user_key"]
+        user_tasks = models.UserTasks.for_user(
+            expected_user_key, list(views.TaskListView.queryset.all())
+        )
+        assert user_tasks.new_tasks == response.context["new_tasks"]
+        assert user_tasks.active_submissions == response.context["active_submissions"]
+        assert (
+            user_tasks.completed_submissions
+            == response.context["completed_submissions"]
+        )
         return response
 
     def test_get__not_published(self) -> None:
