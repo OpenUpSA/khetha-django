@@ -44,6 +44,9 @@ ENV DJANGO_STATICFILES_DIRS='assets:/khetha-django/build/assets'
 ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_STATIC_URL='/static/'
 ENV DJANGO_STATIC_ROOT='/static_root/'
+# Build args
+ARG DJANGO_STATICFILES_STORAGE
+ENV DJANGO_STATICFILES_STORAGE="${DJANGO_STATICFILES_STORAGE}"
 
 ENV DJANGO_SECRET_KEY=dummy-secret-key-for-collectstatic
 # --verbosity 2 lists the collected files, for build logs.
@@ -65,3 +68,6 @@ COPY --from=khetha-site-builder /static_root /static_root
 ENV DJANGO_SETTINGS_MODULE=khetha.settings_env
 ENV DJANGO_STATIC_URL='/static/'
 ENV DJANGO_STATIC_ROOT='/static_root/'
+# Build args
+ARG DJANGO_STATICFILES_STORAGE
+ENV DJANGO_STATICFILES_STORAGE="${DJANGO_STATICFILES_STORAGE}"
