@@ -25,6 +25,9 @@ services:
       context: .
       args:
         DJANGO_STATICFILES_STORAGE: 'whitenoise.storage.CompressedStaticFilesStorage'
+        # To enable hashed files for production (not compatible with DEBUG):
+        #DJANGO_STATICFILES_STORAGE: 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        #WHITENOISE_KEEP_ONLY_HASHED_FILES: 'True'
 
     # WhiteNoise needs --nostatic for development
     command: 'django-admin runserver --nostatic 0.0.0.0:8000'
