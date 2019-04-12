@@ -7,16 +7,14 @@ Expected context:
 
 {% endcomment %}
 
-{% block content %}
-
+{% block top_app_bar_extra %}
     {% if user.is_authenticated and user.is_staff %}
-        <a class="mdc-button mdc-button--dense"
-           data-mdc-auto-init="MDCRipple"
-           style="float: right; margin: 1em"
-           href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
-            Edit in admin ›
-        </a>
+        {% url 'admin:khetha_task_change' object_id=task.pk as href %}
+        {% include 'khetha/includes/admin_link.html' with href=href only %}
     {% endif %}
+{% endblock %}
+
+{% block content %}
 
     <h1>{{ task.title }}</h1>
 
