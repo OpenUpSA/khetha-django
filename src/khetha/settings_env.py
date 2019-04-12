@@ -19,6 +19,32 @@ if "DJANGO_STATIC_ROOT" in env:  # pragma: no cover
 if "DJANGO_ALLOWED_HOSTS" in env:  # pragma: no cover
     ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
+if "DJANGO_STATICFILES_DIRS" in env:  # pragma: no cover
+    # XXX (Pi): Move this into django-environ-base.
+    #
+    # This:
+    #
+    #   DJANGO_STATICFILES_DIRS=node_modules,assets:build/assets
+    #
+    # Will yield this:
+    #
+    #   STATICFILES_DIRS = [
+    #       'node_modules',
+    #       ("assets", "build/assets"),
+    #   ]
+    #
+    STATICFILES_DIRS = env.list(
+        "DJANGO_STATICFILES_DIRS",
+        cast=lambda s: (tuple(s.split(":")) if ":" in s else s),
+    )
+# XXX: Skip this if empty, to avoid inadvertently changing
+# the default StaticFilesStorage to DEFAULT_FILE_STORAGE.
+if env("DJANGO_STATICFILES_STORAGE", default=""):  # pragma: no cover
+    STATICFILES_STORAGE = env("DJANGO_STATICFILES_STORAGE")
+
+if "WHITENOISE_KEEP_ONLY_HASHED_FILES" in env:  # pragma: no cover
+    WHITENOISE_KEEP_ONLY_HASHED_FILES = env.bool("WHITENOISE_KEEP_ONLY_HASHED_FILES")
+
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 
@@ -42,8 +68,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # Django defaults
+    # Django default:
     "django.middleware.security.SecurityMiddleware",
+    # WhiteNoise: After SecurityMiddleware, before everything else.
+    # http://whitenoise.evans.io/en/stable/django.html#enable-whitenoise
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # Django defaults:
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -71,11 +101,6 @@ AUTH_USER_MODEL = "khetha.User"
 # Time zone (hard-coded, for now)
 USE_TZ = True
 TIME_ZONE = "Africa/Johannesburg"
-
-
-# Tell collectstatic where to find the static assets collected by build-assets.sh
-# (XXX: This should go in dev/build config.)
-STATICFILES_DIRS = [("assets", "build/assets")]
 
 
 # Khetha relies on session persistence to identify people:
