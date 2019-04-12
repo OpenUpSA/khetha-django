@@ -22,16 +22,18 @@ Expected context:
         {{ task.description|linebreaks }}
     </div>
 
-    <div class="mdc-layout-grid__inner">
-        {% for answer in tasksubmission.answers %}
-            {% with question=answer.question %}
-                <div id="question-{{ question.pk }}"
-                     {# Make each question card full-width (span 12). #}
-                     class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
-                </div>
-            {% endwith %}
-        {% endfor %}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            {% for answer in tasksubmission.answers %}
+                {% with question=answer.question %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        <div id="question-{{ question.pk }}">
+                            {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
     </div>
 
     {% if tasksubmission.is_completed %}

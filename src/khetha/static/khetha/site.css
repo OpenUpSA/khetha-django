@@ -35,12 +35,20 @@
 }
 
 /* Lay out Khetha using a main central column. */
-.mdc-top-app-bar__row--khetha-main-column {
+.khetha-layout-main-column {
     max-width: 48rem;
-    align-self: center;
+    margin: auto;
 }
-.mdc-layout-grid--khetha-main-column {
-    max-width: 48rem;
+.khetha-layout-main-column--padded {
+    padding: 1rem;
+}
+
+/* XXX (Pi) hacky helper: A container to stretch the contained card's height. */
+.khetha-mdc-card-height-stretcher,
+.khetha-mdc-card-height-stretcher .mdc-card,
+.khetha-mdc-card-height-stretcher .mdc-card .mdc-card__primary-action
+{
+    height: 100%;
 }
 
 .khetha-task-card__title {

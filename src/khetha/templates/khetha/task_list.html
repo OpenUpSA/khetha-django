@@ -19,38 +19,53 @@ Expected context:
 {% block content %}
 
     {% if active_submissions %}
-        <h1>📝️ Active tasks</h1>
-
-        <div class="mdc-layout-grid__inner">
-            {% for tasksubmission in active_submissions %}
-                <div class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
-                </div>
-            {% endfor %}
+        <div class="mdc-typography--overline">
+            In progress
+        </div>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                {% for tasksubmission in active_submissions %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+                        <div class="khetha-mdc-card-height-stretcher">
+                            {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
     {% if new_tasks %}
-        <h1>🆕 New tasks</h1>
-
-        <div class="mdc-layout-grid__inner">
-            {% for task in new_tasks %}
-                <div class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/task_card.html' with task=task only %}
-                </div>
-            {% endfor %}
+        <div class="mdc-typography--overline">
+            New
+        </div>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                {% for task in new_tasks %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+                        <div class="khetha-mdc-card-height-stretcher">
+                            {% include 'khetha/includes/task_card.html' with task=task only %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
     {% if completed_submissions %}
-        <h1>👌️ Completed tasks</h1>
-
-        <div class="mdc-layout-grid__inner">
-            {% for tasksubmission in completed_submissions %}
-                <div class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
-                </div>
-            {% endfor %}
+        <div class="mdc-typography--overline">
+            Completed
+        </div>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                {% for tasksubmission in completed_submissions %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+                        <div class="khetha-mdc-card-height-stretcher">
+                            {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 
