@@ -10,7 +10,7 @@ Expected context:
 {% block top_app_bar_extra %}
     {% if user.is_authenticated and user.is_staff %}
         {% url 'admin:khetha_task_change' object_id=task.pk as href %}
-        {% include 'khetha/includes/admin_link.html' with href=href only %}
+        {% include 'khetha/includes/admin_link.html' with href=href text='Edit in admin' only %}
     {% endif %}
 {% endblock %}
 
