@@ -37,7 +37,7 @@ Blocks:
 {% block body %}
     <header class="mdc-top-app-bar khetha-theme--gradient-bg--bar"
             data-mdc-auto-init="MDCTopAppBar">
-        <div class="mdc-top-app-bar__row">
+        <div class="mdc-top-app-bar__row mdc-top-app-bar__row--khetha-main-column">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-center-khetha">
                 <a class="mdc-top-app-bar__title khetha-app-bar__title"
                    href="{% url 'home' %}">
@@ -47,7 +47,7 @@ Blocks:
         </div>
     </header>
 
-    <div class="mdc-layout-grid khetha-outer-grid mdc-top-app-bar--fixed-adjust">
+    <div class="mdc-layout-grid mdc-layout-grid--khetha-main-column mdc-top-app-bar--fixed-adjust">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-12">
                 {% block content %}{% endblock %}

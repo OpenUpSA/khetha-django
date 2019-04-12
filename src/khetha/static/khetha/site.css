@@ -38,8 +38,13 @@
     text-transform: uppercase;
 }
 
-.khetha-outer-grid {
-    max-width: 600px;
+/* Lay out Khetha using a main central column. */
+.mdc-top-app-bar__row--khetha-main-column {
+    max-width: 48rem;
+    align-self: center;
+}
+.mdc-layout-grid--khetha-main-column {
+    max-width: 48rem;
 }
 
 .khetha-task-card__title {
