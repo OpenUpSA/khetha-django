@@ -19,9 +19,18 @@ Expected context:
 {% endblock %}
 
 {% block content %}
-    <p>
-        You've earned {{ player_points_earned }} points!
-    </p>
+
+    {% if completed_submissions %}
+        <p>
+            You've completed
+            <a href="{% url 'task-completed-list' %}">{{ completed_submissions|length }} tasks</a>
+            and earned <span>{{ player_points_earned }} points</span>!
+        </p>
+    {% else %}
+        <p>
+            Complete a task to earn some points!
+        </p>
+    {% endif %}
 
     {% if active_submissions %}
         <div class="mdc-typography--overline">
@@ -50,23 +59,6 @@ Expected context:
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
                         <div class="khetha-mdc-card-height-stretcher">
                             {% include 'khetha/includes/task_card.html' with task=task only %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-
-    {% if completed_submissions %}
-        <div class="mdc-typography--overline">
-            Completed
-        </div>
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                {% for tasksubmission in completed_submissions %}
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
-                        <div class="khetha-mdc-card-height-stretcher">
-                            {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
                         </div>
                     </div>
                 {% endfor %}

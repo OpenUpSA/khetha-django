@@ -51,6 +51,14 @@ class TaskListView(generic.ListView):
         )
 
 
+class TaskCompletedListView(TaskListView):
+    """
+    For now, just an alias for `TaskListView` with a different template.
+    """
+
+    template_name_suffix = "_completed_list"
+
+
 class TaskDetailView(generic.DetailView):
 
     queryset = models.Task.objects.filter(is_published=True)

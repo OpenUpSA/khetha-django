@@ -1,0 +1,43 @@
+{% extends 'khetha/base.html' %}
+{% comment %}
+See: task_list.html
+
+Expected context:
+
+    completed_submissions: Sequence[TaskSubmission]
+
+{% endcomment %}
+
+{% block content %}
+
+    <div class="p-1">
+        <a class="mdc-button mdc-button--raised p-1" href="{% url 'task-list' %}"
+           data-mdc-auto-init="MDCRipple">
+            <span class="mdc-button__icon">←</span>
+            <span class="mdc-button__label">Back to tasks</span>
+        </a>
+    </div>
+
+    {% if completed_submissions %}
+        <p>
+            You've completed {{ completed_submissions|length }} tasks
+            and earned <span>{{ player_points_earned }} points</span>.
+        </p>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                {% for tasksubmission in completed_submissions %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop">
+                        <div class="khetha-mdc-card-height-stretcher">
+                            {% include 'khetha/includes/tasksubmission_card.html' with tasksubmission=tasksubmission only %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p>
+            You haven't completed any tasks yet!
+        </p>
+    {% endif %}
+
+{% endblock %}

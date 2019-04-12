@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from http import HTTPStatus
 from typing import List, Optional
 
@@ -51,9 +53,12 @@ class TestHome(TestCase):
 class TestTaskListView(TestCase):
     fixtures = ["sample-task-data"]
 
+    view_name = "task-list"
+    expected_template_name = "khetha/task_list.html"
+
     def _get(self) -> TestResponse:
-        response = TestResponse.check(self.client.get(reverse("task-list")))
-        self.assertTemplateUsed("khetha/task_list.html")
+        response = TestResponse.check(self.client.get(reverse(self.view_name)))
+        self.assertTemplateUsed(self.expected_template_name)
         assert HTTPStatus.OK == response.status_code
         expected_user_key = views.get_user_key(response.wsgi_request)
         user_tasks = models.UserTasks.for_user(
@@ -82,9 +87,11 @@ class TestTaskListView(TestCase):
             transform=lambda o: o,
             ordered=False,
         )
-        for task in expected_tasks:
-            with self.subTest(task=task):
-                self.assertContains(response, task.title)
+
+
+class TestCompletedTaskListView(TestTaskListView):
+    view_name = "task-completed-list"
+    expected_template_name = "khetha/task_completed_list.html"
 
 
 class TestTaskDetailView(TestCase):
