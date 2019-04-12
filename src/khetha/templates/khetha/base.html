@@ -25,12 +25,10 @@ Blocks:
 
     <title>{% block title %}Khetha{% endblock %}</title>
 
+    {# Library stylesheets #}
     <link rel="stylesheet" href="{% static 'assets/normalize.css' %}">
     <link href="{% static 'assets/material-components-web.min.css' %}" rel="stylesheet">
-    <script src="{% static 'assets/material-components-web.min.js' %}"></script>
-    <script src="{% static 'assets/zepto.min.js' %}"></script>
-    <script src="{% static 'assets/autosize.js' %}"></script>
-
+    {# Khetha stylesheets #}
     <link rel="stylesheet" href="{% static 'khetha/site.css' %}">
 
     <link rel="shortcut icon" href="{% static 'khetha/images/khetha-icon-light.png' %}">
@@ -75,6 +73,12 @@ Blocks:
     {% endfor %}
 
 {% endblock %}
+
+{# Library scripts #}
+<script src="{% static 'assets/material-components-web.min.js' %}"></script>
+<script src="{% static 'assets/zepto.min.js' %}"></script>
+<script src="{% static 'assets/autosize.js' %}"></script>
+{# Khetha scripts #}
 <script src="{% static 'khetha/site.js' %}"></script>
 <script src="{% static 'khetha/old-school-hacks.js' %}"></script>
 </body>
