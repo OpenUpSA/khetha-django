@@ -17,7 +17,8 @@ Expected context:
                  class="mdc-linear-progress mdc-linear-progress--closed"
                  data-mdc-auto-init="MDCLinearProgress"
                  data-khetha-initial-progress="{{ tasksubmission.progress_factor }}">
-                {#                                    <div class="mdc-linear-progress__buffering-dots"></div>#}
+                {# XXX (Pi): Causes rendering performance problems even when not active? #}
+                {# <div class="mdc-linear-progress__buffering-dots"></div> #}
                 <div class="mdc-linear-progress__buffer"></div>
                 <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
                     <span class="mdc-linear-progress__bar-inner khetha-theme--gradient-bg--primary"></span>
