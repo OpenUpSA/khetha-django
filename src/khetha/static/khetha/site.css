@@ -46,6 +46,10 @@
     font-weight: bold;
 }
 
+.khetha-task-card__point-value {
+    color: var(--mdc-theme-primary);
+}
+
 .khetha-question-card__content {
     padding: 0.5em;
 }
