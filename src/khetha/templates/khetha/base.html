@@ -47,10 +47,12 @@ Blocks:
         </div>
     </header>
 
-    <div class="mdc-layout-grid mdc-layout-grid--khetha-main-column mdc-top-app-bar--fixed-adjust">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell--span-12">
-                {% block content %}{% endblock %}
+    <div class="mdc-top-app-bar--fixed-adjust">
+        <div class="mdc-layout-grid mdc-layout-grid--khetha-main-column">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    {% block content %}{% endblock %}
+                </div>
             </div>
         </div>
     </div>
