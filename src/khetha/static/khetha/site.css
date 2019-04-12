@@ -48,7 +48,6 @@
 }
 
 .khetha-task-card__title {
-    font-weight: bold;
 }
 
 .khetha-task-card__point-value {
@@ -124,23 +123,6 @@ Khetha content bits:
 
 .khetha-card__icon-row__icon--question-complete {
     border-color: var(--mdc-theme-primary);
-}
-
-.khetha-card__icon-row__content__question {
-    font-weight: bold;
-}
-
-.khetha-card__icon-row__content__answer {
-    color: var(--mdc-theme-primary)
-}
-
-/*
-Only use top margins for the answer paragraphs,
-to avoid pushing against the bottom __content padding.
-*/
-.khetha-card__icon-row__content__answer p {
-    margin-top: 1em;
-    margin-bottom: 0;
 }
 
 .khetha-text-field--full-width {
