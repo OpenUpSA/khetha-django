@@ -2,6 +2,8 @@
 {% comment %}
 Expected context:
 
+    player_points_earned: int
+
     new_tasks: Sequence[Task]
     active_submissions: Sequence[TaskSubmission]
     completed_submissions: Sequence[TaskSubmission]
@@ -17,6 +19,9 @@ Expected context:
 {% endblock %}
 
 {% block content %}
+    <p>
+        You've earned {{ player_points_earned }} points!
+    </p>
 
     {% if active_submissions %}
         <div class="mdc-typography--overline">

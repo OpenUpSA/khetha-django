@@ -43,6 +43,10 @@ class TaskListView(generic.ListView):
             new_tasks=user_tasks.new_tasks,
             active_submissions=user_tasks.active_submissions,
             completed_submissions=user_tasks.completed_submissions,
+            player_points_earned=sum(
+                submission.task.points
+                for submission in user_tasks.completed_submissions
+            ),
             **kwargs
         )
 
