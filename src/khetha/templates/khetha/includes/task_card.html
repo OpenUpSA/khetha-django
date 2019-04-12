@@ -5,14 +5,11 @@ Expected context:
 
 {% endcomment %}
 <div class="mdc-card">
-    <div class="mdc-card__primary-action"
-         data-mdc-auto-init="MDCRipple"
-         tabindex="0">
-        <a class="d-block p-1 link-unstyled"
-           href="{{ task.get_absolute_url }}">
+    <a class="mdc-card__primary-action p-1"
+       data-mdc-auto-init="MDCRipple"
+       href="{{ task.get_absolute_url }}">
 
-            {% include 'khetha/includes/task_card_inner.html' with task=task only %}
+        {% include 'khetha/includes/task_card_inner.html' with task=task only %}
 
-        </a>
-    </div>
+    </a>
 </div>
