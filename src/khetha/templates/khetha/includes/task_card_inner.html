@@ -1,0 +1,10 @@
+{% comment %}
+Expected context: task
+{% endcomment %}
+<div class="khetha-task-card__title">
+    {{ task.title }}
+</div>
+
+<div class="mdc-typography--caption">
+    {{ task.description|linebreaks }}
+</div>

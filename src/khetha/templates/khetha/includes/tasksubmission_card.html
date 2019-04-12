@@ -11,15 +11,7 @@ Expected context:
         <a class="d-block p-1 link-unstyled"
            href="{{ tasksubmission.get_task_url }}">
 
-            {% with task=tasksubmission.task %}
-                <div class="khetha-task-card__title">
-                    {{ task.title }}
-                </div>
-
-                <div class="mdc-typography--caption">
-                    {{ task.description|linebreaks }}
-                </div>
-            {% endwith %}
+            {% include 'khetha/includes/task_card_inner.html' with task=tasksubmission.task only %}
 
             <div role="progressbar"
                  class="mdc-linear-progress mdc-linear-progress--closed"
