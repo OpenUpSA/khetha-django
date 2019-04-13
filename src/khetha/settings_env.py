@@ -49,6 +49,11 @@ GOOGLE_MAPS_API_KEY: str
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 
+# django-analytical
+
+if "GOOGLE_ANALYTICS_PROPERTY_ID" in env:  # pragma: no cover
+    GOOGLE_ANALYTICS_PROPERTY_ID = env("GOOGLE_ANALYTICS_PROPERTY_ID")
+
 
 # Other Django settings:
 
@@ -59,6 +64,7 @@ INSTALLED_APPS = [
     "khetha",
     # Third-party libraries
     "adminsortable2",
+    "analytical",
     # Django defaults
     "django.contrib.admin",
     "django.contrib.auth",
