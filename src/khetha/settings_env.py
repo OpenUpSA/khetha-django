@@ -54,6 +54,14 @@ if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
 if "GOOGLE_ANALYTICS_PROPERTY_ID" in env:  # pragma: no cover
     GOOGLE_ANALYTICS_PROPERTY_ID = env("GOOGLE_ANALYTICS_PROPERTY_ID")
 
+# Sentry:
+if "SENTRY_DSN" in env:  # pragma: no cover
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    SENTRY_DSN = env("SENTRY_DSN")
+    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+
 
 # Other Django settings:
 
