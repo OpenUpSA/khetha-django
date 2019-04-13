@@ -17,6 +17,7 @@ django-stubs = "*"
 [packages]
 khetha-django = {editable = true,path = "."}
 django-analytical = "*"
+sentry-sdk = "*"
 
 [requires]
 python_version = "3.7"
