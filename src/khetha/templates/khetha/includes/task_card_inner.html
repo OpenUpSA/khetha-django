@@ -1,0 +1,14 @@
+{% comment %}
+Expected context: task
+{% endcomment %}
+<div class="khetha-task-card__point-value mdc-typography--overline">
+    {{ task.points }} points
+</div>
+
+<div class="khetha-task-card__title mdc-typography--subtitle1">
+    {{ task.title }}
+</div>
+
+<div class="khetha-task-card__description mdc-typography--caption">
+    {{ task.description|linebreaks }}
+</div>

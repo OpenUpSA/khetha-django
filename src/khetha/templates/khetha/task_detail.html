@@ -7,16 +7,14 @@ Expected context:
 
 {% endcomment %}
 
-{% block content %}
-
+{% block top_app_bar_extra %}
     {% if user.is_authenticated and user.is_staff %}
-        <a class="mdc-button mdc-button--dense"
-           data-mdc-auto-init="MDCRipple"
-           style="float: right; margin: 1em"
-           href="{% url 'admin:khetha_task_change' object_id=task.pk %}">
-            Edit in admin ›
-        </a>
+        {% url 'admin:khetha_task_change' object_id=task.pk as href %}
+        {% include 'khetha/includes/admin_link.html' with href=href text='Edit in admin' only %}
     {% endif %}
+{% endblock %}
+
+{% block content %}
 
     <h1>{{ task.title }}</h1>
 
@@ -24,16 +22,18 @@ Expected context:
         {{ task.description|linebreaks }}
     </div>
 
-    <div class="mdc-layout-grid__inner">
-        {% for answer in tasksubmission.answers %}
-            {% with question=answer.question %}
-                <div id="question-{{ question.pk }}"
-                     {# Make each question card full-width (span 12). #}
-                     class="mdc-layout-grid__cell--span-12">
-                    {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
-                </div>
-            {% endwith %}
-        {% endfor %}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            {% for answer in tasksubmission.answers %}
+                {% with question=answer.question %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                        <div id="question-{{ question.pk }}">
+                            {% include 'khetha/includes/question_card.html' with csrf_token=csrf_token question_number=forloop.counter question=question answer=answer only %}
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
     </div>
 
     {% if tasksubmission.is_completed %}
@@ -44,6 +44,7 @@ Expected context:
              aria-modal="true">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
+                    {# https://material.io/develop/web/components/dialogs/#html-structure #}
                     <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
                     <h2 class="mdc-dialog__title">🎉️ Task complete!</h2>
                     <div class="mdc-dialog__content">

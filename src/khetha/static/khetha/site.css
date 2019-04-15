@@ -27,23 +27,35 @@
     background: linear-gradient(158.46deg, #00F260 0%, #0575E6 83.33%), #0576E6;
 }
 
-/* MDC only has align-start and align-end for top app bar sections. */
-/* This is a centering variation. */
-.mdc-top-app-bar__section--align-center-khetha {
-    justify-content: center;
+.mdc-top-app-bar__navigation-icon--khetha-logo {
+    background-image: url(images/khetha-icon-light.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 2rem;
 }
 
-.khetha-app-bar__title {
-    color: var(--mdc-theme-text-primary-on-dark);
-    text-transform: uppercase;
+/* Lay out Khetha using a main central column. */
+.khetha-layout-main-column {
+    max-width: 48rem;
+    margin: auto;
+}
+.khetha-layout-main-column--padded {
+    padding: 1rem;
 }
 
-.khetha-outer-grid {
-    max-width: 600px;
+/* XXX (Pi) hacky helper: A container to stretch the contained card's height. */
+.khetha-mdc-card-height-stretcher,
+.khetha-mdc-card-height-stretcher .mdc-card,
+.khetha-mdc-card-height-stretcher .mdc-card .mdc-card__primary-action
+{
+    height: 100%;
 }
 
 .khetha-task-card__title {
-    font-weight: bold;
+}
+
+.khetha-task-card__point-value {
+    color: var(--mdc-theme-primary);
 }
 
 .khetha-question-card__content {
@@ -115,23 +127,6 @@ Khetha content bits:
 
 .khetha-card__icon-row__icon--question-complete {
     border-color: var(--mdc-theme-primary);
-}
-
-.khetha-card__icon-row__content__question {
-    font-weight: bold;
-}
-
-.khetha-card__icon-row__content__answer {
-    color: var(--mdc-theme-primary)
-}
-
-/*
-Only use top margins for the answer paragraphs,
-to avoid pushing against the bottom __content padding.
-*/
-.khetha-card__icon-row__content__answer p {
-    margin-top: 1em;
-    margin-bottom: 0;
 }
 
 .khetha-text-field--full-width {

@@ -5,20 +5,11 @@ Expected context:
 
 {% endcomment %}
 <div class="mdc-card">
-    <div class="mdc-card__primary-action"
-         data-mdc-auto-init="MDCRipple"
-         tabindex="0">
-        <a class="d-block p-1 link-unstyled"
-           href="{{ task.get_absolute_url }}">
+    <a class="mdc-card__primary-action p-1"
+       data-mdc-auto-init="MDCRipple"
+       href="{{ task.get_absolute_url }}">
 
-            <div class="khetha-task-card__title">
-                {{ task.title }}
-            </div>
+        {% include 'khetha/includes/task_card_inner.html' with task=task only %}
 
-            <div class="mdc-typography--caption">
-                {{ task.description|linebreaks }}
-            </div>
-
-        </a>
-    </div>
+    </a>
 </div>

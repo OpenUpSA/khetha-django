@@ -28,6 +28,7 @@ Blocks:
     {# Library stylesheets #}
     <link rel="stylesheet" href="{% static 'assets/normalize.css' %}">
     <link href="{% static 'assets/material-components-web.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     {# Khetha stylesheets #}
     <link rel="stylesheet" href="{% static 'khetha/site.css' %}">
 
@@ -37,22 +38,30 @@ Blocks:
 {% block body %}
     <header class="mdc-top-app-bar khetha-theme--gradient-bg--bar"
             data-mdc-auto-init="MDCTopAppBar">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-center-khetha">
-                <a class="mdc-top-app-bar__title khetha-app-bar__title"
+        <div class="mdc-top-app-bar__row khetha-layout-main-column">
+
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <a class="mdc-top-app-bar__navigation-icon mdc-top-app-bar__navigation-icon--khetha-logo"
                    href="{% url 'home' %}">
-                    Khetha
                 </a>
+                <span class="mdc-top-app-bar__title">
+                    Khetha!
+                </span>
             </section>
+
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                <div class="p-1">
+                    {% block top_app_bar_extra %} {% endblock %}
+                </div>
+            </section>
+
         </div>
     </header>
 
-    <div class="mdc-layout-grid khetha-outer-grid mdc-top-app-bar--fixed-adjust">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell--span-12">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
+    <div class="mdc-top-app-bar--fixed-adjust"></div>
+
+    <div class="khetha-layout-main-column khetha-layout-main-column--padded">
+        {% block content %}{% endblock %}
     </div>
 
     {# Django messages as a snackbar: #}
