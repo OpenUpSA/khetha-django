@@ -53,6 +53,8 @@ if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
 
 if "GOOGLE_ANALYTICS_PROPERTY_ID" in env:  # pragma: no cover
     GOOGLE_ANALYTICS_PROPERTY_ID = env("GOOGLE_ANALYTICS_PROPERTY_ID")
+if "FACEBOOK_PIXEL_ID" in env:  # pragma: no cover
+    FACEBOOK_PIXEL_ID = env("FACEBOOK_PIXEL_ID")
 
 # Sentry:
 if "SENTRY_DSN" in env:  # pragma: no cover
