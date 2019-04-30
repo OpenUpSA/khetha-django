@@ -1,10 +1,13 @@
-from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin
 from django.contrib.auth.admin import UserAdmin as django_UserAdmin
 from django.db.models import CharField
 
+from adminsortable2.admin import (  # type: ignore
+    SortableAdminMixin,
+    SortableInlineAdminMixin,
+)
 from khetha import models
 
 # Tweaked InlineModelAdmin defaults:
@@ -37,7 +40,7 @@ _formfield_override_wider_char_fields = {
 }
 
 
-class QuestionInline(SortableInlineAdminMixin, _TabularInline):
+class QuestionInline(SortableInlineAdminMixin, _TabularInline):  # type: ignore
     model = models.Question
     raw_id_fields = ["task"]
     readonly_fields = ["description", "answer_options"]
@@ -47,7 +50,7 @@ class QuestionInline(SortableInlineAdminMixin, _TabularInline):
         return ", ".join(question.answer_options().values_list("text", flat=True))
 
 
-class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):
+class AnswerOptionInline(SortableInlineAdminMixin, _TabularInline):  # type: ignore
     model = models.AnswerOption
     raw_id_fields = ["question"]
     formfield_overrides = {**_formfield_override_wider_char_fields}
@@ -61,7 +64,7 @@ class AnswerInline(_StackedInline):
 
 
 @admin.register(models.Task)
-class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):
+class TaskAdmin(SortableAdminMixin, admin.ModelAdmin):  # type: ignore
     list_display = ["slug", "title", "description", "points", "is_published"]
     search_fields = ["slug", "title", "description"]
     list_editable = ["is_published"]

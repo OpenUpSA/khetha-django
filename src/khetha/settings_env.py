@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-import environ
+import environ  # type: ignore
 
 env = environ.Env()
 

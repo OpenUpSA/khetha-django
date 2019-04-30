@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from django.contrib import messages
 from django.contrib.messages.storage.base import Message
@@ -155,7 +155,7 @@ class TestAnswerUpdateView(TestCase):
         path = reverse("answer-update", kwargs={"pk": pk})
         return self.client.get(path)
 
-    def _post(self, *, pk: int, data: Optional[dict] = None) -> HttpResponse:
+    def _post(self, *, pk: int, data: Optional[Dict[str, str]] = None) -> HttpResponse:
         path = reverse("answer-update", kwargs={"pk": pk})
         return self.client.post(path, data=data)
 

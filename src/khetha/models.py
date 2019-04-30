@@ -56,6 +56,7 @@ class Task(models.Model):
         (tasksubmission, created) = self.tasksubmission_set.get_or_create(
             user_key=user_key
         )
+        assert isinstance(tasksubmission, TaskSubmission)
         return tasksubmission
 
 
