@@ -17,6 +17,12 @@ Start PostgreSQL:
 docker-compose up
 ```
 
+Set up database tables first time you set up the database
+
+```
+docker-compose run --rm web django-admin migrate
+```
+
 To attach a `psql` shell:
 
     docker-compose exec --user postgres db psql
