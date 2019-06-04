@@ -11,7 +11,13 @@ npm install
 ./build-assets.sh
 ```
 
-Start PostgreSQL:
+Set up the env file
+
+```
+cp -p .env.example .env
+```
+
+Start PostgreSQL and the app:
 
 ```
 docker-compose up
