@@ -11,23 +11,50 @@ npm install
 ./build-assets.sh
 ```
 
-Start PostgreSQL:
+Set up the env file
+
+```
+cp -p .env.example .env
+```
+
+Start PostgreSQL and the app:
 
 ```
 docker-compose up
+```
+
+Set up database tables first time you set up the database
+
+```
+docker-compose run --rm web django-admin migrate
+docker-compose run --rm web django-admin createsuperuser
+```
+
+Load some development data
+
+```
+docker-compose run --rm web django-admin loaddata /root/.local/lib/python3.7/site-packages/khetha/fixtures/sample-task-data.json
 ```
 
 To attach a `psql` shell:
 
     docker-compose exec --user postgres db psql
 
-Run the tests:
+### Run the tests:
+
+Ensure postgres is running with the required user and DB, e.g. using docker-compose:
+
+```
+docker-compose up db
+```
+
+If using docker-compose as above, then run the tests in another shell:
 
 ```
 tox
 ```
 
-Create an environment and run a development server:
+### Create an environment and run a development server:
 
 ```
 cp -p .env.example .env
