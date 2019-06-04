@@ -21,6 +21,13 @@ Set up database tables first time you set up the database
 
 ```
 docker-compose run --rm web django-admin migrate
+docker-compose run --rm web django-admin createsuperuser
+```
+
+Load some development data
+
+```
+docker-compose run --rm web django-admin loaddata /root/.local/lib/python3.7/site-packages/khetha/fixtures/sample-task-data.json
 ```
 
 To attach a `psql` shell:
