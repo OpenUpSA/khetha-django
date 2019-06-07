@@ -1,1 +1,1 @@
-web: gunicorn --limit-request-line 7168 --worker-class gevent khetha.wsgi:application -t 600 --log-file -
+web: gunicorn --pythonpath src --limit-request-line 7168 --worker-class gevent khetha.wsgi:application -t 600 --log-file -
