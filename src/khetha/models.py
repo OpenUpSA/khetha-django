@@ -53,6 +53,7 @@ class Task(models.Model):
         """
         Get (or create) the active task submission this task and user_key.
         """
+        tasksubmission: TaskSubmission
         (tasksubmission, created) = self.tasksubmission_set.get_or_create(
             user_key=user_key
         )
