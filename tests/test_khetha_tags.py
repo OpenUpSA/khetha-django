@@ -1,7 +1,7 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.test import override_settings
 from django.test.testcases import SimpleTestCase
-from environ import ImproperlyConfigured
 
 from khetha.templatetags import khetha_tags
 
