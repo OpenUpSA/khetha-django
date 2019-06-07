@@ -1,7 +1,7 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.test import override_settings
 from django.test.testcases import SimpleTestCase
-from environ import ImproperlyConfigured
 
 from khetha.templatetags import khetha_tags
 
@@ -9,7 +9,7 @@ from khetha.templatetags import khetha_tags
 class Test_google_maps_api_key(SimpleTestCase):
     def test_missing(self) -> None:
         with override_settings(GOOGLE_MAPS_API_KEY=None):
-            del settings.GOOGLE_MAPS_API_KEY  # type: ignore
+            del settings.GOOGLE_MAPS_API_KEY
             with self.assertRaises(ImproperlyConfigured):
                 khetha_tags.google_maps_api_key()
 

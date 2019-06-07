@@ -45,6 +45,7 @@ if env("DJANGO_STATICFILES_STORAGE", default=""):  # pragma: no cover
 if "WHITENOISE_KEEP_ONLY_HASHED_FILES" in env:  # pragma: no cover
     WHITENOISE_KEEP_ONLY_HASHED_FILES = env.bool("WHITENOISE_KEEP_ONLY_HASHED_FILES")
 
+GOOGLE_MAPS_API_KEY: str
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 
