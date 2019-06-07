@@ -1,7 +1,9 @@
 khetha-django
 =============
 
-Quickstart
+[Jump to Production Deployment](#production-deployment)
+
+Development Quickstart
 ----------
 
 Collect static assets (``build/assets``):
@@ -89,3 +91,16 @@ meld <(django-admin dumpdata --indent 2 khetha.task khetha.question khetha.answe
 ```
 
 [src/khetha/fixtures/sample-task-data.json]: src/khetha/fixtures/sample-task-data.json
+
+Production Deployment
+---------------------
+
+```
+dokku app:create khetha
+dokku domains:add khetha khetha.org.za
+dokku config:set khetha DJANGO_SECRET_KEY=... \
+                        DJANGO_DATABASE_URL=... \
+                        GOOGLE_MAPS_API_KEY=... \
+                        DISABLE_COLLECTSTATIC=1 \
+                        GOOGLE_ANALYTICS_PROPERTY_ID=UA-93649482-14
+```
