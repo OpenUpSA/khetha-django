@@ -10,40 +10,23 @@ env = environ.Env()
 DEBUG = env("DJANGO_DEBUG", default=False)
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-if "DJANGO_DATABASE_URL" in env:  # pragma: no cover
-    DATABASES = {"default": env.db("DJANGO_DATABASE_URL")}
-if "DJANGO_STATIC_URL" in env:  # pragma: no cover
-    STATIC_URL = env("DJANGO_STATIC_URL")
-if "DJANGO_STATIC_ROOT" in env:  # pragma: no cover
-    STATIC_ROOT = env.path("DJANGO_STATIC_ROOT")()
-if "DJANGO_ALLOWED_HOSTS" in env:  # pragma: no cover
-    ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
+import dj_database_url
+DATABASE_URL = env('DJANGO_DATABASE_URL', default='postgres://postgres@localhost:5432/postgres')
+db_config = dj_database_url.parse(DATABASE_URL)
+db_config['ATOMIC_REQUESTS'] = True
+DATABASES = {
+    'default': db_config,
+}
 
-if "DJANGO_STATICFILES_DIRS" in env:  # pragma: no cover
-    # XXX (Pi): Move this into django-environ-base.
-    #
-    # This:
-    #
-    #   DJANGO_STATICFILES_DIRS=node_modules,assets:build/assets
-    #
-    # Will yield this:
-    #
-    #   STATICFILES_DIRS = [
-    #       'node_modules',
-    #       ("assets", "build/assets"),
-    #   ]
-    #
-    STATICFILES_DIRS = env.list(
-        "DJANGO_STATICFILES_DIRS",
-        cast=lambda s: (tuple(s.split(":")) if ":" in s else s),
-    )
-# XXX: Skip this if empty, to avoid inadvertently changing
-# the default StaticFilesStorage to DEFAULT_FILE_STORAGE.
-if env("DJANGO_STATICFILES_STORAGE", default=""):  # pragma: no cover
-    STATICFILES_STORAGE = env("DJANGO_STATICFILES_STORAGE")
+ALLOWED_HOSTS = ['*']
 
-if "WHITENOISE_KEEP_ONLY_HASHED_FILES" in env:  # pragma: no cover
-    WHITENOISE_KEEP_ONLY_HASHED_FILES = env.bool("WHITENOISE_KEEP_ONLY_HASHED_FILES")
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# where the compiled assets go
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# the URL for assets
+STATIC_URL = '/static/'
 
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
