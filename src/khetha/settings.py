@@ -1,14 +1,19 @@
 from datetime import timedelta
 
-import environ
+import environ, os
 
 env = environ.Env()
 
 
 # Environment-based Django settings:
 
-DEBUG = env("DJANGO_DEBUG", default=False)
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
+
+# SECURITY WARNING: keep the secret key used in production secret!
+if DEBUG:
+    SECRET_KEY = 'not-secret-for-dev'
+else:
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 import dj_database_url
 DATABASE_URL = env('DJANGO_DATABASE_URL', default='postgres://postgres@localhost:5432/postgres')
@@ -20,13 +25,27 @@ DATABASES = {
 
 ALLOWED_HOSTS = ['*']
 
-import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+ASSETS_DEBUG = DEBUG
+ASSETS_URL_EXPIRE = False
 
 # where the compiled assets go
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # the URL for assets
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    'node_modules/normalize.css/normalize.css',
+    'node_modules/material-components-web/dist',
+    'node_modules/zepto/dist/zepto.min.js',
+    'node_modules/autosize/dist/autosize.js',
+]
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+)
 
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")

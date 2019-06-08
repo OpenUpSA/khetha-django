@@ -26,8 +26,8 @@ Blocks:
     <title>{% block title %}Khetha{% endblock %}</title>
 
     {# Library stylesheets #}
-    <link rel="stylesheet" href="{% static 'assets/normalize.css' %}">
-    <link href="{% static 'assets/material-components-web.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'normalize.css' %}">
+    <link href="{% static 'material-components-web.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     {# Khetha stylesheets #}
     <link rel="stylesheet" href="{% static 'khetha/site.css' %}">
@@ -84,9 +84,9 @@ Blocks:
 {% endblock %}
 
 {# Library scripts #}
-<script src="{% static 'assets/material-components-web.min.js' %}"></script>
-<script src="{% static 'assets/zepto.min.js' %}"></script>
-<script src="{% static 'assets/autosize.js' %}"></script>
+<script src="{% static 'material-components-web.min.js' %}"></script>
+<script src="{% static 'zepto.min.js' %}"></script>
+<script src="{% static 'autosize.js' %}"></script>
 {# Khetha scripts #}
 <script src="{% static 'khetha/site.js' %}"></script>
 <script src="{% static 'khetha/old-school-hacks.js' %}"></script>
