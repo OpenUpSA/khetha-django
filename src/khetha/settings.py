@@ -106,3 +106,34 @@ TIME_ZONE = "Africa/Johannesburg"
 # Khetha relies on session persistence to identify people:
 # increase the default 2 week lifetime to something long.
 SESSION_COOKIE_AGE = timedelta(days=1000).total_seconds()
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR'
+    },
+    'loggers': {
+        # put any custom loggers here
+        # 'your_package_name': {
+        #    'level': 'DEBUG' if DEBUG else 'INFO',
+        # },
+        'django': {
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        }
+    }
+}
