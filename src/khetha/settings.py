@@ -27,6 +27,11 @@ ALLOWED_HOSTS = ['*']
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+
+######===========================
+# Static files
+#--------------------------
+
 ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False
 
@@ -42,6 +47,14 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#-------------
+# End static files stuff
+######======================
+
+
 
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
@@ -62,6 +75,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
 ]
 
