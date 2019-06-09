@@ -98,7 +98,9 @@ Production Deployment
 ```
 dokku app:create khetha
 dokku domains:add khetha khetha.org.za
-dokku config:set khetha DJANGO_SECRET_KEY=... \
+dokku config:set khetha DJANGO_DEBUG=False \
+                        DISABLE_COLLECTSTATIC=1 \
+                        DJANGO_SECRET_KEY=... \
                         DJANGO_DATABASE_URL=... \
                         GOOGLE_MAPS_API_KEY=... \
                         DISABLE_COLLECTSTATIC=1 \
