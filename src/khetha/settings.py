@@ -41,7 +41,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    'node_modules',
+    ('normalize.css', 'node_modules/normalize.css/'),
+    ('material-components-web/dist',
+     'node_modules/material-components-web/dist/'),
+    ('zepto/dist', 'node_modules/zepto/dist/'),
+    ('autosize/dist', 'node_modules/autosize/dist/'),
 ]
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
