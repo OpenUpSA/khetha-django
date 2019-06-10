@@ -53,6 +53,11 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+if not DEBUG:
+    WHITENOISE_AUTOREFRESH = (
+        os.environ.get("WHITENOISE_AUTOREFRESH", "").lower() == "true"
+    )
+
 # -------------
 # End static files stuff
 # #####======================
