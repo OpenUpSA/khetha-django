@@ -80,5 +80,7 @@ dokku config:set khetha DJANGO_DEBUG=False \
                         DJANGO_DATABASE_URL=... \
                         GOOGLE_MAPS_API_KEY=... \
                         DISABLE_COLLECTSTATIC=1 \
-                        GOOGLE_ANALYTICS_PROPERTY_ID=UA-93649482-14
+                        GOOGLE_ANALYTICS_PROPERTY_ID=UA-93649482-14 \
+                        SENTRY_DSN=https://... \
+                        DJANGO_SECRET_KEY=...
 ```
