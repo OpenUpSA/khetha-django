@@ -1,9 +1,10 @@
 from datetime import timedelta
 
-import environ, os
+import environ
+import os
+import dj_database_url
 
 env = environ.Env()
-
 
 # Environment-based Django settings:
 
@@ -15,8 +16,10 @@ if DEBUG:
 else:
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
-import dj_database_url
-DATABASE_URL = env('DJANGO_DATABASE_URL', default='postgres://postgres@localhost:5432/postgres')
+DATABASE_URL = env(
+    'DJANGO_DATABASE_URL',
+    default='postgres://postgres@localhost:5432/postgres'
+)
 db_config = dj_database_url.parse(DATABASE_URL)
 db_config['ATOMIC_REQUESTS'] = True
 DATABASES = {
@@ -28,9 +31,9 @@ ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-######===========================
+# ===========================
 # Static files
-#--------------------------
+# --------------------------
 
 ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False
@@ -54,10 +57,9 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#-------------
+# -------------
 # End static files stuff
-######======================
-
+# #####======================
 
 
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
@@ -129,7 +131,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'simple': {
-            'format': '%(asctime)s %(levelname)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': ('%(asctime)s %(levelname)s %(module)s'
+                       '%(process)d %(thread)d %(message)s')
         }
     },
     'handlers': {
