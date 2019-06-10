@@ -1,8 +1,8 @@
+import os
 from datetime import timedelta
 
-import environ
-import os
 import dj_database_url
+import environ
 
 env = environ.Env()
 
