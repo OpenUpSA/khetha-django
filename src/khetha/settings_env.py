@@ -49,6 +49,21 @@ GOOGLE_MAPS_API_KEY: str
 if "GOOGLE_MAPS_API_KEY" in env:  # pragma: no cover
     GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 
+# django-analytical
+
+if "GOOGLE_ANALYTICS_PROPERTY_ID" in env:  # pragma: no cover
+    GOOGLE_ANALYTICS_PROPERTY_ID = env("GOOGLE_ANALYTICS_PROPERTY_ID")
+if "FACEBOOK_PIXEL_ID" in env:  # pragma: no cover
+    FACEBOOK_PIXEL_ID = env("FACEBOOK_PIXEL_ID")
+
+# Sentry:
+if "SENTRY_DSN" in env:  # pragma: no cover
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    SENTRY_DSN = env("SENTRY_DSN")
+    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[DjangoIntegration()])
+
 
 # Other Django settings:
 
@@ -59,6 +74,7 @@ INSTALLED_APPS = [
     "khetha",
     # Third-party libraries
     "adminsortable2",
+    "analytical",
     # Django defaults
     "django.contrib.admin",
     "django.contrib.auth",

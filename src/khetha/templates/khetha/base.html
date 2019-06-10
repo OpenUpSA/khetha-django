@@ -1,4 +1,5 @@
 {% load static %}
+{% load analytical %}
 {% comment %}
 
 Base Khetha site template
@@ -20,6 +21,7 @@ Blocks:
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% analytical_head_top %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,8 +35,10 @@ Blocks:
     <link rel="stylesheet" href="{% static 'khetha/site.css' %}">
 
     <link rel="shortcut icon" href="{% static 'khetha/images/khetha-icon-light.png' %}">
+    {% analytical_head_bottom %}
 </head>
 <body class="mdc-typography mdc-theme--background">
+{% analytical_body_top %}
 {% block body %}
     <header class="mdc-top-app-bar khetha-theme--gradient-bg--bar"
             data-mdc-auto-init="MDCTopAppBar">
@@ -90,5 +94,6 @@ Blocks:
 {# Khetha scripts #}
 <script src="{% static 'khetha/site.js' %}"></script>
 <script src="{% static 'khetha/old-school-hacks.js' %}"></script>
+{% analytical_body_bottom %}
 </body>
 </html>
