@@ -1,14 +1,18 @@
 language: python
-cache: pip
+cache:
+  - pip
+  -
+python:
+  - "3.7"
 
-matrix:
-  include:
-    # Python 3.7 requires "dist: xenial", for now.
-    # See:
-    # https://docs.travis-ci.com/user/languages/python/#specifying-python-versions
-    - { python: '3.7', env: TOXENV=py37-codecov, dist: xenial }
+node_js:
+  - "10"
+
+env: TOXENV=py37-codecov
+dist: xenial
 
 install:
+  - npm install
   - pip install tox
 
 script:
