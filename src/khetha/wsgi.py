@@ -13,6 +13,7 @@ from psycogreen.gevent import patch_psycopg
 from django.core.wsgi import get_wsgi_application
 
 import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "khetha.settings")
 
 patch_psycopg()

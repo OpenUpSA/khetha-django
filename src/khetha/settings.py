@@ -8,25 +8,22 @@ env = environ.Env()
 
 # Environment-based Django settings:
 
-DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
+DEBUG = os.environ.get("DJANGO_DEBUG", "true") == "true"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
-    SECRET_KEY = 'not-secret-for-dev'
+    SECRET_KEY = "not-secret-for-dev"
 else:
-    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+    SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 DATABASE_URL = env(
-    'DJANGO_DATABASE_URL',
-    default='postgres://postgres@localhost:5432/postgres'
+    "DJANGO_DATABASE_URL", default="postgres://postgres@localhost:5432/postgres"
 )
 db_config = dj_database_url.parse(DATABASE_URL)
-db_config['ATOMIC_REQUESTS'] = True
-DATABASES = {
-    'default': db_config,
-}
+db_config["ATOMIC_REQUESTS"] = True
+DATABASES = {"default": db_config}
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -39,23 +36,22 @@ ASSETS_DEBUG = DEBUG
 ASSETS_URL_EXPIRE = False
 
 # where the compiled assets go
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # the URL for assets
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    ('normalize.css', 'node_modules/normalize.css/'),
-    ('material-components-web/dist',
-     'node_modules/material-components-web/dist/'),
-    ('zepto/dist', 'node_modules/zepto/dist/'),
-    ('autosize/dist', 'node_modules/autosize/dist/'),
+    ("normalize.css", "node_modules/normalize.css/"),
+    ("material-components-web/dist", "node_modules/material-components-web/dist/"),
+    ("zepto/dist", "node_modules/zepto/dist/"),
+    ("autosize/dist", "node_modules/autosize/dist/"),
 ]
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -------------
 # End static files stuff
@@ -127,32 +123,29 @@ SESSION_COOKIE_AGE = timedelta(days=1000).total_seconds()
 
 # Logging
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'simple': {
-            'format': ('%(asctime)s %(levelname)s %(module)s'
-                       '%(process)d %(thread)d %(message)s')
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "simple": {
+            "format": (
+                "%(asctime)s %(levelname)s %(module)s"
+                "%(process)d %(thread)d %(message)s"
+            )
         }
     },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
         }
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'ERROR'
-    },
-    'loggers': {
+    "root": {"handlers": ["console"], "level": "ERROR"},
+    "loggers": {
         # put any custom loggers here
         # 'your_package_name': {
         #    'level': 'DEBUG' if DEBUG else 'INFO',
         # },
-        'django': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        }
-    }
+        "django": {"level": "DEBUG" if DEBUG else "INFO"}
+    },
 }
