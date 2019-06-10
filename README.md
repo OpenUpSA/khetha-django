@@ -1,20 +1,14 @@
 khetha-django
 =============
 
-Quickstart
+[Jump to Production Deployment](#production-deployment)
+
+Development Quickstart
 ----------
 
-Collect static assets (``build/assets``):
 
 ```shell
 npm install
-./build-assets.sh
-```
-
-Set up the env file
-
-```
-cp -p .env.example .env
 ```
 
 Start PostgreSQL and the app:
@@ -33,7 +27,7 @@ docker-compose run --rm web django-admin createsuperuser
 Load some development data
 
 ```
-docker-compose run --rm web django-admin loaddata /root/.local/lib/python3.7/site-packages/khetha/fixtures/sample-task-data.json
+docker-compose run --rm web django-admin loaddata sample-task-data.json
 ```
 
 To attach a `psql` shell:
@@ -57,25 +51,9 @@ tox
 ### Create an environment and run a development server:
 
 ```
-cp -p .env.example .env
-
-pipenv shell
-pipenv install --dev
-
 django-admin check
 django-admin runserver
 ```
-
-(Or use PyCharm.)
-
-
-Updating dependencies
----------------------
-
-Use Pipenv, and run [requirements-update.sh] after any Pipfile.lock update.
-
-[requirements-update.sh]: requirements-update.sh
-
 
 Working with data
 -----------------
@@ -89,3 +67,20 @@ meld <(django-admin dumpdata --indent 2 khetha.task khetha.question khetha.answe
 ```
 
 [src/khetha/fixtures/sample-task-data.json]: src/khetha/fixtures/sample-task-data.json
+
+Production Deployment
+---------------------
+
+```
+dokku app:create khetha
+dokku domains:add khetha khetha.org.za
+dokku config:set khetha DJANGO_DEBUG=False \
+                        DISABLE_COLLECTSTATIC=1 \
+                        DJANGO_SECRET_KEY=... \
+                        DJANGO_DATABASE_URL=... \
+                        GOOGLE_MAPS_API_KEY=... \
+                        DISABLE_COLLECTSTATIC=1 \
+                        GOOGLE_ANALYTICS_PROPERTY_ID=UA-93649482-14 \
+                        SENTRY_DSN=https://... \
+                        DJANGO_SECRET_KEY=...
+```
